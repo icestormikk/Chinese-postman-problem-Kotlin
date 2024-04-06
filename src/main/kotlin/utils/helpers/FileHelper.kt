@@ -18,12 +18,13 @@ object FileHelper {
     }
 
     fun <T> readFrom(filepath: String, onTransform: (content: String) -> T): T {
-        val file = File(filepath)
-
-        val stream = file.inputStream()
-        val content = stream.readBytes().toString(Charsets.UTF_8)
-
-        return onTransform(content)
+        try {
+            val file = File(filepath)
+            val stream = file.inputStream()
+            val content = stream.readBytes().toString(Charsets.UTF_8)
+            return onTransform(content)
+        } catch (ex: Error) {
+            throw Error("Error while writing to $filepath: ${ex.message}")
+        }
     }
-
 }
