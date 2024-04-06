@@ -1,8 +1,13 @@
 package graph
 
-import java.util.UUID
+import common.Identifiable
+import kotlinx.serialization.Serializable
 
-data class Edge(
-    val id: UUID = UUID.randomUUID(),
-    val star
-)
+@Serializable
+data class Edge<T>(
+    val source: Node,
+    val destination: Node,
+    val weight: T,
+    val type: EdgeType
+) : Identifiable()
+
