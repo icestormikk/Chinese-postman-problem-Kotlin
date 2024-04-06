@@ -4,21 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="an abstract class has been added to add a unique id to the inherited classes">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/ErrorMessages.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/CommandLineHelper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="some random code">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/FileHelper.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/ErrorMessages.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/Identifiable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/Identifiable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Enum" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -60,7 +54,7 @@
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="-nodes-file 1,2,3,4,5" />
+      <option name="PROGRAM_PARAMETERS" value="-algorithm-type GENETIC" />
       <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -113,7 +107,71 @@
       <option name="project" value="LOCAL" />
       <updated>1712427600405</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="restructuring of the project">
+      <option name="closed" value="true" />
+      <created>1712427633578</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427633578</updated>
+    </task>
+    <task id="LOCAL-00006" summary="adding the Particle class to the particle swarm method">
+      <option name="closed" value="true" />
+      <created>1712427680927</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427680927</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added some new files for IDEA">
+      <option name="closed" value="true" />
+      <created>1712427710936</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427710936</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added some new files for IDEA">
+      <option name="closed" value="true" />
+      <created>1712427746618</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427746618</updated>
+    </task>
+    <task id="LOCAL-00009" summary="minor style changes">
+      <option name="closed" value="true" />
+      <created>1712427765838</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427765838</updated>
+    </task>
+    <task id="LOCAL-00010" summary="adding serialization and deserialization methods for the UUID class">
+      <option name="closed" value="true" />
+      <created>1712427814912</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427814912</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Adding constants and methods to work with the command line">
+      <option name="closed" value="true" />
+      <created>1712427842768</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427842768</updated>
+    </task>
+    <task id="LOCAL-00012" summary="some random code">
+      <option name="closed" value="true" />
+      <created>1712427856290</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712427856290</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -121,6 +179,13 @@
     <MESSAGE value="added a general implementation of entities and methods related to genetic algorithms" />
     <MESSAGE value="added new functions and classes for the particle swarm algorithm" />
     <MESSAGE value="an abstract class has been added to add a unique id to the inherited classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="an abstract class has been added to add a unique id to the inherited classes" />
+    <MESSAGE value="restructuring of the project" />
+    <MESSAGE value="adding the Particle class to the particle swarm method" />
+    <MESSAGE value="added some new files for IDEA" />
+    <MESSAGE value="minor style changes" />
+    <MESSAGE value="adding serialization and deserialization methods for the UUID class" />
+    <MESSAGE value="Adding constants and methods to work with the command line" />
+    <MESSAGE value="some random code" />
+    <option name="LAST_COMMIT_MESSAGE" value="some random code" />
   </component>
 </project>
