@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="some random code">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/FileHelper.kt" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="added handlers for possible exceptions in functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/Identifiable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/Identifiable.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +165,71 @@
       <option name="project" value="LOCAL" />
       <updated>1712427856290</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="a class has been created containing all currently implemented methods for solving the problem">
+      <option name="closed" value="true" />
+      <created>1712437439525</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437439526</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added a name for a new command line parameter">
+      <option name="closed" value="true" />
+      <created>1712437480019</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437480019</updated>
+    </task>
+    <task id="LOCAL-00015" summary="creating a class (singleton) containing operations on files">
+      <option name="closed" value="true" />
+      <created>1712437541999</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437541999</updated>
+    </task>
+    <task id="LOCAL-00016" summary="changing the identifier type of each entity">
+      <option name="closed" value="true" />
+      <created>1712437592193</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437592193</updated>
+    </task>
+    <task id="LOCAL-00017" summary="cleaning">
+      <option name="closed" value="true" />
+      <created>1712437606035</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437606035</updated>
+    </task>
+    <task id="LOCAL-00018" summary="some random code">
+      <option name="closed" value="true" />
+      <created>1712437620628</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437620628</updated>
+    </task>
+    <task id="LOCAL-00019" summary="updated">
+      <option name="closed" value="true" />
+      <created>1712437635422</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437635422</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added handlers for possible exceptions in functions">
+      <option name="closed" value="true" />
+      <created>1712437764694</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1712437764694</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -185,7 +243,14 @@
     <MESSAGE value="minor style changes" />
     <MESSAGE value="adding serialization and deserialization methods for the UUID class" />
     <MESSAGE value="Adding constants and methods to work with the command line" />
+    <MESSAGE value="a class has been created containing all currently implemented methods for solving the problem" />
+    <MESSAGE value="added a name for a new command line parameter" />
+    <MESSAGE value="creating a class (singleton) containing operations on files" />
+    <MESSAGE value="changing the identifier type of each entity" />
+    <MESSAGE value="cleaning" />
     <MESSAGE value="some random code" />
-    <option name="LAST_COMMIT_MESSAGE" value="some random code" />
+    <MESSAGE value="updated" />
+    <MESSAGE value="added handlers for possible exceptions in functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="added handlers for possible exceptions in functions" />
   </component>
 </project>
