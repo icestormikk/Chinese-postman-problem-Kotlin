@@ -1,9 +1,9 @@
 import graph.Edge
 import graph.Graph
 import graph.Node
-import utils.constants.EDGES_FILE_PATH_ARGUMENT
-import utils.constants.NODES_FILE_PATH_ARGUMENT
-import utils.helpers.CommandLineHelper
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
+import utils.helpers.FileHelper
 
 class DoubleGraph(
     override val nodes: List<Node>,
@@ -16,13 +16,12 @@ class DoubleGraph(
 
 
 
-fun main(args: Array<String>) {
-    val arguments = args.toList().chunked(2).associate { it[0] to it[1] }
+fun main() {
+    val nodes = FileHelper.readFrom("C:\\Users\\jigal\\IdeaProjects\\chinese_postman_problem\\test.txt") {
+        Json.decodeFromString<List<Node>>(it)
+    }
 
-    val nodesFilePath = CommandLineHelper.fetchArgument(arguments, "-${NODES_FILE_PATH_ARGUMENT}") { it }
-    val edgesFilePath = CommandLineHelper.fetchArgument(arguments, "-${EDGES_FILE_PATH_ARGUMENT}") { it }
-
-//    val nodes = List(3) { Node("Node-${it}") }
+    println(nodes)
 //    val edges = listOf(
 //        Edge(nodes[0], nodes[1], Random.nextDouble(0.0, 100.0), EdgeType.DIRECTED),
 //        Edge(nodes[1], nodes[2], Random.nextDouble(0.0, 100.0), EdgeType.DIRECTED),
