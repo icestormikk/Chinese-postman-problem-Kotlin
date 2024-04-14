@@ -3,21 +3,23 @@ package graph
 import common.Identifiable
 
 abstract class Graph<T>(
-    val nodes: List<Node>,
-    var edges: MutableList<Edge<T>>
+    private val _nodes: List<Node>,
+    private val _edges: List<Edge<T>>
 ) : Identifiable() {
+    val nodes: List<Node> = _nodes
+    val edges: List<Edge<T>> by lazy { initializeEdges() }
 
-    init {
+    private fun initializeEdges(): MutableList<Edge<T>> {
         val result = mutableListOf<Edge<T>>()
 
-        for (edge in edges) {
+        for (edge in _edges) {
             if (edge.type == EdgeType.NOT_ORIENTED) {
                 result.add(Edge(edge.destination, edge.source, edge.weight, EdgeType.DIRECTED))
             }
             result.add(edge.copy(type = EdgeType.DIRECTED))
         }
 
-        edges = result
+        return result
     }
 
     abstract fun calculateTotalLengthOf(path: List<Edge<T>>): T
