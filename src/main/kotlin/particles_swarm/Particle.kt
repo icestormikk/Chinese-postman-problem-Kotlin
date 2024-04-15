@@ -13,11 +13,12 @@ data class Particle(
     var localBestPosition = position
     var localBestFitnessValue = swarm.calculateFitness(position)
 
-    private fun initializePosition(swarm: Swarm): Array<Double> =
-        swarm.minimumValues.mapIndexed { index, minimum ->
+    private fun initializePosition(swarm: Swarm): Array<Double> {
+        return swarm.minimumValues.mapIndexed { index, minimum ->
             val maximum = swarm.maximumValues[index]
             minimum + Math.random() * (maximum - minimum)
         }.toTypedArray()
+    }
 
     private fun initializeVelocity(swarm: Swarm): Array<Double> {
         with (swarm) {
@@ -56,6 +57,28 @@ data class Particle(
             localBestFitnessValue = fitness
             localBestPosition = position
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Particle
+
+        if (swarm != other.swarm) return false
+        if (!position.contentEquals(other.position)) return false
+        if (!velocity.contentEquals(other.velocity)) return false
+        if (!localBestPosition.contentEquals(other.localBestPosition)) return false
+        return localBestFitnessValue == other.localBestFitnessValue
+    }
+
+    override fun hashCode(): Int {
+        var result = swarm.hashCode()
+        result = 31 * result + position.contentHashCode()
+        result = 31 * result + velocity.contentHashCode()
+        result = 31 * result + localBestPosition.contentHashCode()
+        result = 31 * result + localBestFitnessValue.hashCode()
+        return result
     }
 }
 
