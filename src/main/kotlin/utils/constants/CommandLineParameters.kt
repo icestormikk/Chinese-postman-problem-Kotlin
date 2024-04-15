@@ -1,5 +1,5 @@
 package utils.constants
 
-const val NODES_FILE_PATH_ARGUMENT = "nodes-file"
-const val EDGES_FILE_PATH_ARGUMENT = "edges-file"
+const val GRAPH_FILE_PATH_ARGUMENT = "graph-input-file"
+const val PATH_FILE_ARGUMENT = "path-output-file"
 const val ALGORITHM_TYPE_ARGUMENT = "algorithm-type"
