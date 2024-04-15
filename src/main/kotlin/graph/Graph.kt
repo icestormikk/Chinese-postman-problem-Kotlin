@@ -22,7 +22,7 @@ abstract class Graph<T>(
         return result
     }
 
-    abstract fun calculateTotalLengthOf(path: List<Edge<T>>): T
+    abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): T
 
     fun getRandomPath(startNode: Node = nodes.random()): MutableList<Edge<T>> {
         val visited = mutableListOf<Edge<T>>()
@@ -48,11 +48,38 @@ abstract class Graph<T>(
         try {
             dfs(startNode)
 
-            val finalEdge = edges.find { it.destination.id == startNode.id }
-                ?: throw Error("Final edge undefined")
-            return path.plus(finalEdge).toMutableList()
+            val backToStartPath = getPathBetween(path.last().destination, startNode)
+            backToStartPath?.let { edges ->
+                path.addAll(edges)
+            }
+            return path
         } catch (ex: Exception) {
             throw Error("Error while finding a path: " + ex.message)
         }
+    }
+
+    fun getPathBetween(startNode: Node, endNode: Node): List<Edge<T>>? {
+        val visitedEdges = mutableSetOf<Node>()
+        val queue = ArrayDeque<List<Edge<T>>>()
+        queue.add(listOf())
+
+        while (queue.isNotEmpty()) {
+            val path = queue.removeFirst()
+            val currentNode = if (path.isNotEmpty()) path.last().destination else startNode
+
+            if (currentNode == endNode) {
+                return path
+            }
+
+            if (currentNode !in visitedEdges) {
+                visitedEdges.add(currentNode)
+                val adjacentEdges = edges.filter { it.source == currentNode }
+                for (edge in adjacentEdges) {
+                    queue.add(path + edge)
+                }
+            }
+        }
+
+        return null
     }
 }
