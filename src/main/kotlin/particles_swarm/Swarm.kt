@@ -1,6 +1,7 @@
 package particles_swarm
 
 import common.Identifiable
+import utils.helpers.LoggingHelper
 
 abstract class Swarm(
     open val size: Int,
@@ -14,6 +15,10 @@ abstract class Swarm(
     var globalBestPosition: Array<Double>? = null
     val particles by lazy { initialize() }
 
+    companion object {
+        private val logger = LoggingHelper.getLogger("SWARM_LOGGER")
+    }
+
     abstract fun onFitness(position: Array<Double>): Double
     abstract fun getPenalty(position: Array<Double>, ratio: Double): Double
 
@@ -26,6 +31,7 @@ abstract class Swarm(
         val currentFitness = onFitness(position) + getPenalty(position, 10000.0)
 
         if (globalBestFitness == null || currentFitness < globalBestFitness!!) {
+            logger.info { "Updated the global optimal position of the swarm with id $id: $globalBestFitness" }
             globalBestFitness = currentFitness
             globalBestPosition = position
         }
