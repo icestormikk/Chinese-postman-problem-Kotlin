@@ -4,25 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="fixed initialization of graph edges">
-      <change afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Presets.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/LoggingHelper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="updated some moments of code">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithmConfiguration.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/AlgorithmTypeSerializer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/CommandLineParameters.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/CommandLineHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/helpers/CommandLineHelper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/UUIDSerializer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +51,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="chinese_postman_problem" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="help" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -69,10 +68,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Enum" />
-        <option value="Kotlin Class" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -109,7 +108,7 @@
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;kotlin-gradle-user-dirs&quot;: [
@@ -122,6 +121,7 @@
       <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem\src\main\kotlin\utils\constants" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="genetic_algorithms" />
       <recent name="utils.serializers" />
     </key>
   </component>
@@ -326,7 +326,135 @@
       <option name="project" value="LOCAL" />
       <updated>1713094674365</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="all log files should not be considered by the version control system">
+      <option name="closed" value="true" />
+      <created>1713210561636</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210561636</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added a dependency for using logging tools in project files">
+      <option name="closed" value="true" />
+      <created>1713210778191</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210778191</updated>
+    </task>
+    <task id="LOCAL-00025" summary="changes in argument validation">
+      <option name="closed" value="true" />
+      <created>1713210822108</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210822108</updated>
+    </task>
+    <task id="LOCAL-00026" summary="renaming some constants involved in the operation of the application">
+      <option name="closed" value="true" />
+      <created>1713210855982</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210855982</updated>
+    </task>
+    <task id="LOCAL-00027" summary="updated">
+      <option name="closed" value="true" />
+      <created>1713210875281</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210875281</updated>
+    </task>
+    <task id="LOCAL-00028" summary="updated">
+      <option name="closed" value="true" />
+      <created>1713210908814</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1713210908814</updated>
+    </task>
+    <task id="LOCAL-00029" summary="change in function arguments + added a function to find the path between the vertices of the graph">
+      <option name="closed" value="true" />
+      <created>1713211034511</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211034511</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added application logging logic">
+      <option name="closed" value="true" />
+      <created>1713211077312</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211077312</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added general functions for logging the application">
+      <option name="closed" value="true" />
+      <created>1713211109632</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211109632</updated>
+    </task>
+    <task id="LOCAL-00032" summary="stylistic changes and the addition of methods to improve performance">
+      <option name="closed" value="true" />
+      <created>1713211176343</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211176343</updated>
+    </task>
+    <task id="LOCAL-00033" summary="removed the check for the same length for the chromosomes of all entities in the population">
+      <option name="closed" value="true" />
+      <created>1713211246697</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211246697</updated>
+    </task>
+    <task id="LOCAL-00034" summary="improving safety in gene recombination methods">
+      <option name="closed" value="true" />
+      <created>1713211290598</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211290598</updated>
+    </task>
+    <task id="LOCAL-00035" summary="added a logger in the swarm class to track the operation of the algorithm">
+      <option name="closed" value="true" />
+      <created>1713211350598</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211350598</updated>
+    </task>
+    <task id="LOCAL-00036" summary="removed unused import">
+      <option name="closed" value="true" />
+      <created>1713211370723</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211370723</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added code to apply a genetic algorithm to a set of random paths in a graph">
+      <option name="closed" value="true" />
+      <created>1713211418277</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211418277</updated>
+    </task>
+    <task id="LOCAL-00038" summary="again, a bit of random code">
+      <option name="closed" value="true" />
+      <created>1713211461939</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1713211461939</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -351,26 +479,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added dependency for serialization and deserialization of data" />
-    <MESSAGE value="added a general implementation of entities and methods related to genetic algorithms" />
-    <MESSAGE value="added new functions and classes for the particle swarm algorithm" />
-    <MESSAGE value="an abstract class has been added to add a unique id to the inherited classes" />
-    <MESSAGE value="restructuring of the project" />
-    <MESSAGE value="adding the Particle class to the particle swarm method" />
-    <MESSAGE value="added some new files for IDEA" />
-    <MESSAGE value="minor style changes" />
-    <MESSAGE value="adding serialization and deserialization methods for the UUID class" />
-    <MESSAGE value="Adding constants and methods to work with the command line" />
     <MESSAGE value="a class has been created containing all currently implemented methods for solving the problem" />
     <MESSAGE value="added a name for a new command line parameter" />
     <MESSAGE value="creating a class (singleton) containing operations on files" />
     <MESSAGE value="changing the identifier type of each entity" />
     <MESSAGE value="cleaning" />
     <MESSAGE value="some random code" />
-    <MESSAGE value="updated" />
     <MESSAGE value="added handlers for possible exceptions in functions" />
     <MESSAGE value="restructuring" />
     <MESSAGE value="fixed initialization of graph edges" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed initialization of graph edges" />
+    <MESSAGE value="all log files should not be considered by the version control system" />
+    <MESSAGE value="added a dependency for using logging tools in project files" />
+    <MESSAGE value="changes in argument validation" />
+    <MESSAGE value="renaming some constants involved in the operation of the application" />
+    <MESSAGE value="updated" />
+    <MESSAGE value="change in function arguments + added a function to find the path between the vertices of the graph" />
+    <MESSAGE value="added application logging logic" />
+    <MESSAGE value="added general functions for logging the application" />
+    <MESSAGE value="stylistic changes and the addition of methods to improve performance" />
+    <MESSAGE value="removed the check for the same length for the chromosomes of all entities in the population" />
+    <MESSAGE value="improving safety in gene recombination methods" />
+    <MESSAGE value="added a logger in the swarm class to track the operation of the algorithm" />
+    <MESSAGE value="removed unused import" />
+    <MESSAGE value="added code to apply a genetic algorithm to a set of random paths in a graph" />
+    <MESSAGE value="again, a bit of random code" />
+    <MESSAGE value="updated some moments of code" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated some moments of code" />
   </component>
 </project>

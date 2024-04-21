@@ -4,6 +4,12 @@ import genetic_algorithms.Chromosome
 import genetic_algorithms.Population
 
 object ParentSelectionMethods {
+    enum class Types {
+        PANMIXIA,
+        INBREEDING,
+        OUTBREEDING
+    }
+
     fun <T> panmixia(population: Population<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val firstParent = population.entities.random()
         val secondParent = population.entities.random()

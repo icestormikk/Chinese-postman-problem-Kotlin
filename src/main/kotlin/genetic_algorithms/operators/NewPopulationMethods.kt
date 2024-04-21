@@ -5,6 +5,12 @@ import genetic_algorithms.Population
 import kotlin.math.ceil
 
 object NewPopulationMethods {
+    enum class Types {
+        TRUNCATION,
+        ELITE,
+        EXCLUSION
+    }
+
     fun <T> truncationSelection(
         population: Population<T>,
         onFitness: (chromosome: Chromosome<T>) -> Double,

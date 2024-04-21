@@ -4,6 +4,15 @@ import genetic_algorithms.Chromosome
 import kotlin.math.min
 
 object RecombinationMethods {
+    enum class Types {
+        DISCRETE,
+        INTERMEDIATE,
+        LINEAR,
+        TWO_POINT_CROSSOVER,
+        SINGLE_POINT_CROSSOVER,
+        SHUFFLE
+    }
+
     private const val BEST_RECOMBINATION_MULTIPLIER = 0.25
 
     fun <T> discreteRecombination(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {

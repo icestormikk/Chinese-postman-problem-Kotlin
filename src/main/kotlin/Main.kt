@@ -1,17 +1,17 @@
 import common.AlgorithmType
-import genetic_algorithms.Chromosome
-import genetic_algorithms.geneticAlgorithm
-import genetic_algorithms.outputToFile
+import common.Configuration
+import genetic_algorithms.GeneticAlgorithmConfiguration
+import genetic_algorithms.operators.MutationMethods
+import genetic_algorithms.operators.NewPopulationMethods
+import genetic_algorithms.operators.ParentSelectionMethods
+import genetic_algorithms.operators.RecombinationMethods
 import graph.Edge
 import graph.Graph
 import graph.Node
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import utils.helpers.CommandLineHelper
+import kotlinx.serialization.encodeToString
 import utils.helpers.FileHelper
-import java.io.FileNotFoundException
-import java.nio.file.Files
-import kotlin.io.path.Path
 
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
@@ -35,6 +35,7 @@ data class GraphDao(
 }
 
 fun main(args: Array<String>) {
+    /*
     val arguments = args.toList().chunked(2).associate { it[0] to it[1] }
 
     val graphInputFilepath = CommandLineHelper.fetchArgument(arguments, "-graph-input-file") {
@@ -65,6 +66,6 @@ fun main(args: Array<String>) {
         }
         AlgorithmType.PARTICLE_SWARM -> TODO()
         AlgorithmType.ANNEALING -> TODO()
-    }
+    }*/
 }
 

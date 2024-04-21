@@ -4,6 +4,11 @@ import genetic_algorithms.Chromosome
 import genetic_algorithms.Population
 
 object SelectionMethods {
+    enum class Types {
+        TOURNAMENT,
+        ROULETTE_WHEEL
+    }
+
     private const val DEFAULT_TOURNAMENT_SIZE = 2
 
     fun <T> tournamentSelection(

@@ -3,6 +3,11 @@ package genetic_algorithms.operators
 import genetic_algorithms.Chromosome
 
 object MutationMethods {
+    enum class Types {
+        REPLACING,
+        SWAPPING
+    }
+
     fun <T> replacingMutation(chromosome: Chromosome<T>, possibleValues: Array<T>): Chromosome<T>? {
         val value = possibleValues.randomOrNull() ?: return null
         val index = chromosome.genes.indices.random()
