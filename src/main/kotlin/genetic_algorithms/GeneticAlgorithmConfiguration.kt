@@ -1,24 +1,29 @@
 package genetic_algorithms
 
-import genetic_algorithms.operators.MutationMethods
-import genetic_algorithms.operators.NewPopulationMethods
-import genetic_algorithms.operators.ParentSelectionMethods
-import genetic_algorithms.operators.RecombinationMethods
+import genetic_algorithms.operators.*
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class GeneticAlgorithmConfiguration(
     val iterationsCount: Int,
-    val populationSelectionType: NewPopulationMethods.Types,
-    val parentSelectionType: ParentSelectionMethods.Types,
-    val recombinationType: RecombinationConfiguration,
-    val mutationType: MutationConfiguration,
+    val populationSize: Int,
+    val startNodeId: String? = null,
+    val parents: ParentsConfiguration,
+    val recombinationType: RecombinationMethods.Types,
+    val mutation: MutationConfiguration,
+    val newPopulation: PopulationSelectionConfiguration,
 )
 
 @Serializable
-data class RecombinationConfiguration(
-    val type: RecombinationMethods.Types,
-    val percent: Double = 1.0
+data class ParentsConfiguration(
+    val selection: SelectionMethods.Types,
+    val chooser: ParentSelectionMethods.Types
+)
+
+@Serializable
+data class PopulationSelectionConfiguration(
+    val type: NewPopulationMethods.Types,
+    val rate: Double = 1.0
 )
 
 @Serializable
