@@ -1,35 +1,29 @@
 package particles_swarm
 
 import common.Identifiable
+import graph.Graph
+import graph.Node
 import kotlin.math.abs
+import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.time.times
 
-data class Particle(
-    val swarm: Swarm
+data class Particle<T>(
+    val swarm: Swarm,
+    val graph: Graph<T>,
+    val startNode: Node = graph.nodes.random()
 ) : Identifiable() {
-    var position = initializePosition(swarm)
-    var velocity = initializeVelocity(swarm)
+    var position = initializePosition()
+    var velocity = initializeVelocity()
     var localBestPosition = position
     var localBestFitnessValue = swarm.calculateFitness(position)
 
-    private fun initializePosition(swarm: Swarm): Array<Double> {
-        return swarm.minimumValues.mapIndexed { index, minimum ->
-            val maximum = swarm.maximumValues[index]
-            minimum + Math.random() * (maximum - minimum)
-        }.toTypedArray()
+    private fun initializePosition(): Array<Int> {
+        return graph.getRandomPath(startNode).map { graph.edges.indexOf(it) }.toTypedArray()
     }
-
-    private fun initializeVelocity(swarm: Swarm): Array<Double> {
-        with (swarm) {
-            assert(minimumValues.size == position.size)
-            assert(maximumValues.size == position.size)
-
-            return minimumValues.mapIndexed { index, minimum ->
-                val maximum = maximumValues[index]
-                minimum + Math.random() * (maximum - minimum)
-            }.toTypedArray()
-        }
+    private fun initializeVelocity(): Array<Int> {
+        return position.map { if (Math.random() > 0.5) 1 else 0 }.toTypedArray()
     }
 
     fun nextIteration(swarm: Swarm) {
@@ -41,13 +35,13 @@ data class Particle(
         val commonRatio = (2.0 * swarm.currentVelocityRatio
                 / abs(2.0 - velocityRatio - sqrt(velocityRatio.pow(2) - 4.0*velocityRatio)))
 
-        val newVelocity1 = velocity * commonRatio
+        val newVelocity1 = commonRatio * velocity
         val newVelocity2 = commonRatio *
                 swarm.localVelocityRatio *
-                (localBestPosition - position) * randomCurrentBestPosition
+                randomCurrentBestPosition * (localBestPosition - position)
         val newVelocity3 = commonRatio *
                 swarm.globalVelocityRatio *
-                (swarm.globalBestPosition!! - position) * randomGlobalBestPosition
+                randomGlobalBestPosition * (swarm.globalBestPosition!! - position)
 
         velocity = newVelocity1 + newVelocity2 + newVelocity3
         position += velocity
@@ -63,7 +57,7 @@ data class Particle(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Particle
+        other as Particle<*>
 
         if (swarm != other.swarm) return false
         if (!position.contentEquals(other.position)) return false
@@ -82,20 +76,30 @@ data class Particle(
     }
 }
 
-private operator fun Array<Double>.minus(target: Array<Double>): Array<Double> {
-    return this
-        .mapIndexed { index, element -> element - target[index] }
-        .toTypedArray()
+private operator fun Array<Double>.plus(target: Array<Int>): Array<Int> {
+    val indexes = 0..<min(this.size, target.size)
+    return indexes.map { index -> (this[index] + target[index]).toInt() }.toTypedArray()
 }
 
-private operator fun Array<Double>.times(i: Double): Array<Double> {
-    return this.map { it * i }.toTypedArray()
+private operator fun Array<Int>.plus(target: Array<Double>): Array<Int> {
+    val indexes = 0..<min(this.size, target.size)
+    return indexes.map { index -> (this[index] + target[index]).toInt() }.toTypedArray()
 }
 
-private operator fun Array<Double>.plus(second: Array<Double>): Array<Double> {
-    return this.mapIndexed { index, first -> first + second[index] }.toTypedArray()
+private operator fun Array<Double>.plus(target: Array<Double>): Array<Double> {
+    val indexes = 0..<min(this.size, target.size)
+    return indexes.map { index -> this[index] + target[index] }.toTypedArray()
+}
+
+private operator fun Double.times(target: Array<Int>): Array<Int> {
+    return target.map { (this * it).toInt() }.toTypedArray()
 }
 
 private operator fun Double.times(target: Array<Double>): Array<Double> {
-    return target * this
+    return target.map { this * it }.toTypedArray()
+}
+
+private operator fun Array<Int>.minus(target: Array<Int>): Array<Int> {
+    val indexes = 0..<min(this.size, target.size)
+    return indexes.map { index -> this[index] - target[index] }.toTypedArray()
 }
