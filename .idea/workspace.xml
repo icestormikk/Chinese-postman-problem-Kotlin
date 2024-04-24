@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="updated some moments of code">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithmConfiguration.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/serializers/AlgorithmTypeSerializer.kt" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="added a check to ensure that all chromosomes in the population are not empty">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Presets.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Presets.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Presets.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +65,8 @@
       <list>
         <option value="Kotlin Enum" />
         <option value="Kotlin Data Class" />
-        <option value="Kotlin File" />
         <option value="Kotlin Class" />
+        <option value="Kotlin File" />
         <option value="Kotlin Object" />
       </list>
     </option>
@@ -108,6 +104,7 @@
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jigal/IdeaProjects/chinese_postman_problem&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -117,10 +114,15 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem\src\main\kotlin\utils\constants" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="graph" />
+      <recent name="particles_swarm" />
       <recent name="genetic_algorithms" />
       <recent name="utils.serializers" />
     </key>
@@ -129,7 +131,7 @@
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="-algorithm-type GENETIC -graph-input-file .\graph.json -path-output-file .\path.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-particles.json --graph .\graph.json" />
       <shortenClasspath name="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,46 +151,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00001" summary="added dependency for serialization and deserialization of data">
-      <option name="closed" value="true" />
-      <created>1712427180019</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427180019</updated>
-    </task>
-    <task id="LOCAL-00002" summary="added a general implementation of entities and methods related to genetic algorithms">
-      <option name="closed" value="true" />
-      <created>1712427276167</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427276167</updated>
-    </task>
-    <task id="LOCAL-00003" summary="added new functions and classes for the particle swarm algorithm">
-      <option name="closed" value="true" />
-      <created>1712427487208</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427487208</updated>
-    </task>
-    <task id="LOCAL-00004" summary="an abstract class has been added to add a unique id to the inherited classes">
-      <option name="closed" value="true" />
-      <created>1712427600405</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427600405</updated>
-    </task>
-    <task id="LOCAL-00005" summary="restructuring of the project">
-      <option name="closed" value="true" />
-      <created>1712427633578</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427633578</updated>
     </task>
     <task id="LOCAL-00006" summary="adding the Particle class to the particle swarm method">
       <option name="closed" value="true" />
@@ -454,7 +416,135 @@
       <option name="project" value="LOCAL" />
       <updated>1713211461939</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="updated some moments of code">
+      <option name="closed" value="true" />
+      <created>1713734522696</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1713734522696</updated>
+    </task>
+    <task id="LOCAL-00040" summary="dele">
+      <option name="closed" value="true" />
+      <created>1713983370871</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983370872</updated>
+    </task>
+    <task id="LOCAL-00041" summary="deleted">
+      <option name="closed" value="true" />
+      <created>1713983379994</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983379994</updated>
+    </task>
+    <task id="LOCAL-00042" summary="added a logger for the CommandLineHelper class">
+      <option name="closed" value="true" />
+      <created>1713983474445</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983474445</updated>
+    </task>
+    <task id="LOCAL-00043" summary="renamed all constants for command line parameters and added another parameter">
+      <option name="closed" value="true" />
+      <created>1713983717168</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983717168</updated>
+    </task>
+    <task id="LOCAL-00044" summary="now the configurations for different algorithms are in different files">
+      <option name="closed" value="true" />
+      <created>1713983761606</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983761606</updated>
+    </task>
+    <task id="LOCAL-00045" summary="a separate file has been created for validating configuration files">
+      <option name="closed" value="true" />
+      <created>1713983795569</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983795569</updated>
+    </task>
+    <task id="LOCAL-00046" summary="destructuring a configuration class for a genetic algorithm">
+      <option name="closed" value="true" />
+      <created>1713983927030</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1713983927030</updated>
+    </task>
+    <task id="LOCAL-00047" summary="restructuring">
+      <option name="closed" value="true" />
+      <created>1713984074182</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1713984074182</updated>
+    </task>
+    <task id="LOCAL-00048" summary="added a dao object for the Graph class">
+      <option name="closed" value="true" />
+      <created>1713984896043</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1713984896044</updated>
+    </task>
+    <task id="LOCAL-00049" summary="added method for validating the received graph information">
+      <option name="closed" value="true" />
+      <created>1713984937358</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1713984937358</updated>
+    </task>
+    <task id="LOCAL-00050" summary="an additional class has been created for serialization and deserialization">
+      <option name="closed" value="true" />
+      <created>1713984993805</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1713984993813</updated>
+    </task>
+    <task id="LOCAL-00051" summary="fixed a bug with an incorrect number of entities that pass into the next population">
+      <option name="closed" value="true" />
+      <created>1713985084629</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985084629</updated>
+    </task>
+    <task id="LOCAL-00052" summary="complete redesign of the Particle class">
+      <option name="closed" value="true" />
+      <created>1713985122708</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985122708</updated>
+    </task>
+    <task id="LOCAL-00053" summary="adding a class to configure the particle swarm method">
+      <option name="closed" value="true" />
+      <created>1713985145779</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985145779</updated>
+    </task>
+    <task id="LOCAL-00054" summary="added a check to ensure that all chromosomes in the population are not empty">
+      <option name="closed" value="true" />
+      <created>1713985189726</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985189726</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -479,21 +569,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="a class has been created containing all currently implemented methods for solving the problem" />
-    <MESSAGE value="added a name for a new command line parameter" />
-    <MESSAGE value="creating a class (singleton) containing operations on files" />
-    <MESSAGE value="changing the identifier type of each entity" />
-    <MESSAGE value="cleaning" />
-    <MESSAGE value="some random code" />
-    <MESSAGE value="added handlers for possible exceptions in functions" />
-    <MESSAGE value="restructuring" />
-    <MESSAGE value="fixed initialization of graph edges" />
-    <MESSAGE value="all log files should not be considered by the version control system" />
-    <MESSAGE value="added a dependency for using logging tools in project files" />
-    <MESSAGE value="changes in argument validation" />
-    <MESSAGE value="renaming some constants involved in the operation of the application" />
-    <MESSAGE value="updated" />
-    <MESSAGE value="change in function arguments + added a function to find the path between the vertices of the graph" />
     <MESSAGE value="added application logging logic" />
     <MESSAGE value="added general functions for logging the application" />
     <MESSAGE value="stylistic changes and the addition of methods to improve performance" />
@@ -504,6 +579,21 @@
     <MESSAGE value="added code to apply a genetic algorithm to a set of random paths in a graph" />
     <MESSAGE value="again, a bit of random code" />
     <MESSAGE value="updated some moments of code" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated some moments of code" />
+    <MESSAGE value="renaming" />
+    <MESSAGE value="deleted" />
+    <MESSAGE value="added a logger for the CommandLineHelper class" />
+    <MESSAGE value="renamed all constants for command line parameters and added another parameter" />
+    <MESSAGE value="now the configurations for different algorithms are in different files" />
+    <MESSAGE value="a separate file has been created for validating configuration files" />
+    <MESSAGE value="destructuring a configuration class for a genetic algorithm" />
+    <MESSAGE value="restructuring" />
+    <MESSAGE value="added a dao object for the Graph class" />
+    <MESSAGE value="added method for validating the received graph information" />
+    <MESSAGE value="an additional class has been created for serialization and deserialization" />
+    <MESSAGE value="fixed a bug with an incorrect number of entities that pass into the next population" />
+    <MESSAGE value="complete redesign of the Particle class" />
+    <MESSAGE value="adding a class to configure the particle swarm method" />
+    <MESSAGE value="added a check to ensure that all chromosomes in the population are not empty" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a check to ensure that all chromosomes in the population are not empty" />
   </component>
 </project>

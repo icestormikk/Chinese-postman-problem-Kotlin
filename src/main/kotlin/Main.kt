@@ -1,17 +1,19 @@
 import common.AlgorithmType
 import common.Configuration
-import genetic_algorithms.GeneticAlgorithmConfiguration
-import genetic_algorithms.operators.MutationMethods
-import genetic_algorithms.operators.NewPopulationMethods
-import genetic_algorithms.operators.ParentSelectionMethods
-import genetic_algorithms.operators.RecombinationMethods
+import genetic_algorithms.geneticAlgorithm
+import graph.Node
 import graph.Edge
 import graph.Graph
-import graph.Node
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.encodeToString
+import graph.GraphDao
+import particles_swarm.particlesSwarm
+import utils.constants.CONFIGURATION_FILE_ARGUMENT
+import utils.constants.GRAPH_FILE_ARGUMENT
+import utils.helpers.CommandLineHelper
 import utils.helpers.FileHelper
+import utils.helpers.JSONHelper
+import utils.helpers.LoggingHelper
+import utils.validators.ConfigurationValidator
+import utils.validators.GraphValidator
 
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
@@ -23,49 +25,48 @@ class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Do
         return path.sumOf { it.weight }
     }
 }
+fun GraphDao.toDoubleGraph() = DoubleGraph(nodes, edges.toMutableList())
 
-@Serializable
-data class GraphDao(
-    val nodes: List<Node>,
-    val edges: List<Edge<Double>>
-) {
-    fun toDoubleGraph(): DoubleGraph {
-        return DoubleGraph(nodes, edges.toMutableList())
-    }
-}
+private val logger = LoggingHelper.getLogger("MAIN_LOGGER")
 
 fun main(args: Array<String>) {
-    /*
     val arguments = args.toList().chunked(2).associate { it[0] to it[1] }
 
-    val graphInputFilepath = CommandLineHelper.fetchArgument(arguments, "-graph-input-file") {
-        if (!Files.exists(Path(it))) {
-            throw FileNotFoundException("The file '$it' does not exist.")
-        }
-        it
+    val graphDao = CommandLineHelper.fetchArgument(arguments, GRAPH_FILE_ARGUMENT) {
+        FileHelper.readFrom(it) { content -> JSONHelper.getInstance().decodeFromString<GraphDao>(content) }
     }
-    val pathOutputFilepath = CommandLineHelper.fetchArgument(arguments, "-path-output-file") { it }
-    val algorithmType = CommandLineHelper.fetchArgument(arguments, "-algorithm-type") {
-        AlgorithmType.valueOf(it)
-    }
+    GraphValidator.validateGraphDao(graphDao)
+    val graph = graphDao.toDoubleGraph()
 
-    val graph = FileHelper.readFrom(graphInputFilepath) {
-        Json.decodeFromString<GraphDao>(it).toDoubleGraph()
+    val configuration = CommandLineHelper.fetchArgument(arguments, CONFIGURATION_FILE_ARGUMENT) {
+        FileHelper.readFrom(it) { content -> JSONHelper.getInstance().decodeFromString<Configuration>(content) }
     }
-    val onFitness = { chromosome: Chromosome<Edge<Double>> ->
-        if (!chromosome.genes.all { graph.edges.any { edge -> edge.id == it.id } }) {
-            Double.MIN_VALUE
-        }
-        (-1) * graph.calculateTotalLengthOf(chromosome.genes)
-    }
+    ConfigurationValidator.validateConfiguration(configuration, graph)
 
-    when (algorithmType) {
+    when (configuration.type) {
         AlgorithmType.GENETIC -> {
-            val result = geneticAlgorithm(graph, 1000, 1000, onFitness = onFitness)
-            outputToFile(pathOutputFilepath, result, onFitness) { graph.calculateTotalLengthOf(it) }
+            logger.info { "Genetic Algorithm Started" }
+            geneticAlgorithm(
+                graph,
+                onFitness = { chromosome ->
+                    1 / graph.calculateTotalLengthOf(chromosome.genes)
+                },
+                onDistance = { chromosome, chromosome2 ->
+                    chromosome.genes.mapIndexed { index, edge -> if (edge.id != chromosome2.genes[index].id) 1 else 0 }
+                        .sum().toDouble()
+                },
+                configuration.genetic!!
+            ).also {
+                logger.info { "Genetic Algorithm Ended" }
+            }
         }
-        AlgorithmType.PARTICLE_SWARM -> TODO()
+        AlgorithmType.PARTICLES_SWARM -> {
+            logger.info { "Particles Swarm Algorithm Started" }
+            particlesSwarm(graph, configuration.particleSwarm!!).also {
+                logger.info { "Particles Swarm Algorithm Ended" }
+            }
+        }
         AlgorithmType.ANNEALING -> TODO()
-    }*/
+    }
 }
 
