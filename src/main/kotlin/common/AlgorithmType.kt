@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class AlgorithmType {
     GENETIC,
-    PARTICLE_SWARM,
+    PARTICLES_SWARM,
     ANNEALING,
 }
