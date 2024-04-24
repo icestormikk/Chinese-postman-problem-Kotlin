@@ -1,33 +1,32 @@
 package particles_swarm
 
 import common.Identifiable
+import graph.Graph
 import utils.helpers.LoggingHelper
 
 abstract class Swarm(
     open val size: Int,
-    open val minimumValues: Array<Double>,
-    open val maximumValues: Array<Double>,
     open val currentVelocityRatio: Double,
     open val localVelocityRatio: Double,
     open val globalVelocityRatio: Double,
+    val graph: Graph<Double>
 ) : Identifiable() {
     var globalBestFitness: Double? = null
-    var globalBestPosition: Array<Double>? = null
+    var globalBestPosition: Array<Int>? = null
     val particles by lazy { initialize() }
 
     companion object {
         private val logger = LoggingHelper.getLogger("SWARM_LOGGER")
     }
 
-    abstract fun onFitness(position: Array<Double>): Double
-    abstract fun getPenalty(position: Array<Double>, ratio: Double): Double
+    abstract fun onFitness(position: Array<Int>): Double
+    abstract fun getPenalty(position: Array<Int>, ratio: Double): Double
 
-    private fun initialize(): List<Particle> {
-        return (0..<size).map { Particle(swarm = this) }
+    private fun initialize(): List<Particle<Double>> {
+        return (0..<size).map { Particle(this, graph) }
     }
 
-    fun calculateFitness(position: Array<Double>): Double {
-        assert(position.size == minimumValues.size)
+    fun calculateFitness(position: Array<Int>): Double {
         val currentFitness = onFitness(position) + getPenalty(position, 10000.0)
 
         if (globalBestFitness == null || currentFitness < globalBestFitness!!) {
