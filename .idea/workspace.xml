@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="added a check to ensure that all chromosomes in the population are not empty">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Presets.kt" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Presets.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Presets.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,38 +145,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00006" summary="adding the Particle class to the particle swarm method">
-      <option name="closed" value="true" />
-      <created>1712427680927</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427680927</updated>
-    </task>
-    <task id="LOCAL-00007" summary="added some new files for IDEA">
-      <option name="closed" value="true" />
-      <created>1712427710936</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427710936</updated>
-    </task>
-    <task id="LOCAL-00008" summary="added some new files for IDEA">
-      <option name="closed" value="true" />
-      <created>1712427746618</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427746618</updated>
-    </task>
-    <task id="LOCAL-00009" summary="minor style changes">
-      <option name="closed" value="true" />
-      <created>1712427765838</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1712427765838</updated>
     </task>
     <task id="LOCAL-00010" summary="adding serialization and deserialization methods for the UUID class">
       <option name="closed" value="true" />
@@ -544,7 +506,39 @@
       <option name="project" value="LOCAL" />
       <updated>1713985189726</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="updating the algorithm for launching the particle swarm method">
+      <option name="closed" value="true" />
+      <created>1713985221936</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985221936</updated>
+    </task>
+    <task id="LOCAL-00056" summary="reduce the available ways of mixing genes">
+      <option name="closed" value="true" />
+      <created>1713985271440</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985271440</updated>
+    </task>
+    <task id="LOCAL-00057" summary="an attempt to adapt the particle swarm method to the problem being solved">
+      <option name="closed" value="true" />
+      <created>1713985341180</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1713985341180</updated>
+    </task>
+    <task id="LOCAL-00058" summary="updated">
+      <option name="closed" value="true" />
+      <created>1713986414807</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1713986414807</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -569,10 +563,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added application logging logic" />
-    <MESSAGE value="added general functions for logging the application" />
-    <MESSAGE value="stylistic changes and the addition of methods to improve performance" />
-    <MESSAGE value="removed the check for the same length for the chromosomes of all entities in the population" />
     <MESSAGE value="improving safety in gene recombination methods" />
     <MESSAGE value="added a logger in the swarm class to track the operation of the algorithm" />
     <MESSAGE value="removed unused import" />
@@ -594,6 +584,10 @@
     <MESSAGE value="complete redesign of the Particle class" />
     <MESSAGE value="adding a class to configure the particle swarm method" />
     <MESSAGE value="added a check to ensure that all chromosomes in the population are not empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a check to ensure that all chromosomes in the population are not empty" />
+    <MESSAGE value="updating the algorithm for launching the particle swarm method" />
+    <MESSAGE value="reduce the available ways of mixing genes" />
+    <MESSAGE value="an attempt to adapt the particle swarm method to the problem being solved" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
 </project>
