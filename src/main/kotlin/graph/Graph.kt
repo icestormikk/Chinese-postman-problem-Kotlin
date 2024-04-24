@@ -3,13 +3,13 @@ package graph
 import common.Identifiable
 
 abstract class Graph<T>(
-    private val _nodes: List<Node>,
-    private val _edges: List<Edge<T>>
+    _nodes: List<Node>,
+    _edges: List<Edge<T>>
 ) : Identifiable() {
     val nodes: List<Node> = _nodes
-    val edges: List<Edge<T>> by lazy { initializeEdges() }
+    var edges: List<Edge<T>>
 
-    private fun initializeEdges(): MutableList<Edge<T>> {
+    init {
         val result = mutableListOf<Edge<T>>()
 
         for (edge in _edges) {
@@ -19,7 +19,7 @@ abstract class Graph<T>(
             result.add(edge.copy(type = EdgeType.DIRECTED))
         }
 
-        return result
+        edges = result
     }
 
     abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): T
@@ -31,8 +31,8 @@ abstract class Graph<T>(
         fun dfs(node: Node) {
             val suitableEdges = edges.filter { it.source == node }
             if (suitableEdges.all { visited.any { edge -> edge.id == it.id } }) {
-                path.removeLast()
-                visited.removeLast()
+                path.removeLastOrNull()
+                visited.removeLastOrNull()
                 return
             }
 
@@ -45,20 +45,13 @@ abstract class Graph<T>(
             }
         }
 
-        try {
-            dfs(startNode)
-
-            val backToStartPath = getPathBetween(path.last().destination, startNode)
-            backToStartPath?.let { edges ->
-                path.addAll(edges)
-            }
-            return path
-        } catch (ex: Exception) {
-            throw Error("Error while finding a path: " + ex.message)
-        }
+        dfs(startNode)
+        val backToStartPath = getPathBetween(path.last().destination, startNode)
+        backToStartPath?.let { edges -> path.addAll(edges) }
+        return path
     }
 
-    fun getPathBetween(startNode: Node, endNode: Node): List<Edge<T>>? {
+    private fun getPathBetween(startNode: Node, endNode: Node): List<Edge<T>>? {
         val visitedEdges = mutableSetOf<Node>()
         val queue = ArrayDeque<List<Edge<T>>>()
         queue.add(listOf())
