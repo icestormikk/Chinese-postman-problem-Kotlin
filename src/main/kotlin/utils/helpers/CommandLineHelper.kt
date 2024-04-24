@@ -1,6 +1,8 @@
 package utils.helpers
 
 object CommandLineHelper {
+    private val logger = LoggingHelper.getLogger("COMMAND_LINE_LOGGER")
+
     fun <T> fetchArgument(
         argumentsMap: Map<String, String>, argument: String, onTransform: (String) -> T
     ): T {
@@ -11,7 +13,8 @@ object CommandLineHelper {
         return try {
             onTransform(value)
         } catch (ex: Exception) {
-            throw IllegalArgumentException("Error during extraction of parameters from the command line - ${ex.message}")
+            logger.error { ex.message }
+            throw IllegalArgumentException("Error during extraction of parameters from the command line (${ex.message})")
         }
     }
 }
