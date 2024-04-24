@@ -44,7 +44,7 @@ object NewPopulationMethods {
             else ceil(population.entities.size * elitePercent).toInt()
         val suitableEntities = population.entities
             .sortedByDescending(onFitness)
-            .slice(0..(suitableEntitiesCount))
+            .slice(0..<suitableEntitiesCount)
 
         return Population(suitableEntities.toMutableList())
     }
