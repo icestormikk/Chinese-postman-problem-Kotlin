@@ -6,14 +6,10 @@ import kotlin.math.min
 object RecombinationMethods {
     enum class Types {
         DISCRETE,
-        INTERMEDIATE,
-        LINEAR,
         TWO_POINT_CROSSOVER,
         SINGLE_POINT_CROSSOVER,
         SHUFFLE
     }
-
-    private const val BEST_RECOMBINATION_MULTIPLIER = 0.25
 
     fun <T> discreteRecombination(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
@@ -31,67 +27,20 @@ object RecombinationMethods {
         return Pair(child1, child2)
     }
 
-    fun intermediateRecombination(
-        parent1: Chromosome<Double>, parent2: Chromosome<Double>, parameter: Double = BEST_RECOMBINATION_MULTIPLIER
-    ): Pair<Chromosome<Double>, Chromosome<Double>> {
-        require(parameter >= 0) { "The parameter value should not be negative" }
-
-        val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
-
-        val child1 = Chromosome(parent1.genes)
-        val child2 = Chromosome(parent2.genes)
-
-        for (index in suitableIndexes) {
-            val min = -parameter
-            val max = 1 - parameter
-            val alpha = min + Math.random() * (max - min)
-
-            child1.genes[index] = parent1.genes[index] + alpha * (parent2.genes[index] - parent1.genes[index])
-        }
-
-        for (index in suitableIndexes) {
-            val alpha = getRandomBetween(-parameter, 1 - parameter)
-            child2.genes[index] = parent1.genes[index] + alpha * (parent2.genes[index] - parent1.genes[index])
-        }
-
-        return Pair(child1, child2)
-    }
-
-    fun linearRecombination(
-        parent1: Chromosome<Double>, parent2: Chromosome<Double>, parameter: Double = BEST_RECOMBINATION_MULTIPLIER
-    ): Pair<Chromosome<Double>, Chromosome<Double>> {
-        require(parameter >= 0) { "The parameter value should not be negative" }
-
-        val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
-
-        val child1 = Chromosome(parent1.genes)
-        val child2 = Chromosome(parent2.genes)
-
-        var alpha = getRandomBetween(-parameter, 1 - parameter)
-        for (index in suitableIndexes) {
-            child1.genes[index] = parent1.genes[index] + alpha * (parent2.genes[index] - parent1.genes[index])
-        }
-
-        alpha = getRandomBetween(-parameter, 1 - parameter)
-        for (index in suitableIndexes) {
-            child2.genes[index] = parent1.genes[index] + alpha * (parent2.genes[index] - parent1.genes[index])
-        }
-
-        return Pair(child1, child2)
-    }
-
     fun <T> twoPointCrossover(
-        parent1: Chromosome<T>, parent2: Chromosome<T>, points: Pair<Int, Int>
+        parent1: Chromosome<T>, parent2: Chromosome<T>, points: Pair<Int, Int>? = null
     ): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
-        require(points.toList().all { it > -1 && it <= suitableIndexes.last }) {
-            "The crossing points should not be negative or larger than the suitable size of the chromosome"
+        if (points != null) {
+            require(points.toList().all { it > -1 && it <= suitableIndexes.last }) {
+                "The crossing points should not be negative or larger than the suitable size of the chromosome"
+            }
         }
 
         val child1 = Chromosome(parent1.genes.clone())
         val child2 = Chromosome(parent2.genes.clone())
-        val pointsSet = setOf(points.first, points.second)
+        val pointsSet = setOf(points?.first ?: suitableIndexes.random(), points?.second ?: suitableIndexes.random())
 
         for (index in pointsSet.elementAt(0)..pointsSet.elementAt(1)) {
             child1.genes[index] = parent2.genes[index]
@@ -137,7 +86,6 @@ object RecombinationMethods {
         return children
     }
 
-    private fun getRandomBetween(min: Double, max: Double) = min + Math.random() * (max - min)
     fun getSuitableGenesRange(firstGenes: Array<*>, secondGenes: Array<*>): IntRange {
         return 0..min(firstGenes.lastIndex, secondGenes.lastIndex)
     }
