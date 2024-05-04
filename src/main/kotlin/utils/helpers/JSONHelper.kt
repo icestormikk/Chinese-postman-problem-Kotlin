@@ -2,7 +2,7 @@ package utils.helpers
 
 import kotlinx.serialization.json.Json
 
-object JSONHelper {
+class JSONHelper {
     private val _jsonFormatter = Json {
         encodeDefaults = true
         prettyPrint = true

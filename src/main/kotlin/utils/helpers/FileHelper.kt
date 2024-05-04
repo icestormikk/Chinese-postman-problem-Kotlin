@@ -2,7 +2,9 @@ package utils.helpers
 
 import java.io.File
 
-object FileHelper {
+class FileHelper {
+    private val logger = LoggingHelper().getLogger(FileHelper::class.simpleName.toString())
+
     fun writeTo(filepath: String, content: String) {
         try {
             val file = File(filepath)
@@ -12,8 +14,11 @@ object FileHelper {
                 write(content)
                 close()
             }
+            logger.info { "Writing to the $filepath has been completed successfully" }
         } catch (ex: Error) {
-            throw Error("Error while writing to $filepath: ${ex.message}")
+            val message = "Error while writing to $filepath: ${ex.message}"
+            logger.error { message }
+            throw Error(message)
         }
     }
 
@@ -22,9 +27,14 @@ object FileHelper {
             val file = File(filepath)
             val stream = file.inputStream()
             val content = stream.readBytes().toString(Charsets.UTF_8)
-            return onTransform(content)
+            val result = onTransform(content)
+
+            logger.info { "Data from the $filepath has been successfully read" }
+            return result
         } catch (ex: Error) {
-            throw Error("Error while writing to $filepath: ${ex.message}")
+            val message = "Error while writing to $filepath: ${ex.message}"
+            logger.error { message }
+            throw Error(message)
         }
     }
 }
