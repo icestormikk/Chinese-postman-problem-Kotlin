@@ -13,7 +13,7 @@ class CommandLineHelper {
 
         if (!isRequired && value == null) return null
 
-        require(!value.isNullOrBlank()) { "The $argument parameter could not be found. " +
+        require(!value.isNullOrBlank()) { "The required $argument parameter could not be found. " +
             "Check the correctness of the transmitted parameters." }
 
         return try {
@@ -21,7 +21,6 @@ class CommandLineHelper {
             logger.info { "The following parameter was successfully received from the command line: $argument" }
             res
         } catch (ex: Exception) {
-            logger.error { ex.message }
             throw IllegalArgumentException("Error during extraction of parameters from the command line (${ex.message})")
         }
     }
