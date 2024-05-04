@@ -1,7 +1,7 @@
 package utils.helpers
 
-object CommandLineHelper {
-    private val logger = LoggingHelper.getLogger("COMMAND_LINE_LOGGER")
+class CommandLineHelper {
+    private val logger = LoggingHelper().getLogger(CommandLineHelper::class.simpleName.toString())
 
     fun <T> fetchArgument(
         argumentsMap: Map<String, String>,
@@ -17,7 +17,9 @@ object CommandLineHelper {
             "Check the correctness of the transmitted parameters." }
 
         return try {
-            onTransform(value)
+            val res = onTransform(value)
+            logger.info { "The following parameter was successfully received from the command line: $argument" }
+            res
         } catch (ex: Exception) {
             logger.error { ex.message }
             throw IllegalArgumentException("Error during extraction of parameters from the command line (${ex.message})")
