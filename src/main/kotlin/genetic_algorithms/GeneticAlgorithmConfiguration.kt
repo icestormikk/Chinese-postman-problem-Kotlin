@@ -29,5 +29,5 @@ data class PopulationSelectionConfiguration(
 @Serializable
 data class MutationConfiguration(
     val type: MutationMethods.Types,
-    val percent: Double = 0.5
+    val rate: Double = 0.5
 )

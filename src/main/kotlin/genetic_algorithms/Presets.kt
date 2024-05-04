@@ -64,7 +64,7 @@ fun <T> geneticAlgorithm(
                 RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
             }
         }
-        if (Math.random() > mutation.percent) {
+        if (Math.random() > mutation.rate) {
             offspring.toList().forEach {
                 when (mutation.type) {
                     MutationMethods.Types.REPLACING -> {
