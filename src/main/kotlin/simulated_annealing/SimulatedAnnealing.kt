@@ -11,12 +11,13 @@ class SimulatedAnnealing {
 
     fun start(
         graph: Graph<Double>,
-        minTemperature: Double,
-        maxTemperature: Double,
+        configuration: SimulatedAnnealingConfiguration,
         onEnergy: (state: Array<Edge<Double>>) -> Double,
         onNewState: (state: Array<Edge<Double>>) -> Array<Edge<Double>>,
         startNode: Node? = null
     ): Array<Edge<Double>> {
+        val (minTemperature, maxTemperature, temperatureIncreasingCoefficient) = configuration
+
         require(minTemperature < maxTemperature) { "The minimum temperature must be strictly less than the maximum" }
 
         var state = (if (startNode == null) graph.getRandomPath() else graph.getRandomPath(startNode)).toTypedArray()
@@ -39,7 +40,7 @@ class SimulatedAnnealing {
                 }
             }
 
-            currentTemperature = decreaseTemperature(maxTemperature, i)
+            currentTemperature = decreaseTemperature(maxTemperature, i, temperatureIncreasingCoefficient)
             logger.info { "Temperature has been updated: $currentTemperature" }
             if (currentTemperature <= minTemperature) {
                 break
@@ -53,8 +54,8 @@ class SimulatedAnnealing {
         return exp(-energyDiff / temperature)
     }
 
-    private fun decreaseTemperature(initialTemperature: Double,  iterationIndex: Int): Double {
-        return initialTemperature * 0.9 / iterationIndex
+    private fun decreaseTemperature(initialTemperature: Double,  iterationIndex: Int, coefficient: Double): Double {
+        return initialTemperature * coefficient / iterationIndex
     }
 
     private fun isTransition(probability: Double): Boolean {
