@@ -16,7 +16,7 @@ abstract class Swarm(
     val particles by lazy { initialize() }
 
     companion object {
-        private val logger = LoggingHelper.getLogger("SWARM_LOGGER")
+        private val logger = LoggingHelper().getLogger("SWARM_LOGGER")
     }
 
     abstract fun onFitness(position: Array<Int>): Double
