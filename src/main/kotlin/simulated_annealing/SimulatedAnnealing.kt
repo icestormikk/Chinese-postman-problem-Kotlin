@@ -17,9 +17,7 @@ class SimulatedAnnealing {
         onNewState: (state: Array<Edge<Double>>) -> Array<Edge<Double>>,
         startNode: Node? = null
     ): Array<Edge<Double>> {
-        require(minTemperature < maxTemperature) {
-            "The minimum temperature must be strictly less than the maximum"
-        }
+        require(minTemperature < maxTemperature) { "The minimum temperature must be strictly less than the maximum" }
 
         var state = (if (startNode == null) graph.getRandomPath() else graph.getRandomPath(startNode)).toTypedArray()
         var currentEnergy = onEnergy(state)
