@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class SimulatedAnnealingConfiguration(
     val minTemperature: Double,
     val maxTemperature: Double,
-    val temperatureIncreasingCoefficient: Double
+    val temperatureIncreasingCoefficient: Double,
+    val selectedNodeId: String? = null
 )
