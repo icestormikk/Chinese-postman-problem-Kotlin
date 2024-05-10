@@ -3,25 +3,9 @@ package graph
 import common.Identifiable
 
 abstract class Graph<T>(
-    _nodes: List<Node>,
-    _edges: List<Edge<T>>
+    val nodes: List<Node>,
+    val edges: List<Edge<T>>
 ) : Identifiable() {
-    val nodes: List<Node> = _nodes
-    var edges: List<Edge<T>>
-
-    init {
-        val result = mutableListOf<Edge<T>>()
-
-        for (edge in _edges) {
-            if (edge.type == EdgeType.NOT_ORIENTED) {
-                result.add(Edge(edge.destination, edge.source, edge.weight, EdgeType.DIRECTED))
-            }
-            result.add(edge.copy(type = EdgeType.DIRECTED))
-        }
-
-        edges = result
-    }
-
     abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): T
 
     fun getRandomPath(startNode: Node = nodes.random()): MutableList<Edge<T>> {
