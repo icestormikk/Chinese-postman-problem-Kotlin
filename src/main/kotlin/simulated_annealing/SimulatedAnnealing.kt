@@ -31,7 +31,6 @@ class SimulatedAnnealing {
             if (candidateEnergy < currentEnergy) {
                 currentEnergy = candidateEnergy
                 state = candidateState
-//                logger.info { "Current energy has been updated (1): $currentEnergy" }
             } else {
                 val probability = onProbability(candidateEnergy - currentEnergy, currentTemperature)
                 if (isTransition(probability)) {
