@@ -14,7 +14,7 @@ class GeneticAlgorithm {
         onFitness: (chromosome: Chromosome<Edge<T>>) -> Double,
         onDistance: (Chromosome<Edge<T>>, Chromosome<Edge<T>>) -> Double,
         configuration: GeneticAlgorithmConfiguration,
-    ): Population<Edge<T>> {
+    ): Array<Edge<T>> {
         logger.info { "Launching the genetic algorithm" }
 
         val (
@@ -100,7 +100,8 @@ class GeneticAlgorithm {
             }
         }
 
-        return population
+        val bestChromosome = population.entities.sortedByDescending(onFitness)[0]
+        return bestChromosome.genes
     }
 
     private fun <T> Graph<T>.getNodeById(id: String): Node? {
