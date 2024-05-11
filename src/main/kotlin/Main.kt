@@ -19,6 +19,7 @@ import utils.constants.LOGGER_FILE_VM_OPTION
 import utils.constants.RESULT_FILE_ARGUMENT
 import kotlinx.serialization.encodeToString
 import java.nio.file.Paths
+import kotlin.time.measureTimedValue
 
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
@@ -82,37 +83,46 @@ fun main(args: Array<String>) {
                     return ch.genes.mapIndexed { index, edge -> if (edge.id != ch2.genes[index].id) 1 else 0 }.sum().toDouble()
                 }
 
-                val result = GeneticAlgorithm().start(
-                    graph,
-                    ::onFitness,
-                    { ch, ch2 -> onDistance(ch, ch2) },
-                    configuration.genetic
-                )
-                result.entities.sortByDescending(::onFitness)
+                val (result, duration) = measureTimedValue {
+                    GeneticAlgorithm().start(
+                        graph,
+                        ::onFitness,
+                        { ch, ch2 -> onDistance(ch, ch2) },
+                        configuration.genetic
+                    )
+                }
 
-                println(graph.calculateTotalLengthOf(result.entities[0].genes))
-                Response(result.entities[0].genes.map { it.id })
+                val length = graph.calculateTotalLengthOf(result)
+                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
             }
             AlgorithmType.PARTICLES_SWARM -> {
                 if (configuration.particleSwarm == null) {
                     throw Exception("The configuration for the particle swarm method was not passed")
                 }
-                val result = ParticleSwarm().start(graph, configuration.particleSwarm)
-                Response(result.map { index -> graph.edges[index].id })
+                val (result, duration) = measureTimedValue {
+                    ParticleSwarm().start(graph, configuration.particleSwarm)
+                }
+
+                val length = graph.calculateTotalLengthOf(result.toTypedArray())
+                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
             }
             AlgorithmType.ANNEALING -> {
                 if (configuration.annealing == null) {
                     throw Exception("The configuration for the annealing method was not passed")
                 }
                 val selectedNode = graph.nodes.find { it.id == configuration.annealing.selectedNodeId } ?: graph.nodes.random()
-                val result = SimulatedAnnealing().start(
-                    graph,
-                    configuration.annealing,
-                    { state -> graph.calculateTotalLengthOf(state) },
-                    { graph.getRandomPath(selectedNode).toTypedArray() },
-                    selectedNode
-                )
-                Response(result.map { it.id })
+                val (result, duration) = measureTimedValue {
+                    SimulatedAnnealing().start(
+                        graph,
+                        configuration.annealing,
+                        { state -> graph.calculateTotalLengthOf(state) },
+                        { graph.getRandomPath(selectedNode).toTypedArray() },
+                        selectedNode
+                    )
+                }
+
+                val length = graph.calculateTotalLengthOf(result)
+                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
             }
         }
 
