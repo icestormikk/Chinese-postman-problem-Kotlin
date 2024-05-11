@@ -14,19 +14,19 @@ abstract class Graph<T>(
 
         fun dfs(node: Node) {
             val suitableEdges = edges.filter { it.source == node }
-            if (suitableEdges.all { visited.any { edge -> edge.id == it.id } }) {
-                path.removeLastOrNull()
-                visited.removeLastOrNull()
-                return
+            val notVisitedSuitableEdges = suitableEdges.filter { !visited.contains(it) }
+
+            if (suitableEdges.isEmpty()) {
+                throw IllegalArgumentException("There are no output edges from the node with id ${node.id}")
             }
 
-            for (edge in suitableEdges.shuffled()) {
-                if (visited.none { it.id == edge.id }) {
-                    visited.add(edge)
-                    path.add(edge)
-                    dfs(edge.destination)
-                }
-            }
+            if (visited.size >= edges.size && node.id == startNode.id) return
+
+            val nextEdge = (notVisitedSuitableEdges.ifEmpty { suitableEdges }).random()
+
+            visited.add(nextEdge)
+            path.add(nextEdge)
+            dfs(nextEdge.destination)
         }
 
         dfs(startNode)
