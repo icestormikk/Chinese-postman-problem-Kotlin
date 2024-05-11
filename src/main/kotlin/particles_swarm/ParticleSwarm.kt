@@ -1,5 +1,6 @@
 package particles_swarm
 
+import graph.Edge
 import graph.Graph
 import utils.helpers.LoggingHelper
 
@@ -31,7 +32,7 @@ class ParticleSwarm {
 
     }
 
-    fun start(graph: Graph<Double>, configuration: ParticlesSwarmConfiguration): Array<Int> {
+    fun start(graph: Graph<Double>, configuration: ParticlesSwarmConfiguration): List<Edge<Double>> {
         logger.info { "Launching the particle swarm method" }
         val (iterationsCount, swarmSize, currentVelocityRatio, localVelocityRatio, globalVelocityRatio) = configuration
 
@@ -43,6 +44,9 @@ class ParticleSwarm {
         }
 
         logger.info { "The particle swarm method has completed its work" }
-        return swarm.globalBestPosition!!
+        val edgeIndexes = swarm.globalBestPosition ?: throw IllegalStateException("The best position of the swarm is null")
+
+        val path = edgeIndexes.map { graph.edges[it] }
+        return path
     }
 }
