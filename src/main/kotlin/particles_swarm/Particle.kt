@@ -9,14 +9,24 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.time.times
 
+/**
+ * Класс, описывающий одну частицу
+ * @property swarm Рой, которому принадлежит частица
+ * @property graph Граф, на котором происходит решение задачи
+ * @property startNode Вершина для которой решается задача. Все искомые пути должны начинаться и заканчиваться в ней
+ */
 data class Particle<T>(
     val swarm: Swarm,
     val graph: Graph<T>,
     val startNode: Node = graph.nodes.random()
 ) : Identifiable() {
+    // текущая позиция частицы
     var position = initializePosition()
+    // текущая скорость счастицы
     var velocity = initializeVelocity()
+    // лучшая позиция частицы
     var localBestPosition = position
+    // значение ф-ции пригодности в лучшей позиции частицы
     var localBestFitnessValue = swarm.calculateFitness(position)
 
     private fun initializePosition(): Array<Int> {
@@ -26,19 +36,25 @@ data class Particle<T>(
         return position.map { if (Math.random() > 0.5) 1 else 0 }.toTypedArray()
     }
 
+    // обновление позиции частицы
     fun nextIteration(swarm: Swarm) {
         if (swarm.globalBestPosition == null) return
 
+        // коэффициент r для локально лучшей позиции
         val randomCurrentBestPosition = Math.random()
+        // коэффициент r для глобально лучшей позиции
         val randomGlobalBestPosition = Math.random()
         val velocityRatio = swarm.localVelocityRatio - swarm.globalVelocityRatio
         val commonRatio = (2.0 * swarm.currentVelocityRatio
                 / abs(2.0 - velocityRatio - sqrt(velocityRatio.pow(2) - 4.0*velocityRatio)))
 
+        // первая компонента скорости
         val newVelocity1 = commonRatio * velocity
+        // вторая компонента скорости
         val newVelocity2 = commonRatio *
                 swarm.localVelocityRatio *
                 randomCurrentBestPosition * (localBestPosition - position)
+        // третья компонента скорости
         val newVelocity3 = commonRatio *
                 swarm.globalVelocityRatio *
                 randomGlobalBestPosition * (swarm.globalBestPosition!! - position)
@@ -46,6 +62,7 @@ data class Particle<T>(
         velocity = newVelocity1 + newVelocity2 + newVelocity3
         position += velocity
 
+        // рассчёт нового локального значения функции приспособленности и обновление лучших показателей при необходимости
         val fitness = swarm.calculateFitness(position)
         if (fitness < localBestFitnessValue) {
             localBestFitnessValue = fitness

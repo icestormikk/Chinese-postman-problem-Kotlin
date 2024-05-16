@@ -2,18 +2,22 @@ package genetic_algorithms.operators
 
 import genetic_algorithms.Chromosome
 
+// Набор методов для мутации хромосом
 object MutationMethods {
+    // Список доступных методов
     enum class Types {
         REPLACING,
         SWAPPING
     }
 
+    // Случайным образом из набора возможных выбирается случайное значение, и встаёт на место случайного гена
     fun <T> replacingMutation(chromosome: Chromosome<T>, possibleValues: Array<T>): Chromosome<T>? {
         val value = possibleValues.randomOrNull() ?: return null
         val index = chromosome.genes.indices.random()
         return Chromosome(chromosome.genes.clone().apply { this[index] = value })
     }
 
+    // Два случайных гена меняются местами
     fun <T> swappingMutation(chromosome: Chromosome<T>): Chromosome<T>? {
         return when {
             chromosome.genes.size <= 1 -> {

@@ -4,13 +4,16 @@ import genetic_algorithms.Chromosome
 import genetic_algorithms.Population
 import kotlin.math.ceil
 
+// Алгоритмы составления новой популяции
 object NewPopulationMethods {
+    // Список доступных алгоритмов
     enum class Types {
         TRUNCATION,
         ELITE,
         EXCLUSION
     }
 
+    // Отбор усечением (выбор случайных особей из числа пригодных)
     fun <T> truncationSelection(
         population: Population<T>,
         onFitness: (chromosome: Chromosome<T>) -> Double,
@@ -31,6 +34,7 @@ object NewPopulationMethods {
         )
     }
 
+    // Элитарный отбор (все особи, которые имеют значение пригодности выше установленного, проходят в следующую популяцию)
     fun <T> eliteSelection(
         population: Population<T>,
         onFitness: (chromosome: Chromosome<T>) -> Double,
@@ -49,6 +53,7 @@ object NewPopulationMethods {
         return Population(suitableEntities.toMutableList())
     }
 
+    // Отбор вытеснением (то же, что и отбор усечением, но все особи имеют разный набор генов)
     fun <T> exclusionSelection(
         population: Population<T>,
         onFitness: (chromosome: Chromosome<T>) -> Double,

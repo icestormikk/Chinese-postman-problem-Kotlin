@@ -3,7 +3,9 @@ package genetic_algorithms.operators
 import genetic_algorithms.Chromosome
 import kotlin.math.min
 
+// Набор методов для обмена генами между особями
 object RecombinationMethods {
+    // Список доступных методов
     enum class Types {
         DISCRETE,
         TWO_POINT_CROSSOVER,
@@ -11,6 +13,12 @@ object RecombinationMethods {
         SHUFFLE
     }
 
+    /**
+     * Дискретная рекомбинация - каждый ген особи - потомка может с равной вероятностью получен от первого или от второго родителя
+     * @param parent1 Первый "родитель"
+     * @param parent2 Второй "родитель"
+     * @return Две особи - потомка с новыми генами
+     */
     fun <T> discreteRecombination(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
@@ -27,6 +35,13 @@ object RecombinationMethods {
         return Pair(child1, child2)
     }
 
+    /**
+     * Двухточечный кроссинговер, обмен участком хросомом, заключенным между двумя точками
+     * @param parent1 Первый "родитель"
+     * @param parent2 Второй "родитель"
+     * @param points Индексы генов, определяющие начало и конец промежутка для обмена
+     * @return Две особи - потомка с новыми генами
+     */
     fun <T> twoPointCrossover(
         parent1: Chromosome<T>, parent2: Chromosome<T>, points: Pair<Int, Int>? = null
     ): Pair<Chromosome<T>, Chromosome<T>> {
@@ -50,6 +65,10 @@ object RecombinationMethods {
         return Pair(child1, child2)
     }
 
+    /**
+     * Одноточечный кроссинговер, хромосомы делятся на две части и обмениваются ими
+     * @see twoPointCrossover
+     */
     inline fun <reified T> singlePointCrossover(
         parent1: Chromosome<T>, parent2: Chromosome<T>, point: Int? = null
     ): Pair<Chromosome<T>, Chromosome<T>> {
@@ -66,6 +85,12 @@ object RecombinationMethods {
         return Pair(offspring1, offspring2)
     }
 
+    /**
+     * Случайное перемешивание генов хромосом. Изменяются и "родители", и "потомки"
+     * @param parent1 Первый "родитель"
+     * @param parent2 Второй "родитель"
+     * @return Две особи - потомка с новыми генами
+     */
     inline fun <reified T> shuffleCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
