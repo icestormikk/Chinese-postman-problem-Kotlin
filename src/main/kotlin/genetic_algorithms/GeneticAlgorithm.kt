@@ -17,15 +17,7 @@ class GeneticAlgorithm {
     ): Array<Edge<T>> {
         logger.info { "Launching the genetic algorithm" }
 
-        val (
-            iterationCount,
-            populationSize,
-            start,
-            parentsConf,
-            recombinationType,
-            mutation,
-            newPopulationConf,
-        ) = configuration
+        val (iterationCount, populationSize, start, parentsConf, recombinationType, mutation, newPopulationConf) = configuration
 
         val startNode = if (start == null) {
             graph.nodes.random()
@@ -46,6 +38,8 @@ class GeneticAlgorithm {
                 SelectionMethods.Types.ROULETTE_WHEEL -> {
                     SelectionMethods.rouletteWheelSelection(population, onFitness)
                 }
+
+                null -> population
             }
             val selectedParents = when (parentsConf.chooser) {
                 ParentSelectionMethods.Types.PANMIXIA -> {
@@ -57,6 +51,8 @@ class GeneticAlgorithm {
                 ParentSelectionMethods.Types.OUTBREEDING -> {
                     ParentSelectionMethods.outbreeding(allParents, onDistance)
                 }
+
+                null -> ParentSelectionMethods.panmixia(allParents)
             }
             val offspring = when (recombinationType) {
                 RecombinationMethods.Types.DISCRETE -> {
@@ -71,8 +67,10 @@ class GeneticAlgorithm {
                 RecombinationMethods.Types.SHUFFLE -> {
                     RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
                 }
+
+                null -> selectedParents
             }
-            if (Math.random() > mutation.rate) {
+            if (mutation.type != null && Math.random() > mutation.rate) {
                 offspring.toList().forEach {
                     when (mutation.type) {
                         MutationMethods.Types.REPLACING -> {
@@ -97,10 +95,14 @@ class GeneticAlgorithm {
                 NewPopulationMethods.Types.EXCLUSION -> {
                     NewPopulationMethods.exclusionSelection(population, onFitness)
                 }
+
+                null -> population
             }
         }
 
-        val bestChromosome = population.entities.sortedByDescending(onFitness)[0]
+        population.entities.sortByDescending(onFitness)
+
+        val bestChromosome = population.entities[0]
         return bestChromosome.genes
     }
 
