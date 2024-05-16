@@ -44,7 +44,7 @@ class ConfigurationValidator {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require(populationSize > 0) { "The size of the created populations must be strictly greater than zero" }
-            require(mutation.rate > 0.0) { "The probability of mutation must be greater than zero" }
+            require(mutation.rate >= 0.0) { "The probability of mutation must be greater than zero" }
             if (startNodeId != null) {
                 require(graph.nodes.any { it.id == startNodeId }) {
                     "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
