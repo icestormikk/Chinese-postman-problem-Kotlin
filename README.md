@@ -1,22 +1,19 @@
 # Задача "о китайском почтальне". Вычислительная часть.
 Данная программа написана на языке Kotlin (1.9.22) и реализует несколько метаэвристических алгоритмов. Все эти алгоритмы направлены на нахождение кратчайшего замкнутого пути в графе, который будет проходить по каждому ребру минимум один раз.
 
+## Запуск программы
 ### Пример команды запуска
 ```console
 java -jar ./chinese-postman-problem.jar -Dlogfile-path=.\logfile.log --config .\configuration.json --graph .\graph.json --output .\result.json 
 ```
-
-## Параметры запуска
+### Параметры запуска
 Для запуска программы потребуется установить Java Virtual Machine на ваше устройство. Параметры запуска:
 - --config - путь к json-файлу с настройками для алгоритма. В нём должен быть находиться объект, в котором указано кодовое название используемого метода (поле <b>type</b>), а также приведена конфигурация к нему (для каждого из алгоритмов она своя)
 - --graph - путь к json-файлу с информацией о структуре графа. В файле должен находиться объект, с полями edges и nodes соответственно. Оба поля должны содержать массив объектов (вершин и рёбер).
 - --output - путь к файлу, в который будет записан результат работы программы. Вывод представляет собой json-объект.
 - (необязательный) -Dlogfile-path - путь к файлу, в который программа будет записывать свои логи. В случае отсутствия параметра будет создан .log-файл в домашней директории пользователя.
-
-## Примеры входных файлов
-
-### Файл с настройкой алгоритма (на примере ГА)
-
+### Примеры входных файлов
+#### Файл с настройкой алгоритма (на примере ГА)
 ```JSON
 {
   "type": "GENETIC",
@@ -40,8 +37,7 @@ java -jar ./chinese-postman-problem.jar -Dlogfile-path=.\logfile.log --config .\
   }
 }
 ```
-
-### Файл со структурой графа
+#### Файл со структурой графа
 ```JSON
 {
   "nodes": [
@@ -121,4 +117,34 @@ java -jar ./chinese-postman-problem.jar -Dlogfile-path=.\logfile.log --config .\
     }
   ]
 }
+```
+
+## Вывод программы
+Основной результат работы программы записывается в файл, путь к которому передан через параметр --output. Для информативности программа в процессе своей работы ведёт запись логов. Путь к файлу с логами программы можно задать через параметр -Dlogfile-path. В случае если такой параметр не передан, логи сохраняются в файл <b>chinese-postman-problem-program.log</b> в домашнем каталоге пользователя.
+### Пример файла с результатами работы программы
+```JSON
+{
+    "path": [
+        "674e14b0-013d-414d-8c9a-f97ad7198934",
+        "af9a26a1-a357-4f69-b25f-a265a65b61b0",
+        "329db316-3545-4e7c-a223-bb422d13fcd4",
+        "9ac12d1f-4e2f-4845-908c-c28f9ea986e4",
+        "af9a26a1-a357-4f69-b25f-a265a65b61b0",
+        "329db316-3545-4e7c-a223-bb422d13fcd4"
+    ],
+    "length": 600.0,
+    "executionTimeMs": 324
+}
+```
+### Пример файла с логами программы (на примере ГА)
+```log
+21:19:44.718 [main] INFO  ROOT - A custom log path is used: C:\Users\jigal\chinese-postman-problem-program.log
+21:19:44.965 [main] INFO  FileHelper - Data from the C:\Users\jigal\config.json has been successfully read
+21:19:44.967 [main] INFO  CommandLineHelper - The following parameter was successfully received from the command line: --config
+21:19:44.982 [main] INFO  FileHelper - Data from the C:\Users\jigal\data.json has been successfully read
+21:19:44.983 [main] INFO  CommandLineHelper - The following parameter was successfully received from the command line: --graph
+21:19:45.159 [main] INFO  CommandLineHelper - The following parameter was successfully received from the command line: --output
+21:19:45.168 [main] INFO  GeneticAlgorithm - Launching the genetic algorithm
+21:19:45.279 [main] INFO  GeneticAlgorithm - A starting population has been created (id: 37e2e7ea-4aa2-417d-9791-e72ce112edec)
+21:19:58.554 [main] INFO  FileHelper - Writing to the C:\Users\jigal\Downloads\results.json has been completed successfully
 ```
