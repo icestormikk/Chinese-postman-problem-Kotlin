@@ -24,7 +24,7 @@ class SimulatedAnnealing {
         // начальная вершина
         startNode: Node? = null
     ): Array<Edge<Double>> {
-        val (iterationCount, minTemperature, maxTemperature, temperatureDecreasingCoefficient) = configuration
+        val (minTemperature, maxTemperature, temperatureDecreasingCoefficient) = configuration
 
         require(minTemperature < maxTemperature) { "The minimum temperature must be strictly less than the maximum" }
 
