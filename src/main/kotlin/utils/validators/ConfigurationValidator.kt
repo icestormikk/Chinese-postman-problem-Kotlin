@@ -1,10 +1,12 @@
 package utils.validators
 
+import ant_colony.AntColonyAlgorithmConfiguration
 import common.AlgorithmType
 import common.Configuration
 import genetic_algorithms.GeneticAlgorithmConfiguration
 import graph.Graph
 import particles_swarm.ParticlesSwarmConfiguration
+import simulated_annealing.SimulatedAnnealingConfiguration
 import utils.helpers.LoggingHelper
 
 class ConfigurationValidator {
@@ -35,7 +37,26 @@ class ConfigurationValidator {
                 }
             }
             AlgorithmType.ANNEALING -> {
-                throw NotImplementedError()
+                requireNotNull(configuration.annealing) {
+                    "The simulated annealing method was selected, but the configuration for it was not transmitted"
+                }
+                try {
+                    validateSimulatedAnnealingConfiguration(configuration.annealing)
+                } catch (e: Exception) {
+                    logger.error { e.message }
+                    throw IllegalArgumentException("Error during configuration validation for the simulated annealing algorithm (${e.message})")
+                }
+            }
+            AlgorithmType.ANT_COLONY -> {
+                requireNotNull(configuration.antColony) {
+                    "The ant colony method was selected, but the configuration for it was not transmitted"
+                }
+                try {
+                    validateAntColonyConfiguration(configuration.antColony, graph)
+                } catch (e: Exception) {
+                    logger.error { e.message }
+                    throw IllegalArgumentException("Error during configuration validation for the any colony algorithm (${e.message})")
+                }
             }
         }
     }
@@ -57,6 +78,25 @@ class ConfigurationValidator {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require (swarmSize > 0) { "The particle swarm size must be strictly greater than 0" }
+            if (startNodeId != null) {
+                require(graph.nodes.any { it.id == startNodeId }) {
+                    "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
+                }
+            }
+        }
+    }
+
+    private fun validateSimulatedAnnealingConfiguration(configuration: SimulatedAnnealingConfiguration) {
+        with (configuration) {
+            require (minTemperature < maxTemperature) { "The minimum temperature must not exceed the minimum" }
+        }
+    }
+
+    private fun <T> validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration, graph: Graph<T>) {
+        with (configuration) {
+            require (iterationCount > 0) { "The number of iterations must be strictly positive" }
+            require (antCount > 0) { "The number of ants must be strictly positive" }
+            require(startPheromoneValue >= 0) { "The initial amount of pheromones on the branches should not be negative" }
             if (startNodeId != null) {
                 require(graph.nodes.any { it.id == startNodeId }) {
                     "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
