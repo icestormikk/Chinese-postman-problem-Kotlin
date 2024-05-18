@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
  * @constructor Create empty Edge
  */
 @Serializable
-data class Edge<T>(
+open class Edge<T>(
     val source: Node,
     val destination: Node,
     val weight: T,
