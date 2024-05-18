@@ -13,4 +13,6 @@ enum class AlgorithmType {
     PARTICLES_SWARM,
     // Метод отжига
     ANNEALING,
+    // Метод имитации муравьиной колонии
+    ANT_COLONY
 }
