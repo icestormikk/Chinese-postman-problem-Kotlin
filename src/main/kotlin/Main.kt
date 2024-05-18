@@ -1,3 +1,4 @@
+import ant_colony.AntColonyAlgorithm
 import common.AlgorithmType
 import common.Configuration
 import common.Response
@@ -18,6 +19,7 @@ import utils.constants.GRAPH_FILE_ARGUMENT
 import utils.constants.LOGGER_FILE_VM_OPTION
 import utils.constants.RESULT_FILE_ARGUMENT
 import kotlinx.serialization.encodeToString
+import utils.validators.ConfigurationValidator
 import java.nio.file.Paths
 import kotlin.time.measureTimedValue
 
@@ -53,14 +55,16 @@ fun main(args: Array<String>) {
     try {
         val arguments = args.toList().chunked(2).associate { it[0] to it[1] }
 
-        val configuration = CommandLineHelper().fetchArgument(arguments, CONFIGURATION_FILE_ARGUMENT, true) {
-            FileHelper().readFrom<Configuration>(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
-        }!!
-
         val graphDao = CommandLineHelper().fetchArgument(arguments, GRAPH_FILE_ARGUMENT, true) {
             FileHelper().readFrom<GraphDao>(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
         }!!
         val graph = graphDao.toDoubleGraph()
+
+        val configuration = CommandLineHelper().fetchArgument(arguments, CONFIGURATION_FILE_ARGUMENT, true) {
+            val res = FileHelper().readFrom<Configuration>(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
+            ConfigurationValidator().validateConfiguration(res, graph)
+            res
+        }!!
 
         val resultFilepath = CommandLineHelper().fetchArgument(arguments, RESULT_FILE_ARGUMENT, true) { it }!!
 
@@ -116,12 +120,24 @@ fun main(args: Array<String>) {
                         graph,
                         configuration.annealing,
                         { state -> graph.calculateTotalLengthOf(state) },
+                        { ct, _, coeff -> coeff * ct },
                         { graph.getRandomPath(selectedNode).toTypedArray() },
                         selectedNode
                     )
                 }
 
                 val length = graph.calculateTotalLengthOf(result)
+                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
+            }
+            AlgorithmType.ANT_COLONY -> {
+                if (configuration.antColony == null) {
+                    throw Exception("The configuration for the annealing method was not passed")
+                }
+                val (result, duration) = measureTimedValue {
+                    AntColonyAlgorithm().start(graph, configuration.antColony)
+                }
+
+                val length = graph.calculateTotalLengthOf(result.toTypedArray())
                 Response(result.map { it.id }, length, duration.inWholeMilliseconds)
             }
         }
