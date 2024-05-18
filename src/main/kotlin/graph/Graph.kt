@@ -12,7 +12,7 @@ import common.Identifiable
  */
 abstract class Graph<T>(
     val nodes: List<Node>,
-    val edges: List<Edge<T>>
+    open val edges: List<Edge<T>>
 ) : Identifiable() {
     /**
      * Абстрактная функция, которая вычисляет общую длину пути
