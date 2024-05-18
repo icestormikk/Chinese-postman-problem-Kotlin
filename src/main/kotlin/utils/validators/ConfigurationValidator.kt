@@ -5,6 +5,7 @@ import common.Configuration
 import genetic_algorithms.GeneticAlgorithmConfiguration
 import graph.Graph
 import particles_swarm.ParticlesSwarmConfiguration
+import simulated_annealing.SimulatedAnnealingConfiguration
 import utils.helpers.LoggingHelper
 
 class ConfigurationValidator {
@@ -35,7 +36,16 @@ class ConfigurationValidator {
                 }
             }
             AlgorithmType.ANNEALING -> {
-                throw NotImplementedError()
+                requireNotNull(configuration.annealing) {
+                    "The simulated annealing method was selected, but the configuration for it was not transmitted"
+                }
+                try {
+                    validateSimulatedAnnealingConfiguration(configuration.annealing)
+                } catch (e: Exception) {
+                    logger.error { e.message }
+                    throw IllegalArgumentException("Error during configuration validation for the simulated annealing algorithm (${e.message})")
+                }
+            }
             }
         }
     }
@@ -62,6 +72,13 @@ class ConfigurationValidator {
                     "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
                 }
             }
+
+    private fun validateSimulatedAnnealingConfiguration(configuration: SimulatedAnnealingConfiguration) {
+        with (configuration) {
+            require (minTemperature < maxTemperature) { "The minimum temperature must not exceed the minimum" }
+        }
+    }
+
         }
     }
 }
