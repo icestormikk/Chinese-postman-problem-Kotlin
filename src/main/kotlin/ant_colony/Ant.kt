@@ -14,7 +14,7 @@ data class Ant(val id: String) {
         val visitedEdgeIds = mutableSetOf<String>()
 
         fun getNextEdge(currentNode: Node): PheromoneEdge<Double> {
-            val suitableEdges = graph.edges.filter { it.source.id == currentNode.id }
+            val suitableEdges = graph.getEdgesFrom(currentNode)
 
             val totalDesire = suitableEdges.sumOf { it.pheromoneCount.pow(alpha) * (proximityCoefficient / it.weight).pow(beta) }
 

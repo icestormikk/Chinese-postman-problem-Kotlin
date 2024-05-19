@@ -33,7 +33,7 @@ class AntColonyAlgorithm {
         logger.info { "Adding pheromones on the edge of the graph (initial value: ${startPheromoneValue})" }
         val phGraph = PheromoneDoubleGraph(
             graph.nodes,
-            graph.edges.map { PheromoneEdge(it.id, it.source, it.destination, it.weight, startPheromoneValue) }
+            graph.edges.map { PheromoneEdge(it.id, it.source, it.destination, it.weight, it.type, startPheromoneValue) }
         )
 
         var bestPath = mutableListOf<PheromoneEdge<Double>>()

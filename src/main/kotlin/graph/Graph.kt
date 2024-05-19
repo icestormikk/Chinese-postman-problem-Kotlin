@@ -15,6 +15,18 @@ abstract class Graph<T>(
     open val edges: List<Edge<T>>
 ) : Identifiable() {
     /**
+     * Получение всех ребёр, по которым можно "выйти" из данной вершины
+     * @param node Вершина, для которой надо найти подходящие рёбра
+     * @return Список всех ребёр, подходящих под условие
+     */
+    open fun getEdgesFrom(node: Node): List<Edge<T>> {
+        return edges.filter {
+            (it.type == EdgeType.DIRECTED && it.source.id == node.id) ||
+                    (it.type == EdgeType.NOT_ORIENTED && (it.source.id == node.id || it.destination.id == node.id))
+        }
+    }
+
+    /**
      * Абстрактная функция, которая вычисляет общую длину пути
      * @param path Путь, представляющий собой набор ребёр графа
      * @return Значение, которое отражает длину переданного пути
@@ -38,7 +50,7 @@ abstract class Graph<T>(
          */
         fun pathBuilder(node: Node) {
             // список всех рёбер, исходящих из текущей вершины
-            val suitableEdges = edges.filter { it.source == node }
+            val suitableEdges = getEdgesFrom(node)
             // список всех ни разу не посещенных ребёр, исходящих из текущей вершины
             val notVisitedSuitableEdges = suitableEdges.filter { !visited.contains(it) }
 
@@ -59,13 +71,11 @@ abstract class Graph<T>(
             visited.add(nextEdge)
             path.add(nextEdge)
             // следующая вершина - пункт назначения выбранного ребра
-            pathBuilder(nextEdge.destination)
+            pathBuilder(if (nextEdge.destination.id == node.id) nextEdge.source else nextEdge.destination)
         }
 
         // строим путь и возвращаем его в качестве результата
         pathBuilder(startNode)
-        val backToStartPath = getPathBetween(path.last().destination, startNode)
-        backToStartPath?.let { edges -> path.addAll(edges) }
         return path
     }
 

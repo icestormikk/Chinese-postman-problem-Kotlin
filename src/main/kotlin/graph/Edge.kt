@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
  * @property source Вершина, из которой выходит ребро
  * @property destination Вершина, являющаяся пунктом назначения для ребра
  * @property weight Вес ребра
+ * @property type Тип ребра
  * @property id Уникальный идентификационный номер ребра
  * @constructor Create empty Edge
  */
@@ -16,6 +17,7 @@ open class Edge<T>(
     val source: Node,
     val destination: Node,
     val weight: T,
+    val type: EdgeType,
     val id: String
 )
 
