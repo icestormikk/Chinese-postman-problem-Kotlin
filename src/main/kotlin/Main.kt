@@ -4,10 +4,7 @@ import common.Configuration
 import common.Response
 import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
-import graph.Node
-import graph.Edge
-import graph.Graph
-import graph.GraphDao
+import graph.*
 import particles_swarm.ParticleSwarm
 import simulated_annealing.SimulatedAnnealing
 import utils.constants.CONFIGURATION_FILE_ARGUMENT
@@ -25,11 +22,6 @@ import kotlin.time.measureTimedValue
 
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
-        for (index in 0..<path.lastIndex) {
-            if (path[index].destination.id != path[index + 1].source.id) {
-                return Double.MAX_VALUE
-            }
-        }
         return path.sumOf { it.weight }
     }
 }
@@ -88,12 +80,7 @@ fun main(args: Array<String>) {
                 }
 
                 val (result, duration) = measureTimedValue {
-                    GeneticAlgorithm().start(
-                        graph,
-                        ::onFitness,
-                        { ch, ch2 -> onDistance(ch, ch2) },
-                        configuration.genetic
-                    )
+                    GeneticAlgorithm().start(graph, ::onFitness, ::onDistance, configuration.genetic)
                 }
 
                 val length = graph.calculateTotalLengthOf(result)

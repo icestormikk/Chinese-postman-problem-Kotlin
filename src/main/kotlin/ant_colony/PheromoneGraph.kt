@@ -1,6 +1,5 @@
 package ant_colony
 
-import graph.Edge
 import graph.EdgeType
 import graph.Graph
 import graph.Node
