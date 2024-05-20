@@ -6,12 +6,14 @@ import graph.Node
 import utils.helpers.LoggingHelper
 import kotlin.math.exp
 
-// Класс для запуска метода отжига
+@Deprecated(
+    "Use a Genetic algorithm or an Ant colony algorithm instead",
+    ReplaceWith("AntColonyAlgorithm()", "ant_colony.AntColonyAlgorithm"),
+)
 class SimulatedAnnealing {
     private val logger = LoggingHelper().getLogger(SimulatedAnnealing::class.java.simpleName)
 
     fun start(
-        // граф, для которого ищется решение
         graph: Graph<Double, Edge<Double>>,
         // конфигурация запуска с основыми настройками алгоритма
         configuration: SimulatedAnnealingConfiguration,

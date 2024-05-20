@@ -4,6 +4,10 @@ import graph.Edge
 import graph.Graph
 import utils.helpers.LoggingHelper
 
+@Deprecated(
+    "Use a Genetic algorithm or an Ant colony algorithm instead",
+    ReplaceWith("AntColonyAlgorithm()", "ant_colony.AntColonyAlgorithm"),
+)
 class ParticleSwarm {
     private val logger = LoggingHelper().getLogger(ParticleSwarm::class.java.simpleName)
 
