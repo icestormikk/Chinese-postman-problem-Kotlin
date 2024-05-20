@@ -20,7 +20,7 @@ import utils.validators.ConfigurationValidator
 import java.nio.file.Paths
 import kotlin.time.measureTimedValue
 
-class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double>(nodes, edges) {
+class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double, Edge<Double>>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
         return path.sumOf { it.weight }
     }
@@ -47,8 +47,8 @@ fun main(args: Array<String>) {
     try {
         val arguments = args.toList().chunked(2).associate { it[0] to it[1] }
 
-        val graphDao = CommandLineHelper().fetchArgument(arguments, GRAPH_FILE_ARGUMENT, true) {
-            FileHelper().readFrom<GraphDao>(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
+        val graphDao = CommandLineHelper().fetchArgument<GraphDao>(arguments, GRAPH_FILE_ARGUMENT, true) {
+            FileHelper().readFrom(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
         }!!
         val graph = graphDao.toDoubleGraph()
 
@@ -67,10 +67,8 @@ fun main(args: Array<String>) {
                 }
 
                 fun onFitness(chromosome: Chromosome<Edge<Double>>): Double {
-                    for (edge in graph.edges) {
-                        if (!chromosome.genes.contains(edge)) {
-                            return Double.MIN_VALUE
-                        }
+                    if (!graph.edges.all { chromosome.genes.contains(it) }) {
+                        return Double.MIN_VALUE
                     }
 
                     return (-1) * graph.calculateTotalLengthOf(chromosome.genes)
