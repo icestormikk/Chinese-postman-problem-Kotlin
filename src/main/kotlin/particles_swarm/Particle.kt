@@ -1,6 +1,7 @@
 package particles_swarm
 
 import common.Identifiable
+import graph.Edge
 import graph.Graph
 import graph.Node
 import kotlin.math.abs
@@ -22,74 +23,31 @@ data class Particle<T>(
 ) : Identifiable() {
     // текущая позиция частицы
     var position = initializePosition()
-    // текущая скорость счастицы
-    var velocity = initializeVelocity()
     // лучшая позиция частицы
     var localBestPosition = position
     // значение ф-ции пригодности в лучшей позиции частицы
     var localBestFitnessValue = swarm.calculateFitness(position)
 
-    private fun initializePosition(): Array<Int> {
-        return graph.getRandomPath(startNode).map { graph.edges.indexOf(it) }.toTypedArray()
-    }
-    private fun initializeVelocity(): Array<Int> {
-        return position.map { if (Math.random() > 0.5) 1 else 0 }.toTypedArray()
+    private fun initializePosition(): List<Edge<T>> {
+        return graph.getRandomPath(startNode)
     }
 
     // обновление позиции частицы
-    fun nextIteration(swarm: Swarm) {
+    fun nextIteration(swarm: Swarm<T>) {
         if (swarm.globalBestPosition == null) return
 
-        // коэффициент r для локально лучшей позиции
-        val randomCurrentBestPosition = Math.random()
-        // коэффициент r для глобально лучшей позиции
-        val randomGlobalBestPosition = Math.random()
-        val velocityRatio = swarm.localVelocityRatio - swarm.globalVelocityRatio
-        val commonRatio = (2.0 * swarm.currentVelocityRatio
-                / abs(2.0 - velocityRatio - sqrt(velocityRatio.pow(2) - 4.0*velocityRatio)))
+        val randomIndex = (1..<graph.edges.lastIndex).random()
 
-        // первая компонента скорости
-        val newVelocity1 = commonRatio * velocity
-        // вторая компонента скорости
-        val newVelocity2 = commonRatio *
-                swarm.localVelocityRatio *
-                randomCurrentBestPosition * (localBestPosition - position)
-        // третья компонента скорости
-        val newVelocity3 = commonRatio *
-                swarm.globalVelocityRatio *
-                randomGlobalBestPosition * (swarm.globalBestPosition!! - position)
-
-        velocity = newVelocity1 + newVelocity2 + newVelocity3
-        position += velocity
+        val temp = graph.edges[randomIndex - 1]
+        graph.edges[randomIndex - 1] = graph.edges[randomIndex + 1]
+        graph.edges[randomIndex + 1] = temp
 
         // рассчёт нового локального значения функции приспособленности и обновление лучших показателей при необходимости
         val fitness = swarm.calculateFitness(position)
-        if (fitness < localBestFitnessValue) {
+        if (fitness > localBestFitnessValue) {
             localBestFitnessValue = fitness
             localBestPosition = position
         }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Particle<*>
-
-        if (swarm != other.swarm) return false
-        if (!position.contentEquals(other.position)) return false
-        if (!velocity.contentEquals(other.velocity)) return false
-        if (!localBestPosition.contentEquals(other.localBestPosition)) return false
-        return localBestFitnessValue == other.localBestFitnessValue
-    }
-
-    override fun hashCode(): Int {
-        var result = swarm.hashCode()
-        result = 31 * result + position.contentHashCode()
-        result = 31 * result + velocity.contentHashCode()
-        result = 31 * result + localBestPosition.contentHashCode()
-        result = 31 * result + localBestFitnessValue.hashCode()
-        return result
     }
 }
 
