@@ -4,9 +4,10 @@ import common.Configuration
 import common.Response
 import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
-import graph.*
-import particles_swarm.ParticleSwarm
-import simulated_annealing.SimulatedAnnealing
+import graph.Node
+import graph.Edge
+import graph.Graph
+import graph.GraphDao
 import utils.constants.CONFIGURATION_FILE_ARGUMENT
 import utils.helpers.CommandLineHelper
 import utils.helpers.FileHelper
@@ -79,36 +80,6 @@ fun main(args: Array<String>) {
 
                 val (result, duration) = measureTimedValue {
                     GeneticAlgorithm().start(graph, ::onFitness, ::onDistance, configuration.genetic)
-                }
-
-                val length = graph.calculateTotalLengthOf(result)
-                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
-            }
-            AlgorithmType.PARTICLES_SWARM -> {
-                if (configuration.particleSwarm == null) {
-                    throw Exception("The configuration for the particle swarm method was not passed")
-                }
-                val (result, duration) = measureTimedValue {
-                    ParticleSwarm().start(graph, configuration.particleSwarm)
-                }
-
-                val length = graph.calculateTotalLengthOf(result.toTypedArray())
-                Response(result.map { it.id }, length, duration.inWholeMilliseconds)
-            }
-            AlgorithmType.ANNEALING -> {
-                if (configuration.annealing == null) {
-                    throw Exception("The configuration for the annealing method was not passed")
-                }
-                val selectedNode = graph.nodes.find { it.id == configuration.annealing.selectedNodeId } ?: graph.nodes.random()
-                val (result, duration) = measureTimedValue {
-                    SimulatedAnnealing().start(
-                        graph,
-                        configuration.annealing,
-                        { state -> graph.calculateTotalLengthOf(state) },
-                        { ct, _, coeff -> coeff * ct },
-                        { graph.getRandomPath(selectedNode).toTypedArray() },
-                        selectedNode
-                    )
                 }
 
                 val length = graph.calculateTotalLengthOf(result)

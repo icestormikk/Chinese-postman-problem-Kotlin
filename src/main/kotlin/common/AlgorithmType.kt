@@ -10,9 +10,9 @@ enum class AlgorithmType {
     // Генетический алгоритм
     GENETIC,
     // Алгоритм роя частиц
-    PARTICLES_SWARM,
+//    PARTICLES_SWARM,
     // Метод отжига
-    ANNEALING,
+//    ANNEALING,
     // Метод имитации муравьиной колонии
     ANT_COLONY
 }

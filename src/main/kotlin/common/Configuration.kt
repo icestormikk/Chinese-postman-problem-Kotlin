@@ -18,8 +18,8 @@ import simulated_annealing.SimulatedAnnealingConfiguration
 data class Configuration(
     val type: AlgorithmType,
     val genetic: GeneticAlgorithmConfiguration? = null,
-    val particleSwarm: ParticlesSwarmConfiguration? = null,
-    val annealing: SimulatedAnnealingConfiguration? = null,
+//    val particleSwarm: ParticlesSwarmConfiguration? = null,
+//    val annealing: SimulatedAnnealingConfiguration? = null,
     val antColony: AntColonyAlgorithmConfiguration? = null
 )
 

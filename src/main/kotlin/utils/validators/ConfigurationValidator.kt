@@ -26,28 +26,28 @@ class ConfigurationValidator {
                     throw IllegalArgumentException("Error during configuration validation for the genetic algorithm (${e.message})")
                 }
             }
-            AlgorithmType.PARTICLES_SWARM -> {
-                requireNotNull (configuration.particleSwarm) {
-                    "The particles swarm method was selected, but the configuration for it was not transmitted"
-                }
-                try {
-                    validateParticleSwarmConfiguration(configuration.particleSwarm, graph)
-                } catch (e: Exception) {
-                    logger.error { e.message }
-                    throw IllegalArgumentException("Error during configuration validation for the particles swarm algorithm (${e.message})")
-                }
-            }
-            AlgorithmType.ANNEALING -> {
-                requireNotNull(configuration.annealing) {
-                    "The simulated annealing method was selected, but the configuration for it was not transmitted"
-                }
-                try {
-                    validateSimulatedAnnealingConfiguration(configuration.annealing)
-                } catch (e: Exception) {
-                    logger.error { e.message }
-                    throw IllegalArgumentException("Error during configuration validation for the simulated annealing algorithm (${e.message})")
-                }
-            }
+//            AlgorithmType.PARTICLES_SWARM -> {
+//                requireNotNull (configuration.particleSwarm) {
+//                    "The particles swarm method was selected, but the configuration for it was not transmitted"
+//                }
+//                try {
+//                    validateParticleSwarmConfiguration(configuration.particleSwarm, graph)
+//                } catch (e: Exception) {
+//                    logger.error { e.message }
+//                    throw IllegalArgumentException("Error during configuration validation for the particles swarm algorithm (${e.message})")
+//                }
+//            }
+//            AlgorithmType.ANNEALING -> {
+//                requireNotNull(configuration.annealing) {
+//                    "The simulated annealing method was selected, but the configuration for it was not transmitted"
+//                }
+//                try {
+//                    validateSimulatedAnnealingConfiguration(configuration.annealing)
+//                } catch (e: Exception) {
+//                    logger.error { e.message }
+//                    throw IllegalArgumentException("Error during configuration validation for the simulated annealing algorithm (${e.message})")
+//                }
+//            }
             AlgorithmType.ANT_COLONY -> {
                 requireNotNull(configuration.antColony) {
                     "The ant colony method was selected, but the configuration for it was not transmitted"
