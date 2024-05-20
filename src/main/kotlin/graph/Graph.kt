@@ -10,16 +10,16 @@ import common.Identifiable
  * @property nodes Список всех вершин графа
  * @property edges Список всех рёбер графа
  */
-abstract class Graph<T>(
+abstract class Graph<T, E: Edge<T>>(
     val nodes: List<Node>,
-    open val edges: List<Edge<T>>
+    open val edges: MutableList<E>
 ) : Identifiable() {
     /**
      * Получение всех ребёр, по которым можно "выйти" из данной вершины
      * @param node Вершина, для которой надо найти подходящие рёбра
      * @return Список всех ребёр, подходящих под условие
      */
-    open fun getEdgesFrom(node: Node): List<Edge<T>> {
+    open fun getEdgesFrom(node: Node): List<E> {
         return edges.filter {
             (it.type == EdgeType.DIRECTED && it.source.id == node.id) ||
                     (it.type == EdgeType.NOT_ORIENTED && (it.source.id == node.id || it.destination.id == node.id))
@@ -31,18 +31,18 @@ abstract class Graph<T>(
      * @param path Путь, представляющий собой набор ребёр графа
      * @return Значение, которое отражает длину переданного пути
      */
-    abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): T
+    abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): Double
 
     /**
      * Функция для нахождения случайного замкнутого пути в графе
      * @param startNode Начальная и конечная веришна пути
      * @return Один из существующих в графе путей, набор рёбер
      */
-    fun getRandomPath(startNode: Node = nodes.random()): MutableList<Edge<T>> {
+    fun getRandomPath(startNode: Node = nodes.random()): MutableList<E> {
         // Набор рёбер, которые были посещены минимум один раз
-        val visited = mutableSetOf<Edge<T>>()
+        val visited = mutableSetOf<E>()
         // Один из возможных путей в графе
-        val path = mutableListOf<Edge<T>>()
+        val path = mutableListOf<E>()
 
         /**
          * Рекурсивная функция, которая случайным образом блуждает по графу и строит путь

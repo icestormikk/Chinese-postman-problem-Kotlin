@@ -4,6 +4,7 @@ import ant_colony.AntColonyAlgorithmConfiguration
 import common.AlgorithmType
 import common.Configuration
 import genetic_algorithms.GeneticAlgorithmConfiguration
+import graph.Edge
 import graph.Graph
 import particles_swarm.ParticlesSwarmConfiguration
 import simulated_annealing.SimulatedAnnealingConfiguration
@@ -12,7 +13,7 @@ import utils.helpers.LoggingHelper
 class ConfigurationValidator {
     private val logger = LoggingHelper().getLogger(ConfigurationValidator::class.simpleName.toString())
 
-    fun <T> validateConfiguration(configuration: Configuration, graph: Graph<T>) {
+    fun <T> validateConfiguration(configuration: Configuration, graph: Graph<T, Edge<T>>) {
         when (configuration.type) {
             AlgorithmType.GENETIC -> {
                 requireNotNull (configuration.genetic) {
@@ -61,7 +62,7 @@ class ConfigurationValidator {
         }
     }
 
-    private fun <T> validateGeneticConfiguration(configuration: GeneticAlgorithmConfiguration, graph: Graph<T>) {
+    private fun <T> validateGeneticConfiguration(configuration: GeneticAlgorithmConfiguration, graph: Graph<T, Edge<T>>) {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require(populationSize > 0) { "The size of the created populations must be strictly greater than zero" }
@@ -74,7 +75,7 @@ class ConfigurationValidator {
         }
     }
 
-    private fun <T> validateParticleSwarmConfiguration(configuration: ParticlesSwarmConfiguration, graph: Graph<T>) {
+    private fun <T> validateParticleSwarmConfiguration(configuration: ParticlesSwarmConfiguration, graph: Graph<T, Edge<T>>) {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require (swarmSize > 0) { "The particle swarm size must be strictly greater than 0" }
@@ -92,7 +93,7 @@ class ConfigurationValidator {
         }
     }
 
-    private fun <T> validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration, graph: Graph<T>) {
+    private fun <T> validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration, graph: Graph<T, Edge<T>>) {
         with (configuration) {
             require (iterationCount > 0) { "The number of iterations must be strictly positive" }
             require (antCount > 0) { "The number of ants must be strictly positive" }

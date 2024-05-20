@@ -7,14 +7,14 @@ import utils.helpers.LoggingHelper
 class ParticleSwarm {
     private val logger = LoggingHelper().getLogger(ParticleSwarm::class.java.simpleName)
 
-    class GraphSwarm(
+    class GraphSwarm<T>(
         size: Int,
         currentVelocityRatio: Double,
         localVelocityRatio: Double,
         globalVelocityRatio: Double,
-        graph: Graph<Double>
-    ): Swarm(size, currentVelocityRatio, localVelocityRatio, globalVelocityRatio, graph) {
-        override fun onFitness(position: Array<Int>): Double {
+        graph: Graph<T, Edge<T>>
+    ): Swarm<T>(size, currentVelocityRatio, localVelocityRatio, globalVelocityRatio, graph) {
+        override fun onFitness(position: List<Edge<T>>): Double {
             return try {
                 val path = position.map { index -> graph.edges[index] }.toTypedArray()
                 graph.calculateTotalLengthOf(path)

@@ -1,6 +1,7 @@
 package particles_swarm
 
 import common.Identifiable
+import graph.Edge
 import graph.Graph
 import utils.helpers.LoggingHelper
 
@@ -12,17 +13,17 @@ import utils.helpers.LoggingHelper
  * @property globalVelocityRatio Весовой коэффициент для лучшего глобального решения
  * @property graph Граф, на котором происходит решение задачи
  */
-abstract class Swarm(
+abstract class Swarm<T>(
     open val size: Int,
     open val currentVelocityRatio: Double,
     open val localVelocityRatio: Double,
     open val globalVelocityRatio: Double,
-    val graph: Graph<Double>
+    val graph: Graph<T, Edge<T>>
 ) : Identifiable() {
     // значение функции в глобально лучшей позиции
     var globalBestFitness: Double? = null
     // лучшая позиция для всего роя
-    var globalBestPosition: Array<Int>? = null
+    var globalBestPosition: List<Edge<T>>? = null
     // список частиц в рое
     val particles by lazy { initialize() }
 
@@ -31,20 +32,20 @@ abstract class Swarm(
     }
 
     // Абстрактная функция пригодности частицы
-    abstract fun onFitness(position: Array<Int>): Double
+    abstract fun onFitness(position: List<Edge<T>>): Double
     // Абстрактная функция расчёта штрафа для частицы, в случае если какая-то из координат частицы выходит за границы поиска
-    abstract fun getPenalty(position: Array<Int>, ratio: Double): Double
+    abstract fun getPenalty(position: List<Edge<T>>, ratio: Double): Double
 
     // создание набора частиц
-    private fun initialize(): List<Particle<Double>> {
+    private fun initialize(): List<Particle<T>> {
         return (0..<size).map { Particle(this, graph) }
     }
 
     // функция рассчёта пригодности частицы с учётом штрафа и обновление глобального лучшего положения
-    fun calculateFitness(position: Array<Int>): Double {
+    fun calculateFitness(position: List<Edge<T>>): Double {
         val currentFitness = onFitness(position) + getPenalty(position, 10000.0)
 
-        if (globalBestFitness == null || currentFitness < globalBestFitness!!) {
+        if (globalBestFitness == null || currentFitness > globalBestFitness!!) {
             logger.info { "Updated the global optimal position of the swarm with id $id: $globalBestFitness" }
             globalBestFitness = currentFitness
             globalBestPosition = position

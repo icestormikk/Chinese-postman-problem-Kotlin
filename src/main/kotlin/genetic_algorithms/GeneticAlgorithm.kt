@@ -10,7 +10,7 @@ class GeneticAlgorithm {
     private val logger = LoggingHelper().getLogger(GeneticAlgorithm::class.java.simpleName)
 
     fun <T> start(
-        graph: Graph<T>,
+        graph: Graph<T, Edge<T>>,
         onFitness: (chromosome: Chromosome<Edge<T>>) -> Double,
         onDistance: (Chromosome<Edge<T>>, Chromosome<Edge<T>>) -> Double,
         configuration: GeneticAlgorithmConfiguration,
@@ -106,7 +106,7 @@ class GeneticAlgorithm {
         return bestChromosome.genes
     }
 
-    private fun <T> Graph<T>.getNodeById(id: String): Node? {
+    private fun <T> Graph<T, Edge<T>>.getNodeById(id: String): Node? {
         return nodes.find { it.id == id }
     }
 }

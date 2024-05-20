@@ -16,8 +16,8 @@ import kotlin.time.times
  * @property startNode Вершина для которой решается задача. Все искомые пути должны начинаться и заканчиваться в ней
  */
 data class Particle<T>(
-    val swarm: Swarm,
-    val graph: Graph<T>,
+    val swarm: Swarm<T>,
+    val graph: Graph<T, Edge<T>>,
     val startNode: Node = graph.nodes.random()
 ) : Identifiable() {
     // текущая позиция частицы

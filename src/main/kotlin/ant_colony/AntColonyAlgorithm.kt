@@ -7,7 +7,7 @@ import utils.helpers.LoggingHelper
 
 class PheromoneDoubleGraph(
     nodes: List<Node>,
-    edges: List<PheromoneEdge<Double>>
+    edges: MutableList<PheromoneEdge<Double>>
 ) : PheromoneGraph<Double>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
         return path.sumOf { it.weight }
@@ -18,7 +18,7 @@ class AntColonyAlgorithm {
     private val logger = LoggingHelper().getLogger(AntColonyAlgorithm::class.java.simpleName)
 
     fun start(
-        graph: Graph<Double>,
+        graph: Graph<Double, Edge<Double>>,
         configuration: AntColonyAlgorithmConfiguration
     ): MutableList<PheromoneEdge<Double>> {
         val (
@@ -33,7 +33,7 @@ class AntColonyAlgorithm {
         logger.info { "Adding pheromones on the edge of the graph (initial value: ${startPheromoneValue})" }
         val phGraph = PheromoneDoubleGraph(
             graph.nodes,
-            graph.edges.map { PheromoneEdge(it.id, it.source, it.destination, it.weight, it.type, startPheromoneValue) }
+            graph.edges.map { PheromoneEdge(it.id, it.source, it.destination, it.weight, it.type, startPheromoneValue) }.toMutableList()
         )
 
         var bestPath = mutableListOf<PheromoneEdge<Double>>()
@@ -64,7 +64,7 @@ class AntColonyAlgorithm {
         return bestPath
     }
 
-    private fun <T> Graph<T>.getNodeById(id: String): Node? {
+    private fun <T> Graph<T, Edge<T>>.getNodeById(id: String): Node? {
         return nodes.find { it.id == id }
     }
 }

@@ -12,7 +12,7 @@ class SimulatedAnnealing {
 
     fun start(
         // граф, для которого ищется решение
-        graph: Graph<Double>,
+        graph: Graph<Double, Edge<Double>>,
         // конфигурация запуска с основыми настройками алгоритма
         configuration: SimulatedAnnealingConfiguration,
         // функция вычисления энергии для конкретного состояния системы
