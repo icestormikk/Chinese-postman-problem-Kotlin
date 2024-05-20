@@ -36,7 +36,7 @@ data class Ant(val id: String) {
             val nextEdge = getNextEdge(currentNode)
             visitedEdgeIds.add(nextEdge.id)
             path.add(nextEdge)
-            currentNode = nextEdge.destination
+            currentNode = if (nextEdge.destination.id == currentNode.id) nextEdge.source else nextEdge.destination
         }
 
         return path
