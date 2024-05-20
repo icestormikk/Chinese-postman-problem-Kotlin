@@ -3,15 +3,11 @@ package common
 import ant_colony.AntColonyAlgorithmConfiguration
 import genetic_algorithms.GeneticAlgorithmConfiguration
 import kotlinx.serialization.Serializable
-import particles_swarm.ParticlesSwarmConfiguration
-import simulated_annealing.SimulatedAnnealingConfiguration
 
 /**
  * Класс для хранения полученных от пользотеля данных о желаемом алгоритме и его начальных значениях
  * @property type Тип алгоритма, по которому будет рассчитываться оптимальный путь
  * @property genetic Конфигурация для генетического алгоритма
- * @property particleSwarm Конфигурация для алгоритма роя частиц
- * @property annealing Конфигурация для метода отжига
  * @property antColony Конфигурация для метода имитации муравьиной колонии
  */
 @Serializable

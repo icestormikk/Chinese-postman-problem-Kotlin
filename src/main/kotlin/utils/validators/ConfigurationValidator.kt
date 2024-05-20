@@ -75,23 +75,23 @@ class ConfigurationValidator {
         }
     }
 
-    private fun <T> validateParticleSwarmConfiguration(configuration: ParticlesSwarmConfiguration, graph: Graph<T, Edge<T>>) {
-        with (configuration) {
-            require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
-            require (swarmSize > 0) { "The particle swarm size must be strictly greater than 0" }
-            if (startNodeId != null) {
-                require(graph.nodes.any { it.id == startNodeId }) {
-                    "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
-                }
-            }
-        }
-    }
+//    private fun <T> validateParticleSwarmConfiguration(configuration: ParticlesSwarmConfiguration, graph: Graph<T, Edge<T>>) {
+//        with (configuration) {
+//            require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
+//            require (swarmSize > 0) { "The particle swarm size must be strictly greater than 0" }
+//            if (startNodeId != null) {
+//                require(graph.nodes.any { it.id == startNodeId }) {
+//                    "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
+//                }
+//            }
+//        }
+//    }
 
-    private fun validateSimulatedAnnealingConfiguration(configuration: SimulatedAnnealingConfiguration) {
-        with (configuration) {
-            require (minTemperature < maxTemperature) { "The minimum temperature must not exceed the minimum" }
-        }
-    }
+//    private fun validateSimulatedAnnealingConfiguration(configuration: SimulatedAnnealingConfiguration) {
+//        with (configuration) {
+//            require (minTemperature < maxTemperature) { "The minimum temperature must not exceed the minimum" }
+//        }
+//    }
 
     private fun <T> validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration, graph: Graph<T, Edge<T>>) {
         with (configuration) {
