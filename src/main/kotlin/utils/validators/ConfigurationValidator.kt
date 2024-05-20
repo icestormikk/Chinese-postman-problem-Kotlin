@@ -6,8 +6,6 @@ import common.Configuration
 import genetic_algorithms.GeneticAlgorithmConfiguration
 import graph.Edge
 import graph.Graph
-import particles_swarm.ParticlesSwarmConfiguration
-import simulated_annealing.SimulatedAnnealingConfiguration
 import utils.helpers.LoggingHelper
 
 class ConfigurationValidator {
