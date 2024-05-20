@@ -43,9 +43,7 @@ class AntColonyAlgorithm {
         for (iteration in 1..iterationCount) {
             phGraph.edges.forEach { it.pheromoneCount * remainingPheromoneRate }
 
-            for (antIndex in 1..antCount) {
-                logger.info { "Iteration: $iteration, Ant: ${antIndex}" }
-                val ant = Ant("Ant-${antIndex}")
+            for (antIndex in 1..antCount) { val ant = Ant("Ant-${antIndex}")
                 val path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta)
                 val length = phGraph.calculateTotalLengthOf(path.toTypedArray())
 
