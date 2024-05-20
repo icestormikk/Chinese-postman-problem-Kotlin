@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 // Настройки для алгоритма оптимизации роем частиц
 @Serializable
+@Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
 data class ParticlesSwarmConfiguration(
     // Количество итераций алгоритма
     val iterationsCount: Int,

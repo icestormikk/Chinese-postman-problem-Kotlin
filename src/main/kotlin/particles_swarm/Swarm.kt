@@ -13,6 +13,7 @@ import utils.helpers.LoggingHelper
  * @property globalVelocityRatio Весовой коэффициент для лучшего глобального решения
  * @property graph Граф, на котором происходит решение задачи
  */
+@Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
 abstract class Swarm<T>(
     open val size: Int,
     open val currentVelocityRatio: Double,

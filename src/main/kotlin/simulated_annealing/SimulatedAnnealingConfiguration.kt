@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 // Настройки для алгоритма симуляции отжига
 @Serializable
+@Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
 data class SimulatedAnnealingConfiguration(
     // Минимальная температура (при достижении её, алгоритм прекращает свою работу)
     val minTemperature: Double,

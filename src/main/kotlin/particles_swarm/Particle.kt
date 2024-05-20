@@ -4,11 +4,7 @@ import common.Identifiable
 import graph.Edge
 import graph.Graph
 import graph.Node
-import kotlin.math.abs
 import kotlin.math.min
-import kotlin.math.pow
-import kotlin.math.sqrt
-import kotlin.time.times
 
 /**
  * Класс, описывающий одну частицу
@@ -16,6 +12,7 @@ import kotlin.time.times
  * @property graph Граф, на котором происходит решение задачи
  * @property startNode Вершина для которой решается задача. Все искомые пути должны начинаться и заканчиваться в ней
  */
+@Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
 data class Particle<T>(
     val swarm: Swarm<T>,
     val graph: Graph<T, Edge<T>>,
