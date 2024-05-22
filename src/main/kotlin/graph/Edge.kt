@@ -10,7 +10,6 @@ import kotlinx.serialization.Serializable
  * @property weight Вес ребра
  * @property type Тип ребра
  * @property id Уникальный идентификационный номер ребра
- * @constructor Create empty Edge
  */
 @Serializable
 open class Edge<T>(
