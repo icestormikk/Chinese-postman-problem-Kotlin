@@ -4,6 +4,11 @@ import graph.Edge
 import graph.EdgeType
 import graph.Node
 
+/**
+ * Класс для описания ребра, содержащего феромоны
+ * @property pheromoneCount Текущее количество феромонов на ребре
+ * @see Edge
+ */
 class PheromoneEdge<T>(
     id: String,
     source: Node,
