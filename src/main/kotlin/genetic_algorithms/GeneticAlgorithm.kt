@@ -7,12 +7,17 @@ import graph.Node
 import utils.helpers.LoggingHelper
 
 class GeneticAlgorithm {
+    // Логгер для отслеживания действий алгоритма в процессе работы программы
     private val logger = LoggingHelper().getLogger(GeneticAlgorithm::class.java.simpleName)
 
     fun <T> start(
+        // граф, на котором решается задача
         graph: Graph<T, Edge<T>>,
+        // функция приспособленности
         onFitness: (chromosome: Chromosome<Edge<T>>) -> Double,
+        // функция для определения близости хромосом
         onDistance: (Chromosome<Edge<T>>, Chromosome<Edge<T>>) -> Double,
+        // класс с начальными параметрами алгоритма
         configuration: GeneticAlgorithmConfiguration,
     ): Array<Edge<T>> {
         logger.info { "Launching the genetic algorithm" }
@@ -25,12 +30,15 @@ class GeneticAlgorithm {
             graph.getNodeById(start) ?: graph.nodes.random()
         }
 
+        // создаём начальную популяцию (набор случайных путей в графе)
         val paths = MutableList(populationSize) { Chromosome(graph.getRandomPath(startNode).toTypedArray()) }
         var population = Population(paths)
 
         logger.info { "A starting population has been created (id: ${population.id})" }
 
+        // пока не будет достигнуто максимальное количество итераций
         for (i in 0..iterationCount) {
+            // отбираем особей в промежуточную популяцию
             val allParents = when (parentsConf.selection) {
                 SelectionMethods.Types.TOURNAMENT -> {
                     SelectionMethods.tournamentSelection(population, onFitness)
@@ -39,8 +47,10 @@ class GeneticAlgorithm {
                     SelectionMethods.rouletteWheelSelection(population, onFitness)
                 }
 
+                // если пользователь не выбрал метод отбора, то берётся вся исходная популяция
                 null -> population
             }
+            // выбираем особей-родителей
             val selectedParents = when (parentsConf.chooser) {
                 ParentSelectionMethods.Types.PANMIXIA -> {
                     ParentSelectionMethods.panmixia(allParents)
@@ -52,8 +62,10 @@ class GeneticAlgorithm {
                     ParentSelectionMethods.outbreeding(allParents, onDistance)
                 }
 
+                // вариант по умолчанию - панмиксия (две случайные особи)
                 null -> ParentSelectionMethods.panmixia(allParents)
             }
+            // проводим операцию скрещивания
             val offspring = when (recombinationType) {
                 RecombinationMethods.Types.DISCRETE -> {
                     RecombinationMethods.discreteRecombination(selectedParents.first, selectedParents.second)
@@ -68,8 +80,10 @@ class GeneticAlgorithm {
                     RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
                 }
 
+                // вариант по умолчанию - потомки не создаются
                 null -> selectedParents
             }
+            // вычисляем вероятность проведения мутации потомков и проводим её в случае успеха
             if (mutation.type != null && Math.random() > mutation.rate) {
                 offspring.toList().forEach {
                     when (mutation.type) {
@@ -83,8 +97,10 @@ class GeneticAlgorithm {
                 }
             }
 
+            // добавляем потомков в общую популяцию
             population.entities.addAll(offspring.toList())
 
+            // создаём новое поколение мутации
             population = when (newPopulationConf.type) {
                 NewPopulationMethods.Types.TRUNCATION -> {
                     NewPopulationMethods.truncationSelection(population, onFitness, newPopulationConf.rate)
@@ -96,12 +112,15 @@ class GeneticAlgorithm {
                     NewPopulationMethods.exclusionSelection(population, onFitness)
                 }
 
+                // вариант по умолчанию - все особи проходят в следующее поколение
                 null -> population
             }
         }
 
+        // после завершения работы алгоритма сортируем всех особей по значению функции пригодности в порядке убывания
         population.entities.sortByDescending(onFitness)
 
+        // берём самую приспособленную особь и возвращаем её
         val bestChromosome = population.entities[0]
         return bestChromosome.genes
     }
