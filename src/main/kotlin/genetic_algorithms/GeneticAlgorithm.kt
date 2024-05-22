@@ -22,12 +22,14 @@ class GeneticAlgorithm {
     ): Array<Edge<T>> {
         logger.info { "Launching the genetic algorithm" }
 
-        val (iterationCount, populationSize, start, parentsConf, recombinationType, mutation, newPopulationConf) = configuration
+        // получаем все необходимые для запуска алгоритма параметры
+        val (iterationCount, populationSize, startNodeId, parentsConf, recombinationType, mutation, newPopulationConf) = configuration
 
-        val startNode = if (start == null) {
+        // находим начальную вершину (если вершина не определена пользователем, то берётся случайная вершина)
+        val startNode = if (startNodeId == null) {
             graph.nodes.random()
         } else {
-            graph.getNodeById(start) ?: graph.nodes.random()
+            graph.getNodeById(startNodeId) ?: graph.nodes.random()
         }
 
         // создаём начальную популяцию (набор случайных путей в графе)
