@@ -52,7 +52,7 @@ data class Ant(val id: String) {
             }
 
             // если из вершины не исходит ни одно ребро, то бросаем исключение
-            throw IllegalStateException("Suitable edges were not found")
+            throw IllegalStateException("Suitable edges were not found (Node: ${currentNode.id}, ${currentNode.label})")
         }
 
         // путь муравья
