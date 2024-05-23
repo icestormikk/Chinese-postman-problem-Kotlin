@@ -42,8 +42,11 @@ class AntColonyAlgorithm {
         logger.info { "An algorithm for simulating an ant colony is launched ($iterationCount iterations, $antCount ants)" }
         for (iteration in 1..iterationCount) {
             phGraph.edges.forEach { it.pheromoneCount * remainingPheromoneRate }
+            // феромоны на путях испаряются
 
             for (antIndex in 1..antCount) { val ant = Ant("Ant-${antIndex}")
+            for (antIndex in 1..antCount) {
+                val ant = Ant("Ant-${antIndex}")
                 val path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta)
                 val length = phGraph.calculateTotalLengthOf(path.toTypedArray())
 
