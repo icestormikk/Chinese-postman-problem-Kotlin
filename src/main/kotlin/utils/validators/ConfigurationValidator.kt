@@ -95,6 +95,7 @@ class ConfigurationValidator {
         with (configuration) {
             require (iterationCount > 0) { "The number of iterations must be strictly positive" }
             require (antCount > 0) { "The number of ants must be strictly positive" }
+            require (proximityCoefficient > 0) { "The proximity coefficient must be strictly positive" }
             require (startPheromoneValue >= 0) { "The initial amount of pheromones on the branches should not be negative" }
             require (remainingPheromoneRate in 0.0..<1.0) { "The percentage of pheromone evaporation should be in the range [0, 1)" }
             if (startNodeId != null) {
