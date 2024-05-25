@@ -46,11 +46,14 @@ object NewPopulationMethods {
             if (elitePercent > 1)
                 population.entities.size
             else ceil(population.entities.size * elitePercent).toInt()
+        val remainingEntitiesCount = population.entities.size - suitableEntitiesCount
         val suitableEntities = population.entities
             .sortedByDescending(onFitness)
             .slice(0..<suitableEntitiesCount)
 
-        return Population(suitableEntities.toMutableList())
+        val tournamentEntities = SelectionMethods.tournamentSelection(population, onFitness)
+
+        return Population((suitableEntities + tournamentEntities.entities.slice(0..remainingEntitiesCount)).toMutableList())
     }
 
     // Отбор вытеснением (то же, что и отбор усечением, но все особи имеют разный набор генов)
