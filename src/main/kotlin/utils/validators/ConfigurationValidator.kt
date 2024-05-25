@@ -64,6 +64,7 @@ class ConfigurationValidator {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require(populationSize > 0) { "The size of the created populations must be strictly greater than zero" }
+            require(recombination.rate >= 0.0) { "The probability of recombination must be greater than zero" }
             require(mutation.rate >= 0.0) { "The probability of mutation must be greater than zero" }
             if (startNodeId != null) {
                 require(graph.nodes.any { it.id == startNodeId }) {

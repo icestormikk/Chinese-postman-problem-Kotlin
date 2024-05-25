@@ -15,11 +15,17 @@ data class GeneticAlgorithmConfiguration(
     // Настройки выбора родителей
     val parents: ParentsConfiguration,
     // Настройки для обмена генов
-    val recombinationType: RecombinationMethods.Types? = null,
+    val recombination: RecombinationConfiguration,
     // Настройки для мутации генов особей
     val mutation: MutationConfiguration,
     // Настройки создания нового поколения мутации
     val newPopulation: PopulationSelectionConfiguration,
+)
+
+@Serializable
+data class RecombinationConfiguration(
+    val type: RecombinationMethods.Types? = null,
+    val rate: Double = 1.0
 )
 
 @Serializable
