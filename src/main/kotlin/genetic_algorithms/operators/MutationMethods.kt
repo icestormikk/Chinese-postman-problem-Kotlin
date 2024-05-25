@@ -11,26 +11,25 @@ object MutationMethods {
     }
 
     // Случайным образом из набора возможных выбирается случайное значение, и встаёт на место случайного гена
-    fun <T> replacingMutation(chromosome: Chromosome<T>, possibleValues: Array<T>): Chromosome<T>? {
-        val value = possibleValues.randomOrNull() ?: return null
+    fun <T> replacingMutation(chromosome: Chromosome<T>, possibleValues: Array<T>) {
+        val value = possibleValues.randomOrNull() ?: return
         val index = chromosome.genes.indices.random()
-        return Chromosome(chromosome.genes.clone().apply { this[index] = value })
+        chromosome.genes.apply { this[index] = value }
     }
 
     // Два случайных гена меняются местами
-    fun <T> swappingMutation(chromosome: Chromosome<T>): Chromosome<T>? {
-        return when {
-            chromosome.genes.size <= 1 -> {
-                null
+    fun <T> swappingMutation(chromosome: Chromosome<T>) {
+        when {
+            chromosome.genes.size <= 3 -> {
+                return
             }
-            chromosome.genes.size == 2 -> {
-                Chromosome(chromosome.genes.reversedArray())
+            chromosome.genes.size == 4 -> {
+                chromosome.genes.reverse()
             }
             else -> {
-                with(Chromosome(chromosome.genes.clone())) {
-                    val index = (1..<(genes.size - 1)).random()
+                with(chromosome) {
+                    val index = (2..<(genes.size - 2)).random()
                     genes[index - 1] = genes[index + 1].also { genes[index + 1] = genes[index - 1] }
-                    this
                 }
             }
         }
