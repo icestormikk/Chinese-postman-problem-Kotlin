@@ -4,10 +4,9 @@ import common.Configuration
 import common.Response
 import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
-import graph.Node
-import graph.Edge
-import graph.Graph
-import graph.GraphDao
+import genetic_algorithms.operators.MutationMethods
+import genetic_algorithms.operators.RecombinationMethods
+import graph.*
 import utils.constants.CONFIGURATION_FILE_ARGUMENT
 import utils.helpers.CommandLineHelper
 import utils.helpers.FileHelper
@@ -23,6 +22,45 @@ import kotlin.time.measureTimedValue
 
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double, Edge<Double>>(nodes, edges) {
     override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
+        for (i in 1..<path.size) {
+            val previousEdge = path[i - 1]
+            val edge = path[i]
+
+            val previousEdgeNodes = arrayOf(previousEdge.source, previousEdge.destination)
+            val currentEdgeNodes = arrayOf(edge.source, edge.destination)
+
+            when (edge.type) {
+                EdgeType.NOT_ORIENTED -> {
+                    when (previousEdge.type) {
+                        EdgeType.NOT_ORIENTED -> {
+                            if (currentEdgeNodes.none { node -> previousEdgeNodes.contains(node) }) {
+                                return Double.MAX_VALUE
+                            }
+                        }
+                        EdgeType.DIRECTED -> {
+                            if (!currentEdgeNodes.contains(previousEdge.destination)) {
+                                return Double.MAX_VALUE
+                            }
+                        }
+                    }
+                }
+                EdgeType.DIRECTED -> {
+                    when (previousEdge.type) {
+                        EdgeType.NOT_ORIENTED -> {
+                            if (!previousEdgeNodes.contains(edge.source)) {
+                                return Double.MAX_VALUE
+                            }
+                        }
+                        EdgeType.DIRECTED -> {
+                            if (edge.source.id != previousEdge.destination.id) {
+                                return Double.MAX_VALUE
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         return path.sumOf { it.weight }
     }
 }
@@ -52,6 +90,7 @@ fun main(args: Array<String>) {
             FileHelper().readFrom(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
         }!!
         val graph = graphDao.toDoubleGraph()
+        logger.info { "A graph with ${graph.nodes.size} vertices and ${graph.edges.size} edges has been read" }
 
         val configuration = CommandLineHelper().fetchArgument(arguments, CONFIGURATION_FILE_ARGUMENT, true) {
             val res = FileHelper().readFrom<Configuration>(it) { content -> JSONHelper().getInstance().decodeFromString(content) }
@@ -68,14 +107,14 @@ fun main(args: Array<String>) {
                 }
 
                 fun onFitness(chromosome: Chromosome<Edge<Double>>): Double {
-                    if (!graph.edges.all { chromosome.genes.contains(it) }) {
-                        return Double.MIN_VALUE
+                    if (!graph.edges.all { edge -> chromosome.genes.find { gene -> gene.id == edge.id } != null }) {
+                        return Double.NEGATIVE_INFINITY
                     }
 
                     return (-1) * graph.calculateTotalLengthOf(chromosome.genes)
                 }
                 fun onDistance(ch: Chromosome<Edge<Double>>, ch2: Chromosome<Edge<Double>>): Double {
-                    return ch.genes.mapIndexed { index, edge -> if (edge.id != ch2.genes[index].id) 1 else 0 }.sum().toDouble()
+                    return ch.genes.mapIndexed { index, edge -> if (edge.id != ch2.genes.getOrNull(index)?.id) 1 else 0 }.sum().toDouble()
                 }
 
                 val (result, duration) = measureTimedValue {
