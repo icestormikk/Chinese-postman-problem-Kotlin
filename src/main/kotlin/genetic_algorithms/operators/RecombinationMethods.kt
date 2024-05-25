@@ -7,10 +7,45 @@ import kotlin.math.min
 object RecombinationMethods {
     // Список доступных методов
     enum class Types {
+        HUX_CROSSOVER,
         DISCRETE,
         TWO_POINT_CROSSOVER,
         SINGLE_POINT_CROSSOVER,
         SHUFFLE
+    }
+
+    inline fun <reified T> huxCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
+        val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
+
+        val length = suitableIndexes.last
+        val swapIndices = mutableListOf<Int>()
+
+        // Determine the indices for genes to be swapped
+        for (i in 0 until length) {
+            if (parent1.genes[i] != parent2.genes[i]) {
+                swapIndices.add(i)
+            }
+        }
+
+        // Select half of the differing indices to swap
+        swapIndices.shuffle()
+        val halfSize = swapIndices.size / 2
+        val indicesToSwap = swapIndices.take(halfSize)
+
+        val child1Genes = parent1.genes.toMutableList()
+        val child2Genes = parent2.genes.toMutableList()
+
+        // Swap genes at the selected indices
+        for (index in indicesToSwap) {
+            child1Genes[index] = parent2.genes[index]
+            child2Genes[index] = parent1.genes[index]
+        }
+
+        // Create children chromosomes
+        val child1 = Chromosome(child1Genes.toTypedArray())
+        val child2 = Chromosome(child2Genes.toTypedArray())
+
+        return Pair(child1, child2)
     }
 
     /**
