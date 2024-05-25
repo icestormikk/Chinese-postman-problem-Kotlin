@@ -23,7 +23,7 @@ class GeneticAlgorithm {
         logger.info { "Launching the genetic algorithm" }
 
         // получаем все необходимые для запуска алгоритма параметры
-        val (iterationCount, populationSize, startNodeId, parentsConf, recombinationType, mutation, newPopulationConf) = configuration
+        val (iterationCount, populationSize, startNodeId, parentsConf, recombinationConf, mutation, newPopulationConf) = configuration
 
         // находим начальную вершину (если вершина не определена пользователем, то берётся случайная вершина)
         val startNode = if (startNodeId == null) {
@@ -35,6 +35,7 @@ class GeneticAlgorithm {
         // создаём начальную популяцию (набор случайных путей в графе)
         val paths = MutableList(populationSize) { Chromosome(graph.getRandomPath(startNode).toTypedArray()) }
         var population = Population(paths)
+        population.entities.sortByDescending(onFitness)
 
         logger.info { "A starting population has been created (id: ${population.id})" }
 
@@ -52,6 +53,7 @@ class GeneticAlgorithm {
                 // если пользователь не выбрал метод отбора, то берётся вся исходная популяция
                 null -> population
             }
+
             // выбираем особей-родителей
             val selectedParents = when (parentsConf.chooser) {
                 ParentSelectionMethods.Types.PANMIXIA -> {
@@ -67,31 +69,40 @@ class GeneticAlgorithm {
                 // вариант по умолчанию - панмиксия (две случайные особи)
                 null -> ParentSelectionMethods.panmixia(allParents)
             }
-            // проводим операцию скрещивания
-            val offspring = when (recombinationType) {
-                RecombinationMethods.Types.DISCRETE -> {
-                    RecombinationMethods.discreteRecombination(selectedParents.first, selectedParents.second)
-                }
-                RecombinationMethods.Types.TWO_POINT_CROSSOVER -> {
-                    RecombinationMethods.twoPointCrossover(selectedParents.first, selectedParents.second)
-                }
-                RecombinationMethods.Types.SINGLE_POINT_CROSSOVER -> {
-                    RecombinationMethods.singlePointCrossover(selectedParents.first, selectedParents.second)
-                }
-                RecombinationMethods.Types.SHUFFLE -> {
-                    RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
-                }
 
-                // вариант по умолчанию - потомки не создаются
-                null -> selectedParents
+            // проводим операцию скрещивания
+            val offspring = if (Math.random() > recombinationConf.rate) {
+                selectedParents
+            } else {
+                when (recombinationConf.type) {
+                    RecombinationMethods.Types.HUX_CROSSOVER -> {
+                        RecombinationMethods.huxCrossover(selectedParents.first, selectedParents.second)
+                    }
+                    RecombinationMethods.Types.DISCRETE -> {
+                        RecombinationMethods.discreteRecombination(selectedParents.first, selectedParents.second)
+                    }
+                    RecombinationMethods.Types.TWO_POINT_CROSSOVER -> {
+                        RecombinationMethods.twoPointCrossover(selectedParents.first, selectedParents.second)
+                    }
+                    RecombinationMethods.Types.SINGLE_POINT_CROSSOVER -> {
+                        RecombinationMethods.singlePointCrossover(selectedParents.first, selectedParents.second)
+                    }
+                    RecombinationMethods.Types.SHUFFLE -> {
+                        RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
+                    }
+
+                    // вариант по умолчанию - потомки не создаются
+                    null -> selectedParents
+                }
             }
-            // вычисляем вероятность проведения мутации потомков и проводим её в случае успеха
-            if (mutation.type != null && Math.random() > mutation.rate) {
-                offspring.toList().forEach {
+
+            offspring.toList().forEach {
+                if (mutation.type != null && Math.random() < mutation.rate) {
                     when (mutation.type) {
                         MutationMethods.Types.REPLACING -> {
                             MutationMethods.replacingMutation(it, graph.edges.toTypedArray())
                         }
+
                         MutationMethods.Types.SWAPPING -> {
                             MutationMethods.swappingMutation(it)
                         }
@@ -100,7 +111,8 @@ class GeneticAlgorithm {
             }
 
             // добавляем потомков в общую популяцию
-            population.entities.addAll(offspring.toList())
+            population.entities[population.entities.lastIndex - 1] = offspring.first
+            population.entities[population.entities.lastIndex] = offspring.second
 
             // создаём новое поколение мутации
             population = when (newPopulationConf.type) {
@@ -124,6 +136,11 @@ class GeneticAlgorithm {
 
         // берём самую приспособленную особь и возвращаем её
         val bestChromosome = population.entities[0]
+
+        if (onFitness(bestChromosome) == Double.MAX_VALUE * (-1)) {
+            throw IllegalStateException("Couldn't find a path suitable for the conditions")
+        }
+
         return bestChromosome.genes
     }
 

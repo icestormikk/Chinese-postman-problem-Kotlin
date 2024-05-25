@@ -47,6 +47,7 @@ data class Ant(val id: String) {
                 sum += (edge.pheromoneCount.pow(alpha) * (proximityCoefficient / edge.weight).pow(beta)) / totalDesire
                 // проверяем не было ли выбрано это ребро: если да, то возвращаем его
                 if (randomValue < sum) {
+                    visitedEdgeIds.add(edge.id)
                     return edge
                 }
             }

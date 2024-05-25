@@ -4,8 +4,6 @@ import common.Configuration
 import common.Response
 import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
-import genetic_algorithms.operators.MutationMethods
-import genetic_algorithms.operators.RecombinationMethods
 import graph.*
 import utils.constants.CONFIGURATION_FILE_ARGUMENT
 import utils.helpers.CommandLineHelper
