@@ -22,7 +22,7 @@ class ParticleSwarm {
             return try {
                 graph.calculateTotalLengthOf(position.toTypedArray())
             } catch (ex: Exception) {
-                Double.MIN_VALUE
+                Double.NEGATIVE_INFINITY
             }
         }
 
