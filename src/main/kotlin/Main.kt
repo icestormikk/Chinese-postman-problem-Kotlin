@@ -70,6 +70,10 @@ fun main(args: Array<String>) {
             }
         }
 
+        // проверка полученного ответа
+        validateResponse(response, configuration.maxLength)
+
+        // запись результата
         FileHelper().writeTo(resultFilepath, JSONHelper().getInstance().encodeToString(response))
     } catch (e: Exception) {
         logger.error { e.message }
@@ -77,9 +81,13 @@ fun main(args: Array<String>) {
     }
 }
 
+private fun validateResponse(response: Response, maxLength: Double) {
+    require(response.length < maxLength) { "The length of the optimal path should not exceed the set value: $maxLength" }
+}
+
 private fun launchAntColonyAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
     if (configuration.antColony == null) {
-        throw Exception("The configuration for the annealing method was not passed")
+        throw Exception("The ant colony method was selected, but the configuration for it was not transmitted")
     }
     val (result, duration) = measureTimedValue {
         AntColonyAlgorithm().start(graph, configuration.antColony)
@@ -91,7 +99,7 @@ private fun launchAntColonyAlgorithm(configuration: Configuration, graph: Double
 
 private fun launchGeneticAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
     if (configuration.genetic == null) {
-        throw Exception("The configuration for the genetic algorithm was not passed")
+        throw Exception("A genetic algorithm was selected, but the configuration for it was not transmitted")
     }
 
     fun onFitness(chromosome: Chromosome<Edge<Double>>): Double {
