@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Удалил лишнюю константу">
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Добавил новую мутацию, которая ориентирована под графы">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DoubleGraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/DoubleGraph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Edge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Edge.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/constants/AlgorithmConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/AlgorithmConstants.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,30 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00104" summary="Добавил конфигурацию для нового алгоритма">
-      <option name="closed" value="true" />
-      <created>1716033139254</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1716033139254</updated>
-    </task>
-    <task id="LOCAL-00105" summary="Класс ребро теперь открыт для наследования">
-      <option name="closed" value="true" />
-      <created>1716033172245</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1716033172245</updated>
-    </task>
-    <task id="LOCAL-00106" summary="Обновил поле для списка рёбер">
-      <option name="closed" value="true" />
-      <created>1716033196433</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1716033196433</updated>
     </task>
     <task id="LOCAL-00107" summary="Добавил реализацию для класса Муравья, которая содержит алгоритм для построения блуждания муравья по графу с учётом количества феромонов на путях">
       <option name="closed" value="true" />
@@ -607,7 +572,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716822233160</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="Добавил константу для обозначения количества итераций, по истечению которых произойдёт обмен хромосомами в популяциях">
+      <option name="closed" value="true" />
+      <created>1716923205875</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1716923205876</updated>
+    </task>
+    <task id="LOCAL-00154" summary="Обновление до версии 1.3.7">
+      <option name="closed" value="true" />
+      <created>1716923315779</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1716923315779</updated>
+    </task>
+    <task id="LOCAL-00155" summary="Добавил новую мутацию, которая ориентирована под графы">
+      <option name="closed" value="true" />
+      <created>1716924185390</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1716924185391</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -632,9 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Обновил версию кода до 1.3.4-SNAPSHOT" />
-    <MESSAGE value="Все классы, использованные в Deprecated алгоритмах, теперь тоже помечены этой аннатацией" />
-    <MESSAGE value="Исправил имя параметра для выбранной пользователем вершины" />
     <MESSAGE value="Добавил документацию и поясняющие комментарии" />
     <MESSAGE value="Удалил лишнее переопределение метода getEdgesFrom" />
     <MESSAGE value="Удалил лишнюю строку из документации" />
@@ -657,6 +643,9 @@
     <MESSAGE value="Обновил формат выводимых в консоль логов" />
     <MESSAGE value="Добавил комментарии и функцию для проверки корректности ответа" />
     <MESSAGE value="Удалил лишнюю константу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удалил лишнюю константу" />
+    <MESSAGE value="Добавил константу для обозначения количества итераций, по истечению которых произойдёт обмен хромосомами в популяциях" />
+    <MESSAGE value="Обновление до версии 1.3.7" />
+    <MESSAGE value="Добавил новую мутацию, которая ориентирована под графы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил новую мутацию, которая ориентирована под графы" />
   </component>
 </project>
