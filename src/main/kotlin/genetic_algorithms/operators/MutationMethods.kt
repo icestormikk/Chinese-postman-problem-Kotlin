@@ -10,13 +10,14 @@ object MutationMethods {
     // Список доступных методов
     enum class Types {
         REPLACING,
-        SWAPPING
+        SWAPPING,
+        EDGE_REPLACING
     }
 
     fun <T, E: Edge<T>> edgeReplacingMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
         if (chromosome.genes.size <= 2) return
 
-        val index = Random.nextInt(1, chromosome.genes.size - 2)
+        val index = if (chromosome.genes.size == 3) 1 else Random.nextInt(1, chromosome.genes.size - 2)
         val commonNodeStart = graph.getCommonNode(chromosome.genes[index - 1], chromosome.genes[index]) ?: return
         val commonNodeEnd = graph.getCommonNode(chromosome.genes[index], chromosome.genes[index + 1]) ?: return
         val newEdge = graph.getEdgesFromTo(commonNodeStart, commonNodeEnd)

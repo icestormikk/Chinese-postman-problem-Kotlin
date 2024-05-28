@@ -195,6 +195,10 @@ class GeneticAlgorithm {
                     MutationMethods.Types.SWAPPING -> {
                         MutationMethods.swappingMutation(it)
                     }
+
+                    MutationMethods.Types.EDGE_REPLACING -> {
+                        MutationMethods.edgeReplacingMutation(it, graph)
+                    }
                 }
             }
         }
