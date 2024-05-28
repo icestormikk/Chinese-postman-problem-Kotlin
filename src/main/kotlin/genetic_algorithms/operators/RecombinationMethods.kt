@@ -1,20 +1,63 @@
 package genetic_algorithms.operators
 
 import genetic_algorithms.Chromosome
+import graph.Edge
+import graph.Graph
+import graph.Node
 import kotlin.math.min
+import kotlin.random.Random
 
 // Набор методов для обмена генами между особями
 object RecombinationMethods {
     // Список доступных методов
     enum class Types {
-        HUX_CROSSOVER,
         DISCRETE,
+        CHROMOSOME_CROSSOVER,
         TWO_POINT_CROSSOVER,
         SINGLE_POINT_CROSSOVER,
         SHUFFLE
     }
 
-    inline fun <reified T> huxCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
+    fun <T, E: Edge<T>, G: Graph<T, E>> chromosomeCrossover(
+        parent1: Chromosome<E>, parent2: Chromosome<E>, graph: G, startNode: Node
+    ): Pair<Chromosome<E>, Chromosome<E>> {
+        val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
+        val size = suitableIndexes.last + 1
+        val child1Genes = parent1.genes.toMutableList()
+        val child2Genes = parent2.genes.toMutableList()
+
+        // Выбираем две точки разреза
+        val (start, end) = if (size == 3) {
+            listOf(0, 2)
+        } else {
+            List(2) { Random.nextInt(1, size - 1) }.sorted()
+        }
+
+        // Копируем сегменты между родителями
+        for (i in start .. end) {
+            child1Genes[i] = parent2.genes[i]
+            child2Genes[i] = parent1.genes[i]
+        }
+
+        fun getFixedPath(childGenes: MutableList<E>): List<E> {
+            val startTo = graph.getCommonNode(childGenes[start], childGenes[start + 1]) ?: childGenes[start].source
+            val anotherStartFragment = graph.getPathBetween(startNode, startTo)
+
+            val endFrom = with (graph.getCommonNode(childGenes[end - 1], childGenes[end])) {
+                if (childGenes[end].source == this) childGenes[end].destination else childGenes[end].source
+            }
+            val anotherEndFragment = graph.getPathBetween(endFrom, startNode)
+
+            return anotherStartFragment!! + childGenes.slice(start..end) + anotherEndFragment!!
+        }
+
+        val child1 = Chromosome(getFixedPath(child1Genes).toMutableList())
+        val child2 = Chromosome(getFixedPath(child2Genes).toMutableList())
+
+        return Pair(child1, child2)
+    }
+
+    fun <T> huxCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
         val length = suitableIndexes.last
@@ -42,8 +85,8 @@ object RecombinationMethods {
         }
 
         // Create children chromosomes
-        val child1 = Chromosome(child1Genes.toTypedArray())
-        val child2 = Chromosome(child2Genes.toTypedArray())
+        val child1 = Chromosome(child1Genes)
+        val child2 = Chromosome(child2Genes)
 
         return Pair(child1, child2)
     }
@@ -88,8 +131,8 @@ object RecombinationMethods {
             }
         }
 
-        val child1 = Chromosome(parent1.genes.clone())
-        val child2 = Chromosome(parent2.genes.clone())
+        val child1 = Chromosome(parent1.genes)
+        val child2 = Chromosome(parent2.genes)
         val pointsSet = setOf(points?.first ?: suitableIndexes.random(), points?.second ?: suitableIndexes.random())
 
         for (index in pointsSet.elementAt(0)..pointsSet.elementAt(1)) {
@@ -104,17 +147,17 @@ object RecombinationMethods {
      * Одноточечный кроссинговер, хромосомы делятся на две части и обмениваются ими
      * @see twoPointCrossover
      */
-    inline fun <reified T> singlePointCrossover(
+    fun <T> singlePointCrossover(
         parent1: Chromosome<T>, parent2: Chromosome<T>, point: Int? = null
     ): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
         val index = point ?: suitableIndexes.random()
 
         val offspring1 = Chromosome(
-            (parent1.genes.slice(0..<index) + parent2.genes.slice(index..parent2.genes.lastIndex)).toTypedArray()
+            (parent1.genes.slice(0..<index) + parent2.genes.slice(index..parent2.genes.lastIndex)).toMutableList()
         )
         val offspring2 = Chromosome(
-            (parent2.genes.slice(0..<index) + parent1.genes.slice(index..parent1.genes.lastIndex)).toTypedArray()
+            (parent2.genes.slice(0..<index) + parent1.genes.slice(index..parent1.genes.lastIndex)).toMutableList()
         )
 
         return Pair(offspring1, offspring2)
@@ -126,7 +169,7 @@ object RecombinationMethods {
      * @param parent2 Второй "родитель"
      * @return Две особи - потомка с новыми генами
      */
-    inline fun <reified T> shuffleCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
+    fun <T> shuffleCrossover(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
         val shuffleBetween = { p1: Chromosome<T>, p2: Chromosome<T> ->
@@ -146,7 +189,7 @@ object RecombinationMethods {
         return children
     }
 
-    fun getSuitableGenesRange(firstGenes: Array<*>, secondGenes: Array<*>): IntRange {
+    fun getSuitableGenesRange(firstGenes: List<*>, secondGenes: List<*>): IntRange {
         return 0..min(firstGenes.lastIndex, secondGenes.lastIndex)
     }
 }

@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="updated">
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Удалил лишнюю константу">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DoubleGraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/DoubleGraph.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Edge.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Edge.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/constants/AlgorithmConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/constants/AlgorithmConstants.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +51,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="chinese_postman_problem" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="chinese_postman_problem" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="help" type="c8890929:TasksNode$1" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -58,14 +64,19 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Enum" />
+        <option value="Kotlin Object" />
         <option value="Kotlin Data Class" />
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
-        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature-max-length-update" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -91,15 +102,16 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.Build chinese_postman_problem.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.chinese_postman_problem [fatJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.chinese_postman_problem [jar].executor&quot;: &quot;Run&quot;,
     &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/jigal/IdeaProjects/chinese_postman_problem&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;kotlin-gradle-user-dirs&quot;: [
@@ -121,19 +133,76 @@
       <recent name="utils.serializers" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="me" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Kotlin.MainKt">
+    <configuration name="chinese_postman_problem [fatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="fatJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="chinese_postman_problem [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-particles.json --graph .\graph.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic.json --graph .\graph_20.json --output .\result.json" />
       <shortenClasspath name="NONE" />
+      <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss2m" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.chinese_postman_problem [fatJar]" />
+      <item itemvalue="Gradle.chinese_postman_problem [jar]" />
+      <item itemvalue="Kotlin.MainKt" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.MainKt" />
+        <item itemvalue="Gradle.chinese_postman_problem [jar]" />
+        <item itemvalue="Gradle.chinese_postman_problem [fatJar]" />
       </list>
     </recent_temporary>
   </component>
@@ -146,399 +215,399 @@
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
     </task>
-    <task id="LOCAL-00010" summary="adding serialization and deserialization methods for the UUID class">
+    <task id="LOCAL-00104" summary="Добавил конфигурацию для нового алгоритма">
       <option name="closed" value="true" />
-      <created>1712427814912</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+      <created>1716033139254</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1712427814912</updated>
+      <updated>1716033139254</updated>
     </task>
-    <task id="LOCAL-00011" summary="Adding constants and methods to work with the command line">
+    <task id="LOCAL-00105" summary="Класс ребро теперь открыт для наследования">
       <option name="closed" value="true" />
-      <created>1712427842768</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+      <created>1716033172245</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
       <option name="project" value="LOCAL" />
-      <updated>1712427842768</updated>
+      <updated>1716033172245</updated>
     </task>
-    <task id="LOCAL-00012" summary="some random code">
+    <task id="LOCAL-00106" summary="Обновил поле для списка рёбер">
       <option name="closed" value="true" />
-      <created>1712427856290</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+      <created>1716033196433</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
       <option name="project" value="LOCAL" />
-      <updated>1712427856290</updated>
+      <updated>1716033196433</updated>
     </task>
-    <task id="LOCAL-00013" summary="a class has been created containing all currently implemented methods for solving the problem">
+    <task id="LOCAL-00107" summary="Добавил реализацию для класса Муравья, которая содержит алгоритм для построения блуждания муравья по графу с учётом количества феромонов на путях">
       <option name="closed" value="true" />
-      <created>1712437439525</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+      <created>1716049085403</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
       <option name="project" value="LOCAL" />
-      <updated>1712437439526</updated>
+      <updated>1716049085404</updated>
     </task>
-    <task id="LOCAL-00014" summary="added a name for a new command line parameter">
+    <task id="LOCAL-00108" summary="Написал первую реализацию для алгоритма муравьиной колонии">
       <option name="closed" value="true" />
-      <created>1712437480019</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+      <created>1716049113905</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1712437480019</updated>
+      <updated>1716049113905</updated>
     </task>
-    <task id="LOCAL-00015" summary="creating a class (singleton) containing operations on files">
+    <task id="LOCAL-00109" summary="Добавил класс конфигурации для муравьиного алгоритма">
       <option name="closed" value="true" />
-      <created>1712437541999</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+      <created>1716049221781</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
       <option name="project" value="LOCAL" />
-      <updated>1712437541999</updated>
+      <updated>1716049221781</updated>
     </task>
-    <task id="LOCAL-00016" summary="changing the identifier type of each entity">
+    <task id="LOCAL-00110" summary="Добавил проверку поля с процентом остающихся на ребре феромонов">
       <option name="closed" value="true" />
-      <created>1712437592193</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+      <created>1716049309519</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
       <option name="project" value="LOCAL" />
-      <updated>1712437592193</updated>
+      <updated>1716049309521</updated>
     </task>
-    <task id="LOCAL-00017" summary="cleaning">
+    <task id="LOCAL-00111" summary="Добавил версию графа и ребёр для алгоритма муравьиной колонии">
       <option name="closed" value="true" />
-      <created>1712437606035</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+      <created>1716049347460</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
       <option name="project" value="LOCAL" />
-      <updated>1712437606035</updated>
+      <updated>1716049347460</updated>
     </task>
-    <task id="LOCAL-00018" summary="some random code">
+    <task id="LOCAL-00112" summary="Добавил возможность запуска алгоритма имитации муравьиной колонии">
       <option name="closed" value="true" />
-      <created>1712437620628</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+      <created>1716050652978</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
       <option name="project" value="LOCAL" />
-      <updated>1712437620628</updated>
+      <updated>1716050652979</updated>
     </task>
-    <task id="LOCAL-00019" summary="updated">
+    <task id="LOCAL-00113" summary="Обновил версию программы до 1.3-SNAPSHOT">
       <option name="closed" value="true" />
-      <created>1712437635422</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+      <created>1716050687772</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
       <option name="project" value="LOCAL" />
-      <updated>1712437635422</updated>
+      <updated>1716050687772</updated>
     </task>
-    <task id="LOCAL-00020" summary="added handlers for possible exceptions in functions">
+    <task id="LOCAL-00114" summary="Вернул в эксплуатацию неориентированные рёбра">
       <option name="closed" value="true" />
-      <created>1712437764694</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+      <created>1716151966972</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
       <option name="project" value="LOCAL" />
-      <updated>1712437764694</updated>
+      <updated>1716151966974</updated>
     </task>
-    <task id="LOCAL-00021" summary="restructuring">
+    <task id="LOCAL-00115" summary="Мелкие стилистические изменения">
       <option name="closed" value="true" />
-      <created>1713093522455</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+      <created>1716152017058</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
       <option name="project" value="LOCAL" />
-      <updated>1713093522456</updated>
+      <updated>1716152017058</updated>
     </task>
-    <task id="LOCAL-00022" summary="fixed initialization of graph edges">
+    <task id="LOCAL-00116" summary="Обновил версию приложения до 1.3.1-SNAPSHOT">
       <option name="closed" value="true" />
-      <created>1713094674363</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
+      <created>1716152165296</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
       <option name="project" value="LOCAL" />
-      <updated>1713094674365</updated>
+      <updated>1716152165296</updated>
     </task>
-    <task id="LOCAL-00023" summary="all log files should not be considered by the version control system">
+    <task id="LOCAL-00117" summary="Муравьиный алгоритм: исправил ошибку с бесконечным путешествием муравья">
       <option name="closed" value="true" />
-      <created>1713210561636</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
+      <created>1716188705777</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
       <option name="project" value="LOCAL" />
-      <updated>1713210561636</updated>
+      <updated>1716188705778</updated>
     </task>
-    <task id="LOCAL-00024" summary="added a dependency for using logging tools in project files">
+    <task id="LOCAL-00118" summary="Удалил строу с вызовом логгера, которая использовалась для отладки">
       <option name="closed" value="true" />
-      <created>1713210778191</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
+      <created>1716189109807</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
       <option name="project" value="LOCAL" />
-      <updated>1713210778191</updated>
+      <updated>1716189109807</updated>
     </task>
-    <task id="LOCAL-00025" summary="changes in argument validation">
+    <task id="LOCAL-00119" summary="Обновил версию программы до 1.3.2-SNAPSHOT">
       <option name="closed" value="true" />
-      <created>1713210822108</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
+      <created>1716189149101</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
       <option name="project" value="LOCAL" />
-      <updated>1713210822108</updated>
+      <updated>1716189149101</updated>
     </task>
-    <task id="LOCAL-00026" summary="renaming some constants involved in the operation of the application">
+    <task id="LOCAL-00120" summary="Обновил главный класс базового графа, теперь ребра могут принадлежать любому пользовательскому классу, который наследуется от класса Edge">
       <option name="closed" value="true" />
-      <created>1713210855982</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
+      <created>1716211522076</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
       <option name="project" value="LOCAL" />
-      <updated>1713210855982</updated>
+      <updated>1716211522078</updated>
     </task>
-    <task id="LOCAL-00027" summary="updated">
+    <task id="LOCAL-00121" summary="Обновлена логика для алгоритма роя частиц">
       <option name="closed" value="true" />
-      <created>1713210875281</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
+      <created>1716211567804</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
       <option name="project" value="LOCAL" />
-      <updated>1713210875281</updated>
+      <updated>1716211567804</updated>
     </task>
-    <task id="LOCAL-00028" summary="updated">
+    <task id="LOCAL-00122" summary="Добавлено больше типов для алгоритма запуска">
       <option name="closed" value="true" />
-      <created>1713210908814</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
+      <created>1716211612168</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
       <option name="project" value="LOCAL" />
-      <updated>1713210908814</updated>
+      <updated>1716211612168</updated>
     </task>
-    <task id="LOCAL-00029" summary="change in function arguments + added a function to find the path between the vertices of the graph">
+    <task id="LOCAL-00123" summary="Удалил/закомментировал код с использованием двух deprecated алгоритмов">
       <option name="closed" value="true" />
-      <created>1713211034511</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
+      <created>1716213169582</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
       <option name="project" value="LOCAL" />
-      <updated>1713211034511</updated>
+      <updated>1716213169584</updated>
     </task>
-    <task id="LOCAL-00030" summary="added application logging logic">
+    <task id="LOCAL-00124" summary="Метод отжига и метод роя частиц теперь признаны устаревшими и более не используются">
       <option name="closed" value="true" />
-      <created>1713211077312</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
+      <created>1716213202656</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
       <option name="project" value="LOCAL" />
-      <updated>1713211077312</updated>
+      <updated>1716213202657</updated>
     </task>
-    <task id="LOCAL-00031" summary="added general functions for logging the application">
+    <task id="LOCAL-00125" summary="Закомментировал неиспользуемый код">
       <option name="closed" value="true" />
-      <created>1713211109632</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
+      <created>1716213288426</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
       <option name="project" value="LOCAL" />
-      <updated>1713211109632</updated>
+      <updated>1716213288426</updated>
     </task>
-    <task id="LOCAL-00032" summary="stylistic changes and the addition of methods to improve performance">
+    <task id="LOCAL-00126" summary="Очистка кода">
       <option name="closed" value="true" />
-      <created>1713211176343</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
+      <created>1716213327521</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
       <option name="project" value="LOCAL" />
-      <updated>1713211176343</updated>
+      <updated>1716213327521</updated>
     </task>
-    <task id="LOCAL-00033" summary="removed the check for the same length for the chromosomes of all entities in the population">
+    <task id="LOCAL-00127" summary="Обновил версию кода до 1.3.4-SNAPSHOT">
       <option name="closed" value="true" />
-      <created>1713211246697</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
+      <created>1716213491601</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
       <option name="project" value="LOCAL" />
-      <updated>1713211246697</updated>
+      <updated>1716213491601</updated>
     </task>
-    <task id="LOCAL-00034" summary="improving safety in gene recombination methods">
+    <task id="LOCAL-00128" summary="Все классы, использованные в Deprecated алгоритмах, теперь тоже помечены этой аннатацией">
       <option name="closed" value="true" />
-      <created>1713211290598</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
+      <created>1716214313077</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
       <option name="project" value="LOCAL" />
-      <updated>1713211290598</updated>
+      <updated>1716214313078</updated>
     </task>
-    <task id="LOCAL-00035" summary="added a logger in the swarm class to track the operation of the algorithm">
+    <task id="LOCAL-00129" summary="Добавил поясняющие комментарии">
       <option name="closed" value="true" />
-      <created>1713211350598</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
+      <created>1716379803643</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
       <option name="project" value="LOCAL" />
-      <updated>1713211350598</updated>
+      <updated>1716379803644</updated>
     </task>
-    <task id="LOCAL-00036" summary="removed unused import">
+    <task id="LOCAL-00130" summary="Исправил имя параметра для выбранной пользователем вершины">
       <option name="closed" value="true" />
-      <created>1713211370723</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
+      <created>1716379841744</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
       <option name="project" value="LOCAL" />
-      <updated>1713211370723</updated>
+      <updated>1716379841744</updated>
     </task>
-    <task id="LOCAL-00037" summary="added code to apply a genetic algorithm to a set of random paths in a graph">
+    <task id="LOCAL-00131" summary="Добавил документацию и поясняющие комментарии">
       <option name="closed" value="true" />
-      <created>1713211418277</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
+      <created>1716388168878</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
       <option name="project" value="LOCAL" />
-      <updated>1713211418277</updated>
+      <updated>1716388168878</updated>
     </task>
-    <task id="LOCAL-00038" summary="again, a bit of random code">
+    <task id="LOCAL-00132" summary="Удалил лишнее переопределение метода getEdgesFrom">
       <option name="closed" value="true" />
-      <created>1713211461939</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
+      <created>1716389340111</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
       <option name="project" value="LOCAL" />
-      <updated>1713211461939</updated>
+      <updated>1716389340111</updated>
     </task>
-    <task id="LOCAL-00039" summary="updated some moments of code">
+    <task id="LOCAL-00133" summary="Удалил лишнюю строку из документации">
       <option name="closed" value="true" />
-      <created>1713734522696</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
+      <created>1716393829660</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
       <option name="project" value="LOCAL" />
-      <updated>1713734522696</updated>
+      <updated>1716393829661</updated>
     </task>
-    <task id="LOCAL-00040" summary="dele">
+    <task id="LOCAL-00134" summary="Добавил документацию к классам">
       <option name="closed" value="true" />
-      <created>1713983370871</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
+      <created>1716393849299</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
       <option name="project" value="LOCAL" />
-      <updated>1713983370872</updated>
+      <updated>1716393849300</updated>
     </task>
-    <task id="LOCAL-00041" summary="deleted">
+    <task id="LOCAL-00135" summary="Исправил механизм испарения феромонов">
       <option name="closed" value="true" />
-      <created>1713983379994</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
+      <created>1716461731128</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
       <option name="project" value="LOCAL" />
-      <updated>1713983379994</updated>
+      <updated>1716461731129</updated>
     </task>
-    <task id="LOCAL-00042" summary="added a logger for the CommandLineHelper class">
+    <task id="LOCAL-00136" summary="Добавил поясняющие комментарии">
       <option name="closed" value="true" />
-      <created>1713983474445</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
+      <created>1716461761126</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
       <option name="project" value="LOCAL" />
-      <updated>1713983474445</updated>
+      <updated>1716461761127</updated>
     </task>
-    <task id="LOCAL-00043" summary="renamed all constants for command line parameters and added another parameter">
+    <task id="LOCAL-00137" summary="Сделал сообщение об ошибке более информативным">
       <option name="closed" value="true" />
-      <created>1713983717168</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
+      <created>1716488397228</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
       <option name="project" value="LOCAL" />
-      <updated>1713983717168</updated>
+      <updated>1716488397229</updated>
     </task>
-    <task id="LOCAL-00044" summary="now the configurations for different algorithms are in different files">
+    <task id="LOCAL-00138" summary="Коэффициент близости вершин должен быть строго больше нуля">
       <option name="closed" value="true" />
-      <created>1713983761606</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
+      <created>1716488507733</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
       <option name="project" value="LOCAL" />
-      <updated>1713983761606</updated>
+      <updated>1716488507734</updated>
     </task>
-    <task id="LOCAL-00045" summary="a separate file has been created for validating configuration files">
+    <task id="LOCAL-00139" summary="Добавил параметр, отвечающий за вероятность проведения кроссинговера">
       <option name="closed" value="true" />
-      <created>1713983795569</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
+      <created>1716633089343</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
       <option name="project" value="LOCAL" />
-      <updated>1713983795569</updated>
+      <updated>1716633089347</updated>
     </task>
-    <task id="LOCAL-00046" summary="destructuring a configuration class for a genetic algorithm">
+    <task id="LOCAL-00140" summary="Операторы мутации теперь изменяют исходных особей">
       <option name="closed" value="true" />
-      <created>1713983927030</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
+      <created>1716633197073</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
       <option name="project" value="LOCAL" />
-      <updated>1713983927030</updated>
+      <updated>1716633197073</updated>
     </task>
-    <task id="LOCAL-00047" summary="restructuring">
+    <task id="LOCAL-00141" summary="Элитарный отбор заполняет оставшийся процент особей турнирным отбором">
       <option name="closed" value="true" />
-      <created>1713984074182</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
+      <created>1716633282214</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
       <option name="project" value="LOCAL" />
-      <updated>1713984074182</updated>
+      <updated>1716633282215</updated>
     </task>
-    <task id="LOCAL-00048" summary="added a dao object for the Graph class">
+    <task id="LOCAL-00142" summary="Исправлена функция пригодности">
       <option name="closed" value="true" />
-      <created>1713984896043</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
+      <created>1716633305059</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
       <option name="project" value="LOCAL" />
-      <updated>1713984896044</updated>
+      <updated>1716633305061</updated>
     </task>
-    <task id="LOCAL-00049" summary="added method for validating the received graph information">
+    <task id="LOCAL-00143" summary="Добавлен новый способ скрещивания - HUX">
       <option name="closed" value="true" />
-      <created>1713984937358</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
+      <created>1716633330272</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
       <option name="project" value="LOCAL" />
-      <updated>1713984937358</updated>
+      <updated>1716633330272</updated>
     </task>
-    <task id="LOCAL-00050" summary="an additional class has been created for serialization and deserialization">
+    <task id="LOCAL-00144" summary="Исправлены функции пригодности и вычисления длины пути">
       <option name="closed" value="true" />
-      <created>1713984993805</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
+      <created>1716633358953</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
       <option name="project" value="LOCAL" />
-      <updated>1713984993813</updated>
+      <updated>1716633358953</updated>
     </task>
-    <task id="LOCAL-00051" summary="fixed a bug with an incorrect number of entities that pass into the next population">
+    <task id="LOCAL-00145" summary="Небольшое обновление">
       <option name="closed" value="true" />
-      <created>1713985084629</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
+      <created>1716657042872</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
       <option name="project" value="LOCAL" />
-      <updated>1713985084629</updated>
+      <updated>1716657042873</updated>
     </task>
-    <task id="LOCAL-00052" summary="complete redesign of the Particle class">
+    <task id="LOCAL-00146" summary="Обновил номер версии">
       <option name="closed" value="true" />
-      <created>1713985122708</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
+      <created>1716657106638</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
       <option name="project" value="LOCAL" />
-      <updated>1713985122708</updated>
+      <updated>1716657106638</updated>
     </task>
-    <task id="LOCAL-00053" summary="adding a class to configure the particle swarm method">
+    <task id="LOCAL-00147">
       <option name="closed" value="true" />
-      <created>1713985145779</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
+      <created>1716813511537</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
       <option name="project" value="LOCAL" />
-      <updated>1713985145779</updated>
+      <updated>1716813511538</updated>
     </task>
-    <task id="LOCAL-00054" summary="added a check to ensure that all chromosomes in the population are not empty">
+    <task id="LOCAL-00148" summary="Рефакторинг кода">
       <option name="closed" value="true" />
-      <created>1713985189726</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
+      <created>1716813534325</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
       <option name="project" value="LOCAL" />
-      <updated>1713985189726</updated>
+      <updated>1716813534325</updated>
     </task>
-    <task id="LOCAL-00055" summary="updating the algorithm for launching the particle swarm method">
+    <task id="LOCAL-00149" summary="Добавил новое поле для хранения максимальной длины искомого пути">
       <option name="closed" value="true" />
-      <created>1713985221936</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
+      <created>1716813575580</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
       <option name="project" value="LOCAL" />
-      <updated>1713985221936</updated>
+      <updated>1716813575580</updated>
     </task>
-    <task id="LOCAL-00056" summary="reduce the available ways of mixing genes">
+    <task id="LOCAL-00150" summary="Обновил формат выводимых в консоль логов">
       <option name="closed" value="true" />
-      <created>1713985271440</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
+      <created>1716813753226</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
       <option name="project" value="LOCAL" />
-      <updated>1713985271440</updated>
+      <updated>1716813753226</updated>
     </task>
-    <task id="LOCAL-00057" summary="an attempt to adapt the particle swarm method to the problem being solved">
+    <task id="LOCAL-00151" summary="Добавил комментарии и функцию для проверки корректности ответа">
       <option name="closed" value="true" />
-      <created>1713985341180</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
+      <created>1716822203048</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
       <option name="project" value="LOCAL" />
-      <updated>1713985341180</updated>
+      <updated>1716822203048</updated>
     </task>
-    <task id="LOCAL-00058" summary="updated">
+    <task id="LOCAL-00152" summary="Удалил лишнюю константу">
       <option name="closed" value="true" />
-      <created>1713986414807</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
+      <created>1716822233160</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
       <option name="project" value="LOCAL" />
-      <updated>1713986414807</updated>
+      <updated>1716822233160</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -563,31 +632,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="improving safety in gene recombination methods" />
-    <MESSAGE value="added a logger in the swarm class to track the operation of the algorithm" />
-    <MESSAGE value="removed unused import" />
-    <MESSAGE value="added code to apply a genetic algorithm to a set of random paths in a graph" />
-    <MESSAGE value="again, a bit of random code" />
-    <MESSAGE value="updated some moments of code" />
-    <MESSAGE value="renaming" />
-    <MESSAGE value="deleted" />
-    <MESSAGE value="added a logger for the CommandLineHelper class" />
-    <MESSAGE value="renamed all constants for command line parameters and added another parameter" />
-    <MESSAGE value="now the configurations for different algorithms are in different files" />
-    <MESSAGE value="a separate file has been created for validating configuration files" />
-    <MESSAGE value="destructuring a configuration class for a genetic algorithm" />
-    <MESSAGE value="restructuring" />
-    <MESSAGE value="added a dao object for the Graph class" />
-    <MESSAGE value="added method for validating the received graph information" />
-    <MESSAGE value="an additional class has been created for serialization and deserialization" />
-    <MESSAGE value="fixed a bug with an incorrect number of entities that pass into the next population" />
-    <MESSAGE value="complete redesign of the Particle class" />
-    <MESSAGE value="adding a class to configure the particle swarm method" />
-    <MESSAGE value="added a check to ensure that all chromosomes in the population are not empty" />
-    <MESSAGE value="updating the algorithm for launching the particle swarm method" />
-    <MESSAGE value="reduce the available ways of mixing genes" />
-    <MESSAGE value="an attempt to adapt the particle swarm method to the problem being solved" />
-    <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="Обновил версию кода до 1.3.4-SNAPSHOT" />
+    <MESSAGE value="Все классы, использованные в Deprecated алгоритмах, теперь тоже помечены этой аннатацией" />
+    <MESSAGE value="Исправил имя параметра для выбранной пользователем вершины" />
+    <MESSAGE value="Добавил документацию и поясняющие комментарии" />
+    <MESSAGE value="Удалил лишнее переопределение метода getEdgesFrom" />
+    <MESSAGE value="Удалил лишнюю строку из документации" />
+    <MESSAGE value="Добавил документацию к классам" />
+    <MESSAGE value="Исправил механизм испарения феромонов" />
+    <MESSAGE value="Добавил поясняющие комментарии" />
+    <MESSAGE value="Сделал сообщение об ошибке более информативным" />
+    <MESSAGE value="Коэффициент близости вершин должен быть строго больше нуля" />
+    <MESSAGE value="Добавил параметр, отвечающий за вероятность проведения кроссинговера" />
+    <MESSAGE value="Операторы мутации теперь изменяют исходных особей" />
+    <MESSAGE value="Элитарный отбор заполняет оставшийся процент особей турнирным отбором" />
+    <MESSAGE value="Исправлена функция пригодности" />
+    <MESSAGE value="Добавлен новый способ скрещивания - HUX" />
+    <MESSAGE value="Исправлены функции пригодности и вычисления длины пути" />
+    <MESSAGE value="Небольшое обновление" />
+    <MESSAGE value="Обновил номер версии" />
+    <MESSAGE value="Добавил новые константы" />
+    <MESSAGE value="Рефакторинг кода" />
+    <MESSAGE value="Добавил новое поле для хранения максимальной длины искомого пути" />
+    <MESSAGE value="Обновил формат выводимых в консоль логов" />
+    <MESSAGE value="Добавил комментарии и функцию для проверки корректности ответа" />
+    <MESSAGE value="Удалил лишнюю константу" />
+    <option name="LAST_COMMIT_MESSAGE" value="Удалил лишнюю константу" />
   </component>
 </project>

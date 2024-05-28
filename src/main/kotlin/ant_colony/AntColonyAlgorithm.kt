@@ -9,7 +9,7 @@ class PheromoneDoubleGraph(
     nodes: List<Node>,
     edges: MutableList<PheromoneEdge<Double>>
 ) : PheromoneGraph<Double>(nodes, edges) {
-    override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
+    override fun calculateTotalLengthOf(path: List<PheromoneEdge<Double>>): Double {
         return path.sumOf { it.weight }
     }
 }
@@ -55,7 +55,7 @@ class AntColonyAlgorithm {
                 // получаем путь, по которому прошёл муравей
                 val path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta)
                 // вычисляем его длину
-                val length = phGraph.calculateTotalLengthOf(path.toTypedArray())
+                val length = phGraph.calculateTotalLengthOf(path)
 
                 // сравниваем с лучшим путём и при необходимости обновляем его
                 if (length < bestLength) {

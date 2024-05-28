@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.icestormikk"
-version = "1.3.6-SNAPSHOT"
+version = "1.3.7-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -18,6 +18,8 @@ dependencies {
 
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
     implementation("ch.qos.logback:logback-classic:1.5.3")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 
     testImplementation(kotlin("test"))
 }

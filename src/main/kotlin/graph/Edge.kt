@@ -19,4 +19,3 @@ open class Edge<T>(
     val type: EdgeType,
     val id: String
 )
-

@@ -26,12 +26,19 @@ abstract class Graph<T, E: Edge<T>>(
         }
     }
 
+    open fun getEdgesFromTo(fromNode: Node, toNode: Node): List<E> {
+        return edges.filter {
+            (it.type == EdgeType.DIRECTED && it.source.id == fromNode.id && it.destination.id == toNode.id) ||
+                    (it.type == EdgeType.NOT_ORIENTED && (listOf(fromNode, toNode).all { node -> listOf(it.source, it.destination).contains(node) }))
+        }
+    }
+
     /**
      * Абстрактная функция, которая вычисляет общую длину пути
      * @param path Путь, представляющий собой набор ребёр графа
      * @return Значение, которое отражает длину переданного пути
      */
-    abstract fun calculateTotalLengthOf(path: Array<Edge<T>>): Double
+    abstract fun calculateTotalLengthOf(path: List<E>): Double
 
     /**
      * Функция для нахождения случайного замкнутого пути в графе
@@ -85,22 +92,22 @@ abstract class Graph<T, E: Edge<T>>(
      * @param endNode Конечная вершина
      * @return Один из возможных путей между двумя вершинами в виде списка рёбер
      */
-    private fun getPathBetween(startNode: Node, endNode: Node): List<Edge<T>>? {
+    fun getPathBetween(startNode: Node, endNode: Node): List<E>? {
         val visitedEdges = mutableSetOf<Node>()
-        val queue = ArrayDeque<List<Edge<T>>>()
+        val queue = ArrayDeque<List<E>>()
         queue.add(listOf())
 
         while (queue.isNotEmpty()) {
             val path = queue.removeFirst()
             val currentNode = if (path.isNotEmpty()) path.last().destination else startNode
 
-            if (currentNode == endNode) {
+            if (currentNode == endNode && path.isNotEmpty()) {
                 return path
             }
 
             if (currentNode !in visitedEdges) {
                 visitedEdges.add(currentNode)
-                val adjacentEdges = edges.filter { it.source == currentNode }
+                val adjacentEdges = getEdgesFrom(currentNode)
                 for (edge in adjacentEdges) {
                     queue.add(path + edge)
                 }
@@ -109,4 +116,13 @@ abstract class Graph<T, E: Edge<T>>(
 
         return null
     }
+
+    fun getCommonNode(startEdge: E, endEdge: E): Node? {
+        return setOf(startEdge.source, startEdge.destination)
+            .intersect(setOf(endEdge.source, endEdge.destination))
+            .firstOrNull()
+    }
+
+    fun pathToString(path: List<E>, separator: String = ", "): String =
+        path.joinToString(separator) { "${it.source.label} -> ${it.destination.label}" }
 }

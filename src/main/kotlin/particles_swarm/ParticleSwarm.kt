@@ -20,7 +20,7 @@ class ParticleSwarm {
     ): Swarm<T>(size, currentVelocityRatio, localVelocityRatio, globalVelocityRatio, graph) {
         override fun onFitness(position: List<Edge<T>>): Double {
             return try {
-                graph.calculateTotalLengthOf(position.toTypedArray())
+                graph.calculateTotalLengthOf(position)
             } catch (ex: Exception) {
                 Double.NEGATIVE_INFINITY
             }

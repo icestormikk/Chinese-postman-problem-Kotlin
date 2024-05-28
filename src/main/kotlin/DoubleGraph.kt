@@ -9,7 +9,7 @@ import utils.constants.NOT_EXISTENT_PATH_VALUE
  * @see Graph
  */
 class DoubleGraph(nodes: List<Node>, edges: MutableList<Edge<Double>>): Graph<Double, Edge<Double>>(nodes, edges) {
-    override fun calculateTotalLengthOf(path: Array<Edge<Double>>): Double {
+    override fun calculateTotalLengthOf(path: List<Edge<Double>>): Double {
         for (i in 1..<path.size) {
             val previousEdge = path[i - 1]
             val edge = path[i]

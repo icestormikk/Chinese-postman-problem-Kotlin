@@ -4,8 +4,7 @@ import common.Configuration
 import common.Response
 import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
-import graph.Edge
-import graph.GraphDao
+import graph.*
 import kotlinx.serialization.encodeToString
 import utils.constants.*
 import utils.helpers.CommandLineHelper
@@ -23,7 +22,7 @@ private fun getDefaultLoggerFilepath() = Paths
 
 private val logger = LoggingHelper().getLogger()
 
-fun main(args: Array<String>) {
+suspend fun main(args: Array<String>) {
     // Настраиваем инструмент для логирования
     getDefaultLoggerFilepath().let { filepath ->
         if (System.getProperty(LOGGER_FILE_VM_OPTION) == null) {
@@ -70,8 +69,9 @@ fun main(args: Array<String>) {
             }
         }
 
+        logger.info { "The response has been received, the correctness check begins" }
         // проверка полученного ответа
-        validateResponse(response, configuration.maxLength)
+        validateResponse(response, graph, configuration.maxLength)
 
         // запись результата
         FileHelper().writeTo(resultFilepath, JSONHelper().getInstance().encodeToString(response))
@@ -81,8 +81,13 @@ fun main(args: Array<String>) {
     }
 }
 
-private fun validateResponse(response: Response, maxLength: Double) {
-    require(response.length < maxLength) { "The length of the optimal path should not exceed the set value: $maxLength" }
+private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(response: Response, graph: G, maxLength: Double) {
+    require (response.length < maxLength) { "The length of the optimal path should not exceed the set value: $maxLength" }
+
+    val missedEdges = graph.edges.filter { !response.path.contains(it.id) }
+    require (missedEdges.isEmpty()) {
+        "Each edge should be included in the graph, but the next ${missedEdges.size} were not found: ${missedEdges.joinToString(", ") { it.id }}"
+    }
 }
 
 private fun launchAntColonyAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
@@ -93,11 +98,11 @@ private fun launchAntColonyAlgorithm(configuration: Configuration, graph: Double
         AntColonyAlgorithm().start(graph, configuration.antColony)
     }
 
-    val length = graph.calculateTotalLengthOf(result.toTypedArray())
+    val length = graph.calculateTotalLengthOf(result)
     return Response(result.map { it.id }, length, duration.inWholeMilliseconds)
 }
 
-private fun launchGeneticAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
+private suspend fun launchGeneticAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
     if (configuration.genetic == null) {
         throw Exception("A genetic algorithm was selected, but the configuration for it was not transmitted")
     }
