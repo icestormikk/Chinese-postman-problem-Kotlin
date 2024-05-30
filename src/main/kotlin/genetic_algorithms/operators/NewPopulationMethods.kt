@@ -27,7 +27,7 @@ object NewPopulationMethods {
             else ceil(population.entities.size * truncationPercent).toInt()
         val truncatedEntities = population.entities
             .sortedByDescending(onFitness)
-            .slice(0..truncationEntitiesCount)
+            .slice(0 until truncationEntitiesCount)
 
         return Population(
             MutableList(population.entities.size) { truncatedEntities.random() }
