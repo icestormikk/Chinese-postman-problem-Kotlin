@@ -13,6 +13,7 @@ object RecombinationMethods {
     enum class Types {
         DISCRETE,
         CHROMOSOME_CROSSOVER,
+        HUX_CROSSOVER,
         TWO_POINT_CROSSOVER,
         SINGLE_POINT_CROSSOVER,
         SHUFFLE

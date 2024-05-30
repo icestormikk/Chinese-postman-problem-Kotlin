@@ -2,6 +2,8 @@ package genetic_algorithms.operators
 
 import genetic_algorithms.Chromosome
 import genetic_algorithms.Population
+import utils.constants.WORST_SOLUTION_FITNESS_VALUE
+import kotlin.math.abs
 
 /**
  * Набор алгоритмов для создания промежуточной популяции
@@ -60,18 +62,19 @@ object SelectionMethods {
     fun <T> rouletteWheelSelection(
         population: Population<T>, onFitness: (chromosome: Chromosome<T>) -> Double
     ): Population<T> {
+        val suitableEntities = population.entities.filter { onFitness(it) != WORST_SOLUTION_FITNESS_VALUE }
         // Сумма значений пригодности всех особей в популяции
-        val fitnessSum = population.entities.sumOf(onFitness)
+        val fitnessSum = suitableEntities.sumOf { abs(onFitness(it)) }
         val newEntities = arrayListOf<Chromosome<T>>()
 
-        while (newEntities.size != population.entities.size) {
+        while (newEntities.size <= population.entities.size) {
             // выбираем случайное значение на рулетке
             val randomRouletteValue = getRandomBetween(0.0, fitnessSum)
             var sum = 0.0
 
             // смотрим, на какую особь указывает это значение и выбираем её в промежуточную популяцию
-            for (entity in population.entities) {
-                sum += onFitness(entity)
+            for (entity in suitableEntities) {
+                sum += abs(onFitness(entity))
                 if (sum >= randomRouletteValue) {
                     newEntities.add(entity)
                     break

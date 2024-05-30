@@ -4,4 +4,6 @@ import common.Identifiable
 
 data class Chromosome<T>(
     val genes: MutableList<T>,
-) : Identifiable()
+) : Identifiable() {
+    var fitness: Double? = null
+}

@@ -35,6 +35,11 @@ data class Ant(val id: String) {
         fun getNextEdge(currentNode: Node): PheromoneEdge<Double> {
             // получение списка всех возможных рёбер
             val suitableEdges = graph.getEdgesFrom(currentNode)
+            val notVisitedSuitableEdges = suitableEdges.filter { !visitedEdgeIds.contains(it.id) }
+
+            if (notVisitedSuitableEdges.isNotEmpty()) {
+                return notVisitedSuitableEdges.random()
+            }
 
             // общее желание муравья
             val totalDesire = suitableEdges.sumOf { it.pheromoneCount.pow(alpha) * (proximityCoefficient / it.weight).pow(beta) }

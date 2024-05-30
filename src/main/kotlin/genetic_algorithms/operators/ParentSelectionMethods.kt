@@ -41,7 +41,7 @@ object ParentSelectionMethods {
             .filter { it.id != first.id }
             .sortedBy { onDistance(first, it) } // сортировка идёт по возрастанию
 
-        return Pair(first, sortedByDistance[0])
+        return Pair(first, sortedByDistance.getOrElse(0) { first })
     }
 
     /**
@@ -58,6 +58,6 @@ object ParentSelectionMethods {
             .filter { it.id != first.id }
             .sortedByDescending { onDistance(first, it) } // сортировка идёт по убыванию
 
-        return Pair(first, sortedByDistance[0])
+        return Pair(first, sortedByDistance.getOrElse(0) { first })
     }
 }

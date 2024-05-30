@@ -45,7 +45,11 @@ suspend fun main(args: Array<String>) {
         }!!
         // Преобразуем GraphDao в класс Graph
         val graph = graphDao.toDoubleGraph()
-        logger.info { "A graph with ${graph.nodes.size} vertices and ${graph.edges.size} edges has been read" }
+        logger.info {
+            "A graph with ${graph.nodes.size} vertices and ${graph.edges.size}(" +
+                    "${graph.edges.filter{ it.type == EdgeType.DIRECTED }.size} directed and " +
+                    "${graph.edges.filter{ it.type == EdgeType.NOT_ORIENTED }.size} not oriented) edges has been read"
+        }
 
         // Считываем начальные значения параметров алгоритма
         val configuration = CommandLineHelper().fetchArgument(arguments, CONFIGURATION_FILE_ARGUMENT, true) {
@@ -90,7 +94,7 @@ private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(response: Response,
     }
 }
 
-private fun launchAntColonyAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
+private suspend fun launchAntColonyAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
     if (configuration.antColony == null) {
         throw Exception("The ant colony method was selected, but the configuration for it was not transmitted")
     }
@@ -108,11 +112,18 @@ private suspend fun launchGeneticAlgorithm(configuration: Configuration, graph: 
     }
 
     fun onFitness(chromosome: Chromosome<Edge<Double>>): Double {
-        if (!graph.edges.all { edge -> chromosome.genes.find { gene -> gene.id == edge.id } != null }) {
-            return WORST_SOLUTION_FITNESS_VALUE
+        if (chromosome.fitness != null)
+            return chromosome.fitness!!
+
+        val fitness = if (!graph.edges.all { edge -> chromosome.genes.find { gene -> gene.id == edge.id } != null }) {
+            WORST_SOLUTION_FITNESS_VALUE
+        } else (-1) * graph.calculateTotalLengthOf(chromosome.genes)
+
+        if (chromosome.fitness == null) {
+            chromosome.fitness = fitness
         }
 
-        return (-1) * graph.calculateTotalLengthOf(chromosome.genes)
+        return fitness
     }
 
     fun onDistance(ch: Chromosome<Edge<Double>>, ch2: Chromosome<Edge<Double>>): Double {

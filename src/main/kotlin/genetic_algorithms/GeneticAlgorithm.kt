@@ -155,22 +155,21 @@ class GeneticAlgorithm {
         selectedParents
     } else {
         when (recombinationConf.type) {
+            RecombinationMethods.Types.HUX_CROSSOVER -> {
+                RecombinationMethods.huxCrossover(selectedParents.first, selectedParents.second)
+            }
             RecombinationMethods.Types.CHROMOSOME_CROSSOVER -> {
                 RecombinationMethods.chromosomeCrossover(selectedParents.first, selectedParents.second, graph, startNode)
             }
-
             RecombinationMethods.Types.DISCRETE -> {
                 RecombinationMethods.discreteRecombination(selectedParents.first, selectedParents.second)
             }
-
             RecombinationMethods.Types.TWO_POINT_CROSSOVER -> {
                 RecombinationMethods.twoPointCrossover(selectedParents.first, selectedParents.second)
             }
-
             RecombinationMethods.Types.SINGLE_POINT_CROSSOVER -> {
                 RecombinationMethods.singlePointCrossover(selectedParents.first, selectedParents.second)
             }
-
             RecombinationMethods.Types.SHUFFLE -> {
                 RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
             }
@@ -191,13 +190,14 @@ class GeneticAlgorithm {
                     MutationMethods.Types.REPLACING -> {
                         MutationMethods.replacingMutation(it, graph.edges)
                     }
-
                     MutationMethods.Types.SWAPPING -> {
                         MutationMethods.swappingMutation(it)
                     }
-
                     MutationMethods.Types.EDGE_REPLACING -> {
                         MutationMethods.edgeReplacingMutation(it, graph)
+                    }
+                    MutationMethods.Types.CATACLYSMIC -> {
+                        MutationMethods.cataclysmicMutation(it, graph.edges)
                     }
                 }
             }
@@ -212,8 +212,8 @@ class GeneticAlgorithm {
         populationSize: Int, startNode: Node, graph: G
     ): MutableList<Population<E>> {
         val entitiesByCoroutine = when (populationSize) {
-            in 0..1000 -> 50
-            else -> 1000
+            in 0..1000 -> populationSize / 10
+            else -> populationSize / 100
         }
 
         val populations = mutableListOf<Population<E>>()
