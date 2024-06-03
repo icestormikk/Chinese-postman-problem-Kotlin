@@ -1,6 +1,6 @@
 package genetic_algorithms.operators
 
-import genetic_algorithms.Chromosome
+import genetic_algorithms.entities.base.Chromosome
 import graph.Edge
 import graph.Graph
 import kotlin.random.Random
@@ -22,9 +22,15 @@ object MutationMethods {
         val index = if (chromosome.genes.size == 3) 1 else Random.nextInt(1, chromosome.genes.size - 2)
         val commonNodeStart = graph.getCommonNode(chromosome.genes[index - 1], chromosome.genes[index]) ?: return
         val commonNodeEnd = graph.getCommonNode(chromosome.genes[index], chromosome.genes[index + 1]) ?: return
-        val newEdge = graph.getEdgesFromTo(commonNodeStart, commonNodeEnd)
 
-        chromosome.genes[index] = newEdge.firstOrNull { it.id != chromosome.genes[index].id } ?: return
+        if (commonNodeStart == commonNodeEnd) return
+
+        val newEdgeVariants = graph.getEdgesFromTo(commonNodeStart, commonNodeEnd)
+        val newEdge = newEdgeVariants.firstOrNull { it.id != chromosome.genes[index].id }
+
+        if (newEdge != null) {
+            chromosome.genes[index] = newEdge
+        }
     }
 
     // Случайным образом из набора возможных выбирается случайное значение, и встаёт на место случайного гена
@@ -55,10 +61,10 @@ object MutationMethods {
         }
     }
 
-    fun <T> cataclysmicMutation(chromosome: Chromosome<T>, possibleValues: List<T>) {
+    fun <T, E: Edge<T>> cataclysmicMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
         chromosome.fitness = null
         repeat(chromosome.genes.size / 2) {
-            replacingMutation(chromosome, possibleValues)
+            edgeReplacingMutation(chromosome, graph)
         }
     }
 }

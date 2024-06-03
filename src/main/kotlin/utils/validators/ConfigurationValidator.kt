@@ -3,7 +3,7 @@ package utils.validators
 import ant_colony.AntColonyAlgorithmConfiguration
 import common.AlgorithmType
 import common.Configuration
-import genetic_algorithms.GeneticAlgorithmConfiguration
+import genetic_algorithms.algorithm.GeneticAlgorithmConfiguration
 import graph.Edge
 import graph.Graph
 import utils.helpers.LoggingHelper

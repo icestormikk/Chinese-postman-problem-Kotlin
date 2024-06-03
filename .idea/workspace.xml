@@ -4,18 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Update">
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Маленькое исправление">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/entities/base/Chromosome.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/entities/base/Population.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/Ant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/Ant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithmConfiguration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmConfiguration.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,10 +69,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Enum" />
-        <option value="Kotlin Object" />
-        <option value="Kotlin Data Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Data Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -94,46 +101,47 @@
 }</component>
   <component name="ProjectId" id="2ejc5xgAV9cYr2jLznjwgQ56KPe" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build chinese_postman_problem.executor": "Run",
-    "Gradle.chinese_postman_problem [fatJar].executor": "Run",
-    "Gradle.chinese_postman_problem [jar].executor": "Run",
-    "Kotlin.MainKt AntColony.executor": "Run",
-    "Kotlin.MainKt CHC.executor": "Run",
-    "Kotlin.MainKt Classic.executor": "Run",
-    "Kotlin.MainKt Genitor.executor": "Run",
-    "Kotlin.MainKt.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/jigal/IdeaProjects/chinese_postman_problem",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build chinese_postman_problem.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.chinese_postman_problem [fatJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.chinese_postman_problem [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt AntColony.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt CHC.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt Classic.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt Genitor.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jigal/IdeaProjects/chinese_postman_problem&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "kotlin-gradle-user-dirs": [
-      "C:\\Users\\jigal\\.gradle"
+  &quot;keyToStringList&quot;: {
+    &quot;kotlin-gradle-user-dirs&quot;: [
+      &quot;C:\\Users\\jigal\\.gradle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem\src\main\kotlin\genetic_algorithms\algorithm" />
       <recent name="C:\Users\jigal\IdeaProjects\chinese_postman_problem\src\main\kotlin\utils\constants" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="common.configuration" />
+      <recent name="common.response" />
+      <recent name="genetic_algorithms.entities.base" />
       <recent name="graph" />
       <recent name="particles_swarm" />
-      <recent name="genetic_algorithms" />
-      <recent name="utils.serializers" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -141,13 +149,13 @@
       <command value="me" />
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.MainKt AntColony">
+  <component name="RunManager" selected="Kotlin.MainKt Genitor">
     <configuration name="chinese_postman_problem [fatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -219,7 +227,7 @@
     <configuration name="MainKt Genitor" type="JetRunConfigurationType" singleton="false">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-genitor.json --graph .\graph_40_no.json --output .\result.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-genitor.json --graph .\graph_10.json --output .\result.json" />
       <shortenClasspath name="NONE" />
       <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss6M" />
       <method v="2">
@@ -236,8 +244,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.MainKt Classic" />
         <item itemvalue="Gradle.chinese_postman_problem [fatJar]" />
+        <item itemvalue="Kotlin.MainKt Classic" />
         <item itemvalue="Gradle.chinese_postman_problem [jar]" />
       </list>
     </recent_temporary>
@@ -250,30 +258,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00109" summary="Добавил класс конфигурации для муравьиного алгоритма">
-      <option name="closed" value="true" />
-      <created>1716049221781</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1716049221781</updated>
-    </task>
-    <task id="LOCAL-00110" summary="Добавил проверку поля с процентом остающихся на ребре феромонов">
-      <option name="closed" value="true" />
-      <created>1716049309519</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1716049309521</updated>
-    </task>
-    <task id="LOCAL-00111" summary="Добавил версию графа и ребёр для алгоритма муравьиной колонии">
-      <option name="closed" value="true" />
-      <created>1716049347460</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1716049347460</updated>
     </task>
     <task id="LOCAL-00112" summary="Добавил возможность запуска алгоритма имитации муравьиной колонии">
       <option name="closed" value="true" />
@@ -643,7 +627,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716924361322</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="В каждом месте всего понемножку">
+      <option name="closed" value="true" />
+      <created>1717063840917</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1717063840923</updated>
+    </task>
+    <task id="LOCAL-00159" summary="Обновил версию приложения до 1.4.1-SNAPSHOT">
+      <option name="closed" value="true" />
+      <created>1717063911204</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1717063911204</updated>
+    </task>
+    <task id="LOCAL-00160" summary="Маленькое исправление">
+      <option name="closed" value="true" />
+      <created>1717064823829</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1717064823830</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -668,9 +676,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Удалил лишнюю строку из документации" />
-    <MESSAGE value="Добавил документацию к классам" />
-    <MESSAGE value="Исправил механизм испарения феромонов" />
     <MESSAGE value="Добавил поясняющие комментарии" />
     <MESSAGE value="Сделал сообщение об ошибке более информативным" />
     <MESSAGE value="Коэффициент близости вершин должен быть строго больше нуля" />
@@ -693,6 +698,9 @@
     <MESSAGE value="Добавил новую мутацию, которая ориентирована под графы" />
     <MESSAGE value="Обновил версию приложения до 1.3.7.1-SNAPSHOT" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="В каждом месте всего понемножку" />
+    <MESSAGE value="Обновил версию приложения до 1.4.1-SNAPSHOT" />
+    <MESSAGE value="Маленькое исправление" />
+    <option name="LAST_COMMIT_MESSAGE" value="Маленькое исправление" />
   </component>
 </project>

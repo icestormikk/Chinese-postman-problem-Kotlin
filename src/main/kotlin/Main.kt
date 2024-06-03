@@ -2,8 +2,8 @@ import ant_colony.AntColonyAlgorithm
 import common.AlgorithmType
 import common.Configuration
 import common.Response
-import genetic_algorithms.Chromosome
 import genetic_algorithms.GeneticAlgorithm
+import genetic_algorithms.entities.base.Chromosome
 import graph.*
 import kotlinx.serialization.encodeToString
 import utils.constants.*

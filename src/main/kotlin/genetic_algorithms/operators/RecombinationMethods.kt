@@ -1,6 +1,6 @@
 package genetic_algorithms.operators
 
-import genetic_algorithms.Chromosome
+import genetic_algorithms.entities.base.Chromosome
 import graph.Edge
 import graph.Graph
 import graph.Node
@@ -49,7 +49,9 @@ object RecombinationMethods {
             }
             val anotherEndFragment = graph.getPathBetween(endFrom, startNode)
 
-            return anotherStartFragment!! + childGenes.slice(start..end) + anotherEndFragment!!
+            return (anotherStartFragment ?: child1Genes.slice(0 until start)) +
+                        childGenes.slice(start..end) +
+                    (anotherEndFragment ?: childGenes.slice((end + 1) until childGenes.lastIndex))
         }
 
         val child1 = Chromosome(getFixedPath(child1Genes).toMutableList())

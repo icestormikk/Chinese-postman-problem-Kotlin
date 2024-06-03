@@ -21,15 +21,27 @@ abstract class Graph<T, E: Edge<T>>(
      */
     open fun getEdgesFrom(node: Node): List<E> {
         return edges.filter {
-            (it.type == EdgeType.DIRECTED && it.source.id == node.id) ||
-                    (it.type == EdgeType.NOT_ORIENTED && (it.source.id == node.id || it.destination.id == node.id))
+            when (it.type) {
+                EdgeType.DIRECTED -> {
+                    return@filter it.source.id == node.id
+                }
+                EdgeType.NOT_ORIENTED -> {
+                    return@filter it.source.id == node.id || it.destination.id == node.id
+                }
+            }
         }
     }
 
     open fun getEdgesFromTo(fromNode: Node, toNode: Node): List<E> {
         return edges.filter {
-            (it.type == EdgeType.DIRECTED && it.source.id == fromNode.id && it.destination.id == toNode.id) ||
-                    (it.type == EdgeType.NOT_ORIENTED && (listOf(fromNode, toNode).all { node -> listOf(it.source, it.destination).contains(node) }))
+            when (it.type) {
+                EdgeType.NOT_ORIENTED -> {
+                    return@filter listOf(fromNode, toNode).all { node -> listOf(it.source, it.destination).contains(node) }
+                }
+                EdgeType.DIRECTED -> {
+                    return@filter it.source.id == fromNode.id && it.destination.id == toNode.id
+                }
+            }
         }
     }
 
@@ -118,9 +130,34 @@ abstract class Graph<T, E: Edge<T>>(
     }
 
     fun getCommonNode(startEdge: E, endEdge: E): Node? {
-        return setOf(startEdge.source, startEdge.destination)
-            .intersect(setOf(endEdge.source, endEdge.destination))
-            .firstOrNull()
+        return when (startEdge.type) {
+            EdgeType.NOT_ORIENTED -> {
+                when (endEdge.type) {
+                    EdgeType.NOT_ORIENTED -> {
+                        setOf(startEdge.source, startEdge.destination)
+                            .intersect(setOf(endEdge.source, endEdge.destination))
+                            .firstOrNull()
+                    }
+                    EdgeType.DIRECTED -> {
+                        setOf(startEdge.source, startEdge.destination)
+                            .intersect(setOf(endEdge.source))
+                            .firstOrNull()
+                    }
+                }
+            }
+            EdgeType.DIRECTED -> {
+                when (endEdge.type) {
+                    EdgeType.NOT_ORIENTED -> {
+                        setOf(startEdge.source)
+                            .intersect(setOf(endEdge.source, endEdge.destination))
+                            .firstOrNull()
+                    }
+                    EdgeType.DIRECTED -> {
+                        startEdge.destination
+                    }
+                }
+            }
+        }
     }
 
     fun pathToString(path: List<E>, separator: String = ", "): String =

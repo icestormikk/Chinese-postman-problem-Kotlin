@@ -1,7 +1,7 @@
 package common
 
 import ant_colony.AntColonyAlgorithmConfiguration
-import genetic_algorithms.GeneticAlgorithmConfiguration
+import genetic_algorithms.algorithm.GeneticAlgorithmConfiguration
 import kotlinx.serialization.Serializable
 
 /**
@@ -16,8 +16,6 @@ data class Configuration(
     val type: AlgorithmType,
     val maxLength: Double,
     val genetic: GeneticAlgorithmConfiguration? = null,
-//    val particleSwarm: ParticlesSwarmConfiguration? = null,
-//    val annealing: SimulatedAnnealingConfiguration? = null,
     val antColony: AntColonyAlgorithmConfiguration? = null
 )
 

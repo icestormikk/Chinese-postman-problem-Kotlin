@@ -1,4 +1,4 @@
-package genetic_algorithms
+package genetic_algorithms.algorithm
 
 import genetic_algorithms.operators.*
 import kotlinx.serialization.Serializable

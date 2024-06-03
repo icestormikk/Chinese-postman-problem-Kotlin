@@ -1,7 +1,7 @@
 package genetic_algorithms.operators
 
-import genetic_algorithms.Chromosome
-import genetic_algorithms.Population
+import genetic_algorithms.entities.base.Chromosome
+import genetic_algorithms.entities.base.Population
 
 /**
  * Набор алгоритмов для отбора родителей
