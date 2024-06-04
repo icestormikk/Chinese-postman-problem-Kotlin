@@ -138,6 +138,10 @@ object RecombinationMethods {
         val child2 = Chromosome(parent2.genes)
         val pointsSet = setOf(points?.first ?: suitableIndexes.random(), points?.second ?: suitableIndexes.random())
 
+        if (pointsSet.size == 1) {
+            return singlePointCrossover(parent1, parent2, pointsSet.elementAt(0))
+        }
+
         for (index in pointsSet.elementAt(0)..pointsSet.elementAt(1)) {
             child1.genes[index] = parent2.genes[index]
             child2.genes[index] = parent1.genes[index]

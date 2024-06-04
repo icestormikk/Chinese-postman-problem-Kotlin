@@ -26,6 +26,7 @@ class GeneticAlgorithm {
         onDistance: (Chromosome<E>, Chromosome<E>) -> Double,
         // класс с начальными параметрами алгоритма
         configuration: GeneticAlgorithmConfiguration,
+        // начальная вершина
         startNode: Node
     ): MutableList<E> {
         logger.info { "Obtaining the parameters of the genetic algorithm" }
@@ -35,15 +36,20 @@ class GeneticAlgorithm {
         // находим начальную вершину (если вершина не определена пользователем, то берётся случайная вершина)
         logger.info { "Starting vertex selection: (${startNode.id}, ${startNode.label})" }
 
+        // делим популяцию на подпопуляции
         val populations = GeneticAlgorithmHelpers.Populations.generatePopulations(populationSize, startNode, graph)
         logger.info { "A ${populations.size} populations have been created (${populations[0].entities.size} entities in each)" }
 
+        // задаём начальные значения для лучшего пути и его длины
         logger.info { "Launching the genetic algorithm (${iterationCount} iteration(s))" }
         var bestFitness = Double.NEGATIVE_INFINITY
         var bestChromosome: Chromosome<E>? = null
 
+        // пока не достигнуто максимальное количество итераций (ISOLATION_ITERATION_COUNT - время изоляции)
         for (iteration in 0 until iterationCount step ISOLATION_ITERATION_COUNT) {
+            // для каждой из подпопуляций
             val jobs = populations.mapIndexed { index, population ->
+                // запускаем свой поток (корутину)
                 CoroutineScope(Dispatchers.Default).launch {
                     for (i in iteration until iteration + ISOLATION_ITERATION_COUNT) {
                         // формируем промежуточную популяцию
@@ -65,7 +71,7 @@ class GeneticAlgorithm {
             }
             jobs.joinAll()
 
-            // миграция
+            // функция для обновления лучшего пути
             @Synchronized fun updateBestPath(currentPath: Chromosome<E>) {
                 val fitness = onFitness(currentPath)
 
@@ -75,6 +81,7 @@ class GeneticAlgorithm {
                 }
             }
 
+            // миграция
             val lastPopulationBest = populations.last().entities[0].copy()
             for (populationIndex in 0 until populations.size - 1) {
                 val bestInPopulation = populations[populationIndex].entities[0]

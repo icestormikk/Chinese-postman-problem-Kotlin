@@ -129,6 +129,12 @@ abstract class Graph<T, E: Edge<T>>(
         return null
     }
 
+    /**
+     * Функция для получения общей вершины между двух рёбер
+     * @param startEdge Первое ребро
+     * @param endEdge Второе ребро
+     * @return Общая для двух вышеуказанных рёбер вершина (если имеется)
+     */
     fun getCommonNode(startEdge: E, endEdge: E): Node? {
         return when (startEdge.type) {
             EdgeType.NOT_ORIENTED -> {
@@ -166,7 +172,8 @@ abstract class Graph<T, E: Edge<T>>(
     fun pathToNodeString(path: List<E>, startNode: Node): String {
         val nodes = mutableListOf(startNode)
         for (i in 0 until path.size - 1) {
-            val commonNode = getCommonNode(path[i], path[i+1]) ?: return ""
+            val commonNode = getCommonNode(path[i], path[i+1])
+                ?: throw IllegalStateException("Can't find a common node for: ${pathToString(path.slice(i..i+1))}")
             nodes.add(commonNode)
         }
         nodes.add(startNode)

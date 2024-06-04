@@ -89,12 +89,29 @@ class AntColonyAlgorithm {
             // феромоны на путях испаряются
             phGraph.edges.forEach { it.pheromoneCount *= remainingPheromoneRate }
 
+            // вычисляем количество муравьёв для каждой из корутин (для каждого потока)
             val antsByCoroutine = when (antCount) {
                 in 0..100 -> antCount / 10
                 in 101..1000 -> antCount / 100
                 else -> antCount / 500
             }
 
+            @Synchronized fun updateBestPath(path: MutableList<PheromoneEdge<Double>>, length: Double) {
+                if (length < bestLength) {
+                    logger.info { "The minimum path has been updated!\tIteration number: $iteration, length: $length" }
+                    bestLength = length
+                    bestPath = path
+                }
+            }
+            @Synchronized fun updatePheromones(path: MutableList<PheromoneEdge<Double>>, length: Double) {
+                path.forEach { edge ->
+                    val indexInGraph = phGraph.edges.indexOfFirst { it.id == edge.id }
+                    val newPheromoneCount = q / length
+                    phGraph.edges[indexInGraph].pheromoneCount += newPheromoneCount
+                }
+            }
+
+            // запускаем поток для каждой из подгрупп муравьёв
             val jobs = List (antCount / antsByCoroutine) {
                 CoroutineScope(Dispatchers.Default).launch {
                     // для каждого муравья
@@ -104,20 +121,10 @@ class AntColonyAlgorithm {
                         val path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta)
                         // вычисляем его длину
                         val length = phGraph.calculateTotalLengthOf(path)
-
                         // сравниваем с лучшим путём и при необходимости обновляем его
-                        if (length < bestLength) {
-                            logger.info { "The minimum path has been updated!\tIteration number: $iteration, length: $length" }
-                            bestLength = length
-                            bestPath = path
-                        }
-
+                        updateBestPath(path, length)
                         // обновляем количество феромонов на пройденный ребёр (добавка)
-                        path.forEach { edge ->
-                            val indexInGraph = phGraph.edges.indexOfFirst { it.id == edge.id }
-                            val newPheromoneCount = q / length
-                            phGraph.edges[indexInGraph].pheromoneCount += newPheromoneCount
-                        }
+                        updatePheromones(path, length)
                     }
                 }
             }
@@ -125,9 +132,5 @@ class AntColonyAlgorithm {
         }
 
         return bestPath
-    }
-
-    private fun <T> Graph<T, Edge<T>>.getNodeById(id: String): Node? {
-        return nodes.find { it.id == id }
     }
 }
