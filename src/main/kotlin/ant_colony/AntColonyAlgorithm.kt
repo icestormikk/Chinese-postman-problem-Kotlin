@@ -64,18 +64,13 @@ class AntColonyAlgorithm {
 
     suspend fun start(
         graph: Graph<Double, Edge<Double>>,
-        configuration: AntColonyAlgorithmConfiguration
+        configuration: AntColonyAlgorithmConfiguration,
+        startNode: Node
     ): MutableList<PheromoneEdge<Double>> {
         // определяем начальные значения параметров
         val (
-            iterationCount, antCount, startPheromoneValue, proximityCoefficient, alpha, beta, remainingPheromoneRate, q, startNodeId
+            iterationCount, antCount, startPheromoneValue, proximityCoefficient, alpha, beta, remainingPheromoneRate, q
         ) = configuration
-        // определяем стартовую вершину
-        val startNode = if (startNodeId == null) {
-            graph.nodes.random()
-        } else {
-            graph.getNodeById(startNodeId) ?: graph.nodes.random()
-        }
 
         logger.info { "Adding pheromones on the edge of the graph (initial value: ${startPheromoneValue})" }
         // преобразуем исходный граф, полученный от пользователя в граф, содержащий феромоны

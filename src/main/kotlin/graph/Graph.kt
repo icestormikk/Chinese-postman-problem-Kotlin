@@ -148,7 +148,7 @@ abstract class Graph<T, E: Edge<T>>(
             EdgeType.DIRECTED -> {
                 when (endEdge.type) {
                     EdgeType.NOT_ORIENTED -> {
-                        setOf(startEdge.source)
+                        setOf(startEdge.destination)
                             .intersect(setOf(endEdge.source, endEdge.destination))
                             .firstOrNull()
                     }
@@ -162,4 +162,15 @@ abstract class Graph<T, E: Edge<T>>(
 
     fun pathToString(path: List<E>, separator: String = ", "): String =
         path.joinToString(separator) { "${it.source.label} -> ${it.destination.label}" }
+
+    fun pathToNodeString(path: List<E>, startNode: Node): String {
+        val nodes = mutableListOf(startNode)
+        for (i in 0 until path.size - 1) {
+            val commonNode = getCommonNode(path[i], path[i+1]) ?: return ""
+            nodes.add(commonNode)
+        }
+        nodes.add(startNode)
+
+        return nodes.joinToString("->") { it.label }
+    }
 }

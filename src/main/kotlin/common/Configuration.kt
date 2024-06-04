@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
  * Класс для хранения полученных от пользотеля данных о желаемом алгоритме и его начальных значениях
  * @property type Тип алгоритма, по которому будет рассчитываться оптимальный путь
  * @property maxLength Максимальная длина искомого пути
+ * @property startNodeId Идентификатор начальной вершины
  * @property genetic Конфигурация для генетического алгоритма
  * @property antColony Конфигурация для метода имитации муравьиной колонии
  */
@@ -15,6 +16,7 @@ import kotlinx.serialization.Serializable
 data class Configuration(
     val type: AlgorithmType,
     val maxLength: Double,
+    val startNodeId: String? = null,
     val genetic: GeneticAlgorithmConfiguration? = null,
     val antColony: AntColonyAlgorithmConfiguration? = null
 )

@@ -5,6 +5,7 @@ import genetic_algorithms.algorithm.GeneticAlgorithmHelpers
 import genetic_algorithms.entities.base.Chromosome
 import graph.Edge
 import graph.Graph
+import graph.Node
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.joinAll
@@ -25,17 +26,13 @@ class GeneticAlgorithm {
         onDistance: (Chromosome<E>, Chromosome<E>) -> Double,
         // класс с начальными параметрами алгоритма
         configuration: GeneticAlgorithmConfiguration,
+        startNode: Node
     ): MutableList<E> {
         logger.info { "Obtaining the parameters of the genetic algorithm" }
         // получаем все необходимые для запуска алгоритма параметры
-        val (iterationCount, populationSize, startNodeId, parentsConf, recombinationConf, mutation, newPopulationConf) = configuration
+        val (iterationCount, populationSize, parentsConf, recombinationConf, mutation, newPopulationConf) = configuration
 
         // находим начальную вершину (если вершина не определена пользователем, то берётся случайная вершина)
-        val startNode = if (startNodeId == null) {
-            graph.nodes.random()
-        } else {
-            GeneticAlgorithmHelpers.Common.getNodeById(startNodeId, graph) ?: graph.nodes.random()
-        }
         logger.info { "Starting vertex selection: (${startNode.id}, ${startNode.label})" }
 
         val populations = GeneticAlgorithmHelpers.Populations.generatePopulations(populationSize, startNode, graph)

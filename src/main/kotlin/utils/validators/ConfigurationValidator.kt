@@ -12,6 +12,13 @@ class ConfigurationValidator {
     private val logger = LoggingHelper().getLogger(ConfigurationValidator::class.simpleName.toString())
 
     fun <T> validateConfiguration(configuration: Configuration, graph: Graph<T, Edge<T>>) {
+
+        if (configuration.startNodeId != null) {
+            require(graph.nodes.any { it.id == configuration.startNodeId }) {
+                "The vertex with the id ${configuration.startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
+            }
+        }
+
         when (configuration.type) {
             AlgorithmType.GENETIC -> {
                 requireNotNull (configuration.genetic) {
@@ -66,11 +73,6 @@ class ConfigurationValidator {
             require(populationSize > 0) { "The size of the created populations must be strictly greater than zero" }
             require(recombination.rate >= 0.0) { "The probability of recombination must be greater than zero" }
             require(mutation.rate >= 0.0) { "The probability of mutation must be greater than zero" }
-            if (startNodeId != null) {
-                require(graph.nodes.any { it.id == startNodeId }) {
-                    "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
-                }
-            }
         }
     }
 
@@ -99,11 +101,6 @@ class ConfigurationValidator {
             require (proximityCoefficient > 0) { "The proximity coefficient must be strictly positive" }
             require (startPheromoneValue >= 0) { "The initial amount of pheromones on the branches should not be negative" }
             require (remainingPheromoneRate in 0.0..<1.0) { "The percentage of pheromone evaporation should be in the range [0, 1)" }
-            if (startNodeId != null) {
-                require(graph.nodes.any { it.id == startNodeId }) {
-                    "The vertex with the id ${startNodeId}, which was planned as the starting vertex, was not found in the transmitted graph"
-                }
-            }
         }
     }
 }

@@ -19,7 +19,5 @@ data class AntColonyAlgorithmConfiguration(
     // какой процент феромонов останется на грани после очередной итерации
     val remainingPheromoneRate: Double,
     // коэффициент Q (участвует в расчёте нового количества феромонов на путях)
-    val q: Double,
-    // Начальная вершина
-    val startNodeId: String? = null
+    val q: Double
 )

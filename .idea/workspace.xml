@@ -4,23 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Маленькое исправление">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/entities/base/Chromosome.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/entities/base/Population.kt" afterDir="false" />
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Там добавил, сям добавил">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/AlgorithmType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithmConfiguration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithmConfiguration.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/common/Configuration.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Chromosome.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithmConfiguration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmConfiguration.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/Population.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/ParentSelectionMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/SelectionMethods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmConfiguration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmConfiguration.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" afterDir="false" />
     </list>
@@ -197,7 +190,7 @@
     <configuration name="MainKt AntColony" type="JetRunConfigurationType" singleton="false">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-antcolony.json --graph .\graph_40_no.json --output .\result.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-antcolony.json --graph .\graph_20_more_oriented.json --output .\result.json" />
       <shortenClasspath name="NONE" />
       <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss6M" />
       <method v="2">
@@ -207,7 +200,7 @@
     <configuration name="MainKt CHC" type="JetRunConfigurationType" singleton="false">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-chc.json --graph .\graph_40_no.json --output .\result.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-chc.json --graph .\graph_20_more_oriented.json --output .\result.json" />
       <shortenClasspath name="NONE" />
       <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss6M" />
       <method v="2">
@@ -217,7 +210,7 @@
     <configuration name="MainKt Classic" type="JetRunConfigurationType" singleton="false" temporary="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-classic.json --graph .\graph_40_no.json --output .\result.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-classic.json --graph .\graph_20_02.json --output .\result.json" />
       <shortenClasspath name="NONE" />
       <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss6M" />
       <method v="2">
@@ -227,7 +220,7 @@
     <configuration name="MainKt Genitor" type="JetRunConfigurationType" singleton="false">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="chinese_postman_problem.main" />
-      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-genitor.json --graph .\graph_10.json --output .\result.json" />
+      <option name="PROGRAM_PARAMETERS" value="--config .\configuration-genetic-genitor.json --graph .\graph_20.json --output .\result.json" />
       <shortenClasspath name="NONE" />
       <option name="VM_PARAMETERS" value="-Dlogfile-path=commandline-log.log -Xms2g -Xmx4g -Xss6M" />
       <method v="2">
@@ -258,14 +251,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00112" summary="Добавил возможность запуска алгоритма имитации муравьиной колонии">
-      <option name="closed" value="true" />
-      <created>1716050652978</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1716050652979</updated>
     </task>
     <task id="LOCAL-00113" summary="Обновил версию программы до 1.3-SNAPSHOT">
       <option name="closed" value="true" />
@@ -651,7 +636,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717064823830</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="Там добавил, сям добавил">
+      <option name="closed" value="true" />
+      <created>1717439714666</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1717439714669</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -676,7 +669,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Добавил поясняющие комментарии" />
     <MESSAGE value="Сделал сообщение об ошибке более информативным" />
     <MESSAGE value="Коэффициент близости вершин должен быть строго больше нуля" />
     <MESSAGE value="Добавил параметр, отвечающий за вероятность проведения кроссинговера" />
@@ -701,6 +693,7 @@
     <MESSAGE value="В каждом месте всего понемножку" />
     <MESSAGE value="Обновил версию приложения до 1.4.1-SNAPSHOT" />
     <MESSAGE value="Маленькое исправление" />
-    <option name="LAST_COMMIT_MESSAGE" value="Маленькое исправление" />
+    <MESSAGE value="Там добавил, сям добавил" />
+    <option name="LAST_COMMIT_MESSAGE" value="Там добавил, сям добавил" />
   </component>
 </project>

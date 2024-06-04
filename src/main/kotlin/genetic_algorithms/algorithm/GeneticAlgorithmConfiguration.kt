@@ -10,8 +10,6 @@ data class GeneticAlgorithmConfiguration(
     val iterationsCount: Int,
     // Размер популяции
     val populationSize: Int,
-    // Начальная вершина
-    val startNodeId: String? = null,
     // Настройки выбора родителей
     val parents: ParentsConfiguration,
     // Настройки для обмена генов

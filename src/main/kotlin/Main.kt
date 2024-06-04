@@ -3,6 +3,7 @@ import common.AlgorithmType
 import common.Configuration
 import common.Response
 import genetic_algorithms.GeneticAlgorithm
+import genetic_algorithms.algorithm.GeneticAlgorithmHelpers
 import genetic_algorithms.entities.base.Chromosome
 import graph.*
 import kotlinx.serialization.encodeToString
@@ -61,21 +62,26 @@ suspend fun main(args: Array<String>) {
         // Считываем пользовательский путь к файлу с результатами
         val resultFilepath = CommandLineHelper().fetchArgument(arguments, RESULT_FILE_ARGUMENT, true) { it }!!
 
-        // Переменная для записи результата работы алгоритма
+        // Вычисляем начальную вершину
+        val startNode = if (configuration.startNodeId == null) {
+            graph.nodes.random()
+        } else {
+            GeneticAlgorithmHelpers.Common.getNodeById(configuration.startNodeId, graph) ?: graph.nodes.random()
+        }
+
         val response: Response = when (configuration.type) {
             // Генетический алгоритм
             AlgorithmType.GENETIC -> {
-                launchGeneticAlgorithm(configuration, graph)
+                launchGeneticAlgorithm(configuration, graph, startNode)
             }
             // Метод имитации муравьиной колонии
             AlgorithmType.ANT_COLONY -> {
-                launchAntColonyAlgorithm(configuration, graph)
+                launchAntColonyAlgorithm(configuration, graph, startNode)
             }
         }
-
         logger.info { "The response has been received, the correctness check begins" }
         // проверка полученного ответа
-        validateResponse(response, graph, configuration.maxLength)
+        validateResponse(response, graph, configuration.maxLength, startNode)
 
         // запись результата
         FileHelper().writeTo(resultFilepath, JSONHelper().getInstance().encodeToString(response))
@@ -85,28 +91,53 @@ suspend fun main(args: Array<String>) {
     }
 }
 
-private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(response: Response, graph: G, maxLength: Double) {
+private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(
+    response: Response,
+    graph: G,
+    maxLength: Double,
+    startNode: Node,
+) {
     require (response.length < maxLength) { "The length of the optimal path should not exceed the set value: $maxLength" }
 
     val missedEdges = graph.edges.filter { !response.path.contains(it.id) }
+
     require (missedEdges.isEmpty()) {
         "Each edge should be included in the graph, but the next ${missedEdges.size} were not found: ${missedEdges.joinToString(", ") { it.id }}"
     }
+
+
+    val firstEdge = graph.edges.first { it.id == response.path.first() }
+    require (firstEdge.source.id == startNode.id || firstEdge.destination.id == startNode.id) {
+        "The first edge in the path must contain the initial vertex"
+    }
+
+    val endEdge = graph.edges.first { it.id == response.path.last() }
+    require (endEdge.source.id == startNode.id || endEdge.destination.id == startNode.id) {
+        "The last edge in the path must contain the initial vertex"
+    }
 }
 
-private suspend fun launchAntColonyAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
+private suspend fun launchAntColonyAlgorithm(
+    configuration: Configuration,
+    graph: DoubleGraph,
+    startNode: Node
+): Response {
     if (configuration.antColony == null) {
         throw Exception("The ant colony method was selected, but the configuration for it was not transmitted")
     }
     val (result, duration) = measureTimedValue {
-        AntColonyAlgorithm().start(graph, configuration.antColony)
+        AntColonyAlgorithm().start(graph, configuration.antColony, startNode)
     }
 
     val length = graph.calculateTotalLengthOf(result)
     return Response(result.map { it.id }, length, duration.inWholeMilliseconds)
 }
 
-private suspend fun launchGeneticAlgorithm(configuration: Configuration, graph: DoubleGraph): Response {
+private suspend fun launchGeneticAlgorithm(
+    configuration: Configuration,
+    graph: DoubleGraph,
+    startNode: Node
+): Response {
     if (configuration.genetic == null) {
         throw Exception("A genetic algorithm was selected, but the configuration for it was not transmitted")
     }
@@ -132,7 +163,7 @@ private suspend fun launchGeneticAlgorithm(configuration: Configuration, graph: 
     }
 
     val (result, duration) = measureTimedValue {
-        GeneticAlgorithm().start(graph, ::onFitness, ::onDistance, configuration.genetic)
+        GeneticAlgorithm().start(graph, ::onFitness, ::onDistance, configuration.genetic, startNode)
     }
 
     val length = graph.calculateTotalLengthOf(result)
