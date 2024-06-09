@@ -34,11 +34,11 @@ data class Ant(val id: String) {
          */
         fun getNextEdge(currentNode: Node): PheromoneEdge<Double> {
             // получение списка всех возможных рёбер
-            val suitableEdges = graph.getEdgesFrom(currentNode)
+            var suitableEdges = graph.getEdgesFrom(currentNode)
             val notVisitedSuitableEdges = suitableEdges.filter { !visitedEdgeIds.contains(it.id) }
 
             if (notVisitedSuitableEdges.isNotEmpty()) {
-                return notVisitedSuitableEdges.random()
+                suitableEdges = notVisitedSuitableEdges
             }
 
             // общее желание муравья

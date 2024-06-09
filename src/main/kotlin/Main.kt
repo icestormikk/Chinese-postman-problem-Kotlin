@@ -80,9 +80,9 @@ suspend fun main(args: Array<String>) {
             }
         }
         logger.info { "The response has been received, the correctness check begins" }
+
         // проверка полученного ответа
         validateResponse(response, graph, configuration.maxLength, startNode)
-
         // запись результата
         FileHelper().writeTo(resultFilepath, JSONHelper().getInstance().encodeToString(response))
     } catch (e: Exception) {
@@ -115,6 +115,14 @@ private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(
     require (endEdge.source.id == startNode.id || endEdge.destination.id == startNode.id) {
         "The last edge in the path must contain the initial vertex"
     }
+
+    val pathToEdges = response.path.map { edgeId -> graph.edges.find { it.id == edgeId }!! }
+    try {
+        require(graph.pathToNodeString(pathToEdges, startNode) != "")
+    } catch (e: Exception) {
+        logger.error { "Invalid path (${e.message})" }
+        throw e
+    }
 }
 
 private suspend fun launchAntColonyAlgorithm(
@@ -142,13 +150,17 @@ private suspend fun launchGeneticAlgorithm(
         throw Exception("A genetic algorithm was selected, but the configuration for it was not transmitted")
     }
 
-    fun onFitness(chromosome: Chromosome<Edge<Double>>): Double {
+    fun onFitness(chromosome: Chromosome<Edge<Double>>, maxLength: Double): Double {
         if (chromosome.fitness != null)
             return chromosome.fitness!!
 
-        val fitness = if (!graph.edges.all { edge -> chromosome.genes.find { gene -> gene.id == edge.id } != null }) {
-            WORST_SOLUTION_FITNESS_VALUE
-        } else (-1) * graph.calculateTotalLengthOf(chromosome.genes)
+        val length = graph.calculateTotalLengthOf(chromosome.genes)
+        if (length > maxLength) {
+            return WORST_SOLUTION_FITNESS_VALUE
+        }
+
+        val allEdgesPassed = graph.edges.all { edge -> chromosome.genes.find { gene -> gene.id == edge.id } != null }
+        val fitness = if (!allEdgesPassed) WORST_SOLUTION_FITNESS_VALUE else (-1) * length
 
         if (chromosome.fitness == null) {
             chromosome.fitness = fitness
@@ -163,7 +175,7 @@ private suspend fun launchGeneticAlgorithm(
     }
 
     val (result, duration) = measureTimedValue {
-        GeneticAlgorithm().start(graph, ::onFitness, ::onDistance, configuration.genetic, startNode)
+        GeneticAlgorithm().start(graph, { chromosome -> onFitness(chromosome, configuration.maxLength) }, ::onDistance, configuration.genetic, startNode)
     }
 
     val length = graph.calculateTotalLengthOf(result)

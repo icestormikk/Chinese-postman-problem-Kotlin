@@ -28,7 +28,7 @@ class GeneticAlgorithm {
         configuration: GeneticAlgorithmConfiguration,
         // начальная вершина
         startNode: Node
-    ): MutableList<E> {
+    ): List<E> {
         logger.info { "Obtaining the parameters of the genetic algorithm" }
         // получаем все необходимые для запуска алгоритма параметры
         val (iterationCount, populationSize, parentsConf, recombinationConf, mutation, newPopulationConf) = configuration

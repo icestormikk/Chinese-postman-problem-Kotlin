@@ -103,17 +103,17 @@ object RecombinationMethods {
     fun <T> discreteRecombination(parent1: Chromosome<T>, parent2: Chromosome<T>): Pair<Chromosome<T>, Chromosome<T>> {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
-        val child1 = Chromosome(parent1.genes)
-        val child2 = Chromosome(parent2.genes)
+        val child1Genes = parent1.genes.toMutableList()
+        val child2Genes = parent2.genes.toMutableList()
 
         for (index in suitableIndexes) {
-            child1.genes[index] = if (Math.random() > 0.5) parent1.genes[index] else parent2.genes[index]
+            child1Genes[index] = if (Math.random() > 0.5) parent1.genes[index] else parent2.genes[index]
         }
         for (index in suitableIndexes) {
-            child2.genes[index] = if (Math.random() > 0.5) parent1.genes[index] else parent2.genes[index]
+            child2Genes[index] = if (Math.random() > 0.5) parent1.genes[index] else parent2.genes[index]
         }
 
-        return Pair(child1, child2)
+        return Pair(Chromosome(child1Genes), Chromosome(child2Genes))
     }
 
     /**
@@ -134,8 +134,8 @@ object RecombinationMethods {
             }
         }
 
-        val child1 = Chromosome(parent1.genes)
-        val child2 = Chromosome(parent2.genes)
+        val child1Genes = parent1.genes.toMutableList()
+        val child2Genes = parent2.genes.toMutableList()
         val pointsSet = setOf(points?.first ?: suitableIndexes.random(), points?.second ?: suitableIndexes.random())
 
         if (pointsSet.size == 1) {
@@ -143,11 +143,11 @@ object RecombinationMethods {
         }
 
         for (index in pointsSet.elementAt(0)..pointsSet.elementAt(1)) {
-            child1.genes[index] = parent2.genes[index]
-            child2.genes[index] = parent1.genes[index]
+            child1Genes[index] = parent2.genes[index]
+            child2Genes[index] = parent1.genes[index]
         }
 
-        return Pair(child1, child2)
+        return Pair(Chromosome(child1Genes), Chromosome(child2Genes))
     }
 
     /**
@@ -180,13 +180,18 @@ object RecombinationMethods {
         val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
 
         val shuffleBetween = { p1: Chromosome<T>, p2: Chromosome<T> ->
+            val p1Genes = p1.genes.toMutableList()
+            val p2Genes = p2.genes.toMutableList()
+
             for (index in suitableIndexes) {
                 if (Math.random() > 0.5) {
-                    val temp = p1.genes[index]
-                    p1.genes[index] = p2.genes[index]
-                    p2.genes[index] = temp
+                    val temp = p1Genes[index]
+                    p1Genes[index] = p2Genes[index]
+                    p2Genes[index] = temp
                 }
             }
+
+            p1.genes = p1Genes; p2.genes = p2Genes
         }
 
         shuffleBetween(parent1, parent2)
@@ -196,7 +201,7 @@ object RecombinationMethods {
         return children
     }
 
-    fun getSuitableGenesRange(firstGenes: List<*>, secondGenes: List<*>): IntRange {
+    private fun getSuitableGenesRange(firstGenes: List<*>, secondGenes: List<*>): IntRange {
         return 0..min(firstGenes.lastIndex, secondGenes.lastIndex)
     }
 }

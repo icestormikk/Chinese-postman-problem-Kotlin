@@ -17,28 +17,34 @@ object MutationMethods {
 
     fun <T, E: Edge<T>> edgeReplacingMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
         if (chromosome.genes.size <= 2) return
-        chromosome.fitness = null
 
-        val index = if (chromosome.genes.size == 3) 1 else Random.nextInt(1, chromosome.genes.size - 2)
-        val commonNodeStart = graph.getCommonNode(chromosome.genes[index - 1], chromosome.genes[index]) ?: return
-        val commonNodeEnd = graph.getCommonNode(chromosome.genes[index], chromosome.genes[index + 1]) ?: return
+        val newGenes = chromosome.genes.toMutableList()
+
+        val index = if (newGenes.size == 3) 1 else Random.nextInt(1, newGenes.size - 2)
+        val commonNodeStart = graph.getCommonNode(newGenes[index - 1], newGenes[index]) ?: return
+        val commonNodeEnd = graph.getCommonNode(newGenes[index], newGenes[index + 1]) ?: return
 
         if (commonNodeStart == commonNodeEnd) return
 
         val newEdgeVariants = graph.getEdgesFromTo(commonNodeStart, commonNodeEnd)
-        val newEdge = newEdgeVariants.firstOrNull { it.id != chromosome.genes[index].id }
+        val newEdge = newEdgeVariants.firstOrNull { it.id != newGenes[index].id }
 
         if (newEdge != null) {
-            chromosome.genes[index] = newEdge
+            newGenes[index] = newEdge
         }
+
+        chromosome.genes = newGenes
     }
 
     // Случайным образом из набора возможных выбирается случайное значение, и встаёт на место случайного гена
     fun <T> replacingMutation(chromosome: Chromosome<T>, possibleValues: List<T>) {
-        chromosome.fitness = null
+        val newGenes = chromosome.genes.toMutableList()
+
         val value = possibleValues.randomOrNull() ?: return
         val index = chromosome.genes.indices.random()
-        chromosome.genes.apply { this[index] = value }
+        newGenes.apply { this[index] = value }
+
+        chromosome.genes = newGenes
     }
 
     // Два случайных гена меняются местами
@@ -48,21 +54,20 @@ object MutationMethods {
                 return
             }
             chromosome.genes.size == 4 -> {
-                chromosome.fitness = null
-                chromosome.genes.reverse()
+                chromosome.genes = chromosome.genes.reversed()
             }
             else -> {
-                chromosome.fitness = null
-                with(chromosome) {
-                    val index = (2..<(genes.size - 2)).random()
-                    genes[index - 1] = genes[index + 1].also { genes[index + 1] = genes[index - 1] }
-                }
+                val newGenes = chromosome.genes.toMutableList()
+
+                val index = (2..<(newGenes.size - 2)).random()
+                newGenes[index - 1] = newGenes[index + 1].also { newGenes[index + 1] = newGenes[index - 1] }
+
+                chromosome.genes = newGenes
             }
         }
     }
 
     fun <T, E: Edge<T>> cataclysmicMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
-        chromosome.fitness = null
         repeat(chromosome.genes.size / 2) {
             edgeReplacingMutation(chromosome, graph)
         }

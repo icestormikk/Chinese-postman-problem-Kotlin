@@ -33,17 +33,17 @@ object GeneticAlgorithmHelpers {
             val entitiesByCoroutine = Common.getEntitiesCountForCoroutine(populationSize)
 
             val populations = mutableListOf<Population<E>>()
-            val randomSuitablePath = graph.getRandomPath(startNode)
+//            val randomSuitablePath = graph.getRandomPath(startNode)
 
             val jobs = List(populationSize / entitiesByCoroutine) {
                 CoroutineScope(Dispatchers.Default).launch {
                     val entities = mutableListOf<Chromosome<E>>()
                     for (i in 0 until entitiesByCoroutine) {
-                        val pathCopy = randomSuitablePath.toMutableList()
-                        val chromosome = Chromosome(pathCopy)
-
-                        MutationMethods.cataclysmicMutation(chromosome, graph)
-                        entities.add(chromosome)
+//                        val pathCopy = randomSuitablePath.toMutableList()
+//                        val chromosome = Chromosome(pathCopy)
+//
+//                        MutationMethods.cataclysmicMutation(chromosome, graph)
+                        entities.add(Chromosome(graph.getRandomPath(startNode)))
                     }
 
                     populations.add(Population(entities))

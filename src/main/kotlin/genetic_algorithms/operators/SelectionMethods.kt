@@ -4,6 +4,7 @@ import genetic_algorithms.entities.base.Chromosome
 import genetic_algorithms.entities.base.Population
 import utils.constants.WORST_SOLUTION_FITNESS_VALUE
 import kotlin.math.abs
+import kotlin.random.Random
 
 /**
  * Набор алгоритмов для создания промежуточной популяции
@@ -69,7 +70,7 @@ object SelectionMethods {
 
         while (newEntities.size <= population.entities.size) {
             // выбираем случайное значение на рулетке
-            val randomRouletteValue = getRandomBetween(0.0, fitnessSum)
+            val randomRouletteValue = Random.nextDouble(0.0, fitnessSum)
             var sum = 0.0
 
             // смотрим, на какую особь указывает это значение и выбираем её в промежуточную популяцию
@@ -84,6 +85,4 @@ object SelectionMethods {
 
         return Population(newEntities)
     }
-
-    private fun getRandomBetween(min: Double, max: Double) = min + Math.random() * (max - min)
 }

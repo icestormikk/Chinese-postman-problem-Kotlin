@@ -25,7 +25,7 @@ class ConfigurationValidator {
                     "A genetic algorithm was selected, but the configuration for it was not transmitted"
                 }
                 try {
-                    validateGeneticConfiguration(configuration.genetic, graph)
+                    validateGeneticConfiguration(configuration.genetic)
                 } catch (e: Exception) {
                     logger.error { e.message }
                     throw IllegalArgumentException("Error during configuration validation for the genetic algorithm (${e.message})")
@@ -58,7 +58,7 @@ class ConfigurationValidator {
                     "The ant colony method was selected, but the configuration for it was not transmitted"
                 }
                 try {
-                    validateAntColonyConfiguration(configuration.antColony, graph)
+                    validateAntColonyConfiguration(configuration.antColony)
                 } catch (e: Exception) {
                     logger.error { e.message }
                     throw IllegalArgumentException("Error during configuration validation for the any colony algorithm (${e.message})")
@@ -67,7 +67,7 @@ class ConfigurationValidator {
         }
     }
 
-    private fun <T> validateGeneticConfiguration(configuration: GeneticAlgorithmConfiguration, graph: Graph<T, Edge<T>>) {
+    private fun validateGeneticConfiguration(configuration: GeneticAlgorithmConfiguration) {
         with (configuration) {
             require (iterationsCount > 0) { "The number of iterations must be strictly positive" }
             require(populationSize > 0) { "The size of the created populations must be strictly greater than zero" }
@@ -94,7 +94,7 @@ class ConfigurationValidator {
 //        }
 //    }
 
-    private fun <T> validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration, graph: Graph<T, Edge<T>>) {
+    private fun validateAntColonyConfiguration(configuration: AntColonyAlgorithmConfiguration) {
         with (configuration) {
             require (iterationCount > 0) { "The number of iterations must be strictly positive" }
             require (antCount > 0) { "The number of ants must be strictly positive" }
