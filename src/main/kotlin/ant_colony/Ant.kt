@@ -2,6 +2,7 @@ package ant_colony
 
 import graph.Node
 import kotlin.math.pow
+import kotlin.random.Random
 
 /**
  * Класс для описания муравья
@@ -22,8 +23,9 @@ data class Ant(val id: String) {
         startNode: Node,
         proximityCoefficient: Double,
         alpha: Double,
-        beta: Double
-    ): MutableList<PheromoneEdge<Double>> {
+        beta: Double,
+        currentBestPathLength: Double
+    ): MutableList<PheromoneEdge<Double>>? {
         // Набор посещённых рёбер
         val visitedEdgeIds = mutableSetOf<String>()
 
@@ -45,8 +47,9 @@ data class Ant(val id: String) {
             val totalDesire = suitableEdges.sumOf { it.pheromoneCount.pow(alpha) * (proximityCoefficient / it.weight).pow(beta) }
 
             // случайное значение из промежутка от 0 до 1
-            val randomValue = Math.random()
+            val randomValue = Random.nextDouble(0.0, 1.0)
             var sum = 0.0
+
             for (edge in suitableEdges) {
                 // вычисляем желание муравья пройти по данной ветке
                 sum += (edge.pheromoneCount.pow(alpha) * (proximityCoefficient / edge.weight).pow(beta)) / totalDesire
@@ -57,22 +60,28 @@ data class Ant(val id: String) {
                 }
             }
 
+            return suitableEdges.random()
             // если из вершины не исходит ни одно ребро, то бросаем исключение
-            throw IllegalStateException("Suitable edges were not found (Node: ${currentNode.id}, ${currentNode.label})")
+//            throw IllegalStateException("Suitable edges were not found (Node: ${currentNode.id}, ${currentNode.label}, $sum, ${suitableEdges.map { it.pheromoneCount }}, $totalDesire, $randomValue)")
         }
 
         // путь муравья
         val path = mutableListOf<PheromoneEdge<Double>>()
+        var currentLength = 0.0
         // муравей начинает своё движение из стартовой вершины
         var currentNode = startNode
         // пока каждое из рёбер графа не будет посещено хотя бы один раз и муравей не вернётся в стартовую вершину
         while (!(visitedEdgeIds.size >= graph.edges.size && currentNode.id == startNode.id)) {
+            if (currentLength > currentBestPathLength) {
+                return null
+            }
             // получаем следующее ребро
             val nextEdge = getNextEdge(currentNode)
             // добавляем его в набор посещённых рёбер
             visitedEdgeIds.add(nextEdge.id)
             // добавляем это ребро в путь
             path.add(nextEdge)
+            currentLength += nextEdge.weight
             // обновляем текущую вершину муравья: записываем в неё вершину, до которой муравей может добраться, пройдя по выбранному ребру
             currentNode = if (nextEdge.destination.id == currentNode.id) nextEdge.source else nextEdge.destination
         }

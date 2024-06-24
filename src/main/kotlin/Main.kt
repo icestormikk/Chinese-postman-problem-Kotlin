@@ -134,7 +134,7 @@ private suspend fun launchAntColonyAlgorithm(
         throw Exception("The ant colony method was selected, but the configuration for it was not transmitted")
     }
     val (result, duration) = measureTimedValue {
-        AntColonyAlgorithm().start(graph, configuration.antColony, startNode)
+        AntColonyAlgorithm().start(graph, configuration.antColony)
     }
 
     val length = graph.calculateTotalLengthOf(result)

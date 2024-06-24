@@ -11,7 +11,7 @@ import utils.helpers.LoggingHelper
 class ConfigurationValidator {
     private val logger = LoggingHelper().getLogger(ConfigurationValidator::class.simpleName.toString())
 
-    fun <T> validateConfiguration(configuration: Configuration, graph: Graph<T, Edge<T>>) {
+    fun <T: Comparable<T>> validateConfiguration(configuration: Configuration, graph: Graph<T, Edge<T>>) {
 
         if (configuration.startNodeId != null) {
             require(graph.nodes.any { it.id == configuration.startNodeId }) {

@@ -14,7 +14,7 @@ import utils.helpers.LoggingHelper
  * @property graph Граф, на котором происходит решение задачи
  */
 @Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
-abstract class Swarm<T>(
+abstract class Swarm<T: Comparable<T>>(
     open val size: Int,
     open val currentVelocityRatio: Double,
     open val localVelocityRatio: Double,

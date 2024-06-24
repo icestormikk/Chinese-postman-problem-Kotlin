@@ -16,7 +16,22 @@ object RecombinationMethods {
         HUX_CROSSOVER,
         TWO_POINT_CROSSOVER,
         SINGLE_POINT_CROSSOVER,
-        SHUFFLE
+        SHUFFLE,
+        MODIFIED_SINGLE_POINT
+    }
+
+    fun <T, E: Edge<T>, G: Graph<T, E>> modifiedSinglePointCrossover(
+        parent1: Chromosome<E>, parent2: Chromosome<E>, graph: G, startNode: Node
+    ): Pair<Chromosome<E>, Chromosome<E>> {
+        val suitableIndexes = getSuitableGenesRange(parent1.genes, parent2.genes)
+        val size = suitableIndexes.last + 1
+
+        // Выбираем две точки разреза
+        val point = Random.nextInt(1, size - 1)
+        val child1Genes = graph.getRandomPath(startNode, parent1.genes.slice(0..point).toMutableList())
+        val child2Genes = graph.getRandomPath(startNode, parent2.genes.slice(0..point).toMutableList())
+
+        return Pair(Chromosome(child1Genes), Chromosome(child2Genes))
     }
 
     fun <T, E: Edge<T>, G: Graph<T, E>> chromosomeCrossover(
@@ -36,8 +51,8 @@ object RecombinationMethods {
 
         // Копируем сегменты между родителями
         for (i in start .. end) {
-            child1Genes[i] = parent2.genes[i]
-            child2Genes[i] = parent1.genes[i]
+            child1Genes[i] = parent1.genes[i]
+            child2Genes[i] = parent2.genes[i]
         }
 
         fun getFixedPath(childGenes: MutableList<E>): List<E> {

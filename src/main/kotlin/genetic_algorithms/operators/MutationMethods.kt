@@ -15,7 +15,7 @@ object MutationMethods {
         CATACLYSMIC
     }
 
-    fun <T, E: Edge<T>> edgeReplacingMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
+    fun <T: Comparable<T>, E: Edge<T>> edgeReplacingMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
         if (chromosome.genes.size <= 2) return
 
         val newGenes = chromosome.genes.toMutableList()
@@ -67,7 +67,7 @@ object MutationMethods {
         }
     }
 
-    fun <T, E: Edge<T>> cataclysmicMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
+    fun <T: Comparable<T>, E: Edge<T>> cataclysmicMutation(chromosome: Chromosome<E>, graph: Graph<T, E>) {
         repeat(chromosome.genes.size / 2) {
             edgeReplacingMutation(chromosome, graph)
         }

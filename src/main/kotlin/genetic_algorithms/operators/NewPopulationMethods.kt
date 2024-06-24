@@ -27,7 +27,7 @@ object NewPopulationMethods {
             else ceil(population.entities.size * truncationPercent).toInt()
         val truncatedEntities = population.entities
             .sortedByDescending(onFitness)
-            .slice(0 until truncationEntitiesCount)
+            .take(truncationEntitiesCount)
 
         return Population(
             MutableList(population.entities.size) { truncatedEntities.random() }
@@ -49,7 +49,7 @@ object NewPopulationMethods {
         val remainingEntitiesCount = population.entities.size - suitableEntitiesCount
         val suitableEntities = population.entities
             .sortedByDescending(onFitness)
-            .slice(0..<suitableEntitiesCount)
+            .take(suitableEntitiesCount)
 
         val tournamentEntities = SelectionMethods.tournamentSelection(population, onFitness)
 

@@ -11,7 +11,7 @@ import utils.helpers.LoggingHelper
 class ParticleSwarm {
     private val logger = LoggingHelper().getLogger(ParticleSwarm::class.java.simpleName)
 
-    class GraphSwarm<T>(
+    class GraphSwarm<T: Comparable<T>>(
         size: Int,
         currentVelocityRatio: Double,
         localVelocityRatio: Double,

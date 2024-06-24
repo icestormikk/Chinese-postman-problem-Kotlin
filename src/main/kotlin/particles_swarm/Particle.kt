@@ -13,7 +13,7 @@ import kotlin.math.min
  * @property startNode Вершина для которой решается задача. Все искомые пути должны начинаться и заканчиваться в ней
  */
 @Deprecated("The algorithm in which this class is used is recognized as extremely inefficient")
-data class Particle<T>(
+data class Particle<T: Comparable<T>>(
     val swarm: Swarm<T>,
     val graph: Graph<T, Edge<T>>,
     val startNode: Node = graph.nodes.random()

@@ -77,7 +77,7 @@ object GeneticAlgorithmHelpers {
             null -> population
         }
 
-        internal fun <T, E : Edge<T>> getAllPossibleParents(
+        internal fun <T: Comparable<T>, E : Edge<T>> getAllPossibleParents(
             parentsConf: ParentsConfiguration,
             population: Population<E>,
             onFitness: (chromosome: Chromosome<E>) -> Double
@@ -94,7 +94,7 @@ object GeneticAlgorithmHelpers {
             null -> population
         }
 
-        internal fun <E : Edge<T>, T> selectParents(
+        internal fun <T: Comparable<T>, E : Edge<T>> selectParents(
             parentsConf: ParentsConfiguration,
             allParents: Population<E>,
             onDistance: (Chromosome<E>, Chromosome<E>) -> Double
@@ -115,7 +115,7 @@ object GeneticAlgorithmHelpers {
             null -> ParentSelectionMethods.panmixia(allParents)
         }
 
-        internal fun <T, E : Edge<T>, G : Graph<T, E>> getOffspring(
+        internal fun <T: Comparable<T>, E : Edge<T>, G : Graph<T, E>> getOffspring(
             recombinationConf: RecombinationConfiguration,
             selectedParents: Pair<Chromosome<E>, Chromosome<E>>,
             graph: G,
@@ -142,13 +142,16 @@ object GeneticAlgorithmHelpers {
                 RecombinationMethods.Types.SHUFFLE -> {
                     RecombinationMethods.shuffleCrossover(selectedParents.first, selectedParents.second)
                 }
+                RecombinationMethods.Types.MODIFIED_SINGLE_POINT -> {
+                    RecombinationMethods.modifiedSinglePointCrossover(selectedParents.first, selectedParents.second, graph, startNode)
+                }
 
                 // вариант по умолчанию - потомки не создаются
                 null -> selectedParents
             }
         }
 
-        internal fun <T, E : Edge<T>, G : Graph<T, E>> applyMutation(
+        internal fun <T: Comparable<T>, E : Edge<T>, G : Graph<T, E>> applyMutation(
             offspring: Pair<Chromosome<E>, Chromosome<E>>,
             mutation: MutationConfiguration,
             graph: G

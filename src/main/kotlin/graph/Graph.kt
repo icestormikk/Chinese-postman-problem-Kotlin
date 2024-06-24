@@ -10,7 +10,7 @@ import common.Identifiable
  * @property nodes Список всех вершин графа
  * @property edges Список всех рёбер графа
  */
-abstract class Graph<T, E: Edge<T>>(
+abstract class Graph<T: Comparable<T>, E: Edge<T>>(
     val nodes: List<Node>,
     open val edges: MutableList<E>
 ) : Identifiable() {
@@ -57,11 +57,11 @@ abstract class Graph<T, E: Edge<T>>(
      * @param startNode Начальная и конечная веришна пути
      * @return Один из существующих в графе путей, набор рёбер
      */
-    fun getRandomPath(startNode: Node = nodes.random()): MutableList<E> {
+    fun getRandomPath(startNode: Node = nodes.random(), existingPath: MutableList<E>? = null): MutableList<E> {
         // Набор рёбер, которые были посещены минимум один раз
-        val visited = mutableSetOf<E>()
+        val visited = existingPath?.toMutableSet() ?: mutableSetOf()
         // Один из возможных путей в графе
-        val path = mutableListOf<E>()
+        val path = existingPath ?: mutableListOf()
 
         /**
          * Рекурсивная функция, которая случайным образом блуждает по графу и строит путь
@@ -80,7 +80,7 @@ abstract class Graph<T, E: Edge<T>>(
 
             // если мы посетили каждое ребро минимум один раз и находимся в стартовой вершине, то
             // выходим из рекурсии
-            if (visited.size >= edges.size && node.id == startNode.id) return
+            if (visited.size >= edges.size && startNode == node) return
 
             // выбираем, куда функция будет двигаться дальше: если из этой веришны исходят ребра, в которых
             // мы ни разу не были, выбираем любое из них; иначе - выбираем любое из имеющихся рёбер
@@ -95,7 +95,8 @@ abstract class Graph<T, E: Edge<T>>(
 
         // строим путь и возвращаем его в качестве результата
         pathBuilder(startNode)
-        return path
+
+        return path.toMutableList()
     }
 
     /**
@@ -166,14 +167,28 @@ abstract class Graph<T, E: Edge<T>>(
         }
     }
 
-    fun pathToString(path: List<E>, separator: String = ", "): String =
-        path.joinToString(separator) { "${it.source.label} -> ${it.destination.label}" }
+    fun pathToString(path: List<E>, startNode: Node): String {
+        val res = mutableListOf<String>()
+        var currentNode = startNode
+        for (edge in path) {
+            res += if (currentNode.id == edge.source.id) {
+                currentNode = edge.destination
+                "${edge.source.label} -> ${edge.destination.label}"
+            } else {
+                currentNode = edge.source
+                "${edge.destination.label} -> ${edge.source.label}"
+            }
+
+        }
+
+        return res.joinToString(", ")
+    }
 
     fun pathToNodeString(path: List<E>, startNode: Node): String {
         val nodes = mutableListOf(startNode)
         for (i in 0 until path.size - 1) {
             val commonNode = getCommonNode(path[i], path[i+1])
-                ?: throw IllegalStateException("Can't find a common node for: ${pathToString(path.slice(i..i+1))}")
+                ?: throw IllegalStateException("Can't find a common node for: ${pathToString(path.slice(i..i+1), startNode)}")
             nodes.add(commonNode)
         }
         nodes.add(startNode)

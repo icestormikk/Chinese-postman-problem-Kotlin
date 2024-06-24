@@ -59,13 +59,17 @@ class PheromoneDoubleGraph(
     }
 }
 
+
 class AntColonyAlgorithm {
     private val logger = LoggingHelper().getLogger(AntColonyAlgorithm::class.java.simpleName)
 
+    companion object {
+        private const val MAX_TRY_COUNT = 10
+    }
+
     suspend fun start(
         graph: Graph<Double, Edge<Double>>,
-        configuration: AntColonyAlgorithmConfiguration,
-        startNode: Node
+        configuration: AntColonyAlgorithmConfiguration
     ): MutableList<PheromoneEdge<Double>> {
         // определяем начальные значения параметров
         val (
@@ -83,9 +87,28 @@ class AntColonyAlgorithm {
         var bestPath = mutableListOf<PheromoneEdge<Double>>()
         var bestLength = Double.MAX_VALUE
 
+        @Synchronized fun updateBestPath(path: MutableList<PheromoneEdge<Double>>, length: Double, iteration: Int) {
+            if (length < bestLength) {
+                logger.info { "The minimum path has been updated!\tIteration number: $iteration\tLength: $length" }
+                bestLength = length
+                bestPath = path
+            }
+        }
+        @Synchronized fun updatePheromones(path: MutableList<PheromoneEdge<Double>>, length: Double) {
+            path.forEach { edge ->
+                val indexInGraph = phGraph.edges.indexOfFirst { it.id == edge.id }
+                val newPheromoneCount = q / length
+                phGraph.edges[indexInGraph].pheromoneCount += newPheromoneCount
+            }
+        }
+
         logger.info { "An algorithm for simulating an ant colony is launched ($iterationCount iterations, $antCount ants)" }
         // пока не будет достигнуто максимальное количество итераций
         for (iteration in 1..iterationCount) {
+            if (iteration % 10 == 0) {
+                logger.info { "Passed #$iteration iteration" }
+            }
+
             // феромоны на путях испаряются
             phGraph.edges.forEach { it.pheromoneCount *= remainingPheromoneRate }
 
@@ -96,33 +119,27 @@ class AntColonyAlgorithm {
                 else -> antCount / 500
             }
 
-            @Synchronized fun updateBestPath(path: MutableList<PheromoneEdge<Double>>, length: Double) {
-                if (length < bestLength) {
-                    logger.info { "The minimum path has been updated!\tIteration number: $iteration, length: $length" }
-                    bestLength = length
-                    bestPath = path
-                }
-            }
-            @Synchronized fun updatePheromones(path: MutableList<PheromoneEdge<Double>>, length: Double) {
-                path.forEach { edge ->
-                    val indexInGraph = phGraph.edges.indexOfFirst { it.id == edge.id }
-                    val newPheromoneCount = q / length
-                    phGraph.edges[indexInGraph].pheromoneCount += newPheromoneCount
-                }
-            }
-
             // запускаем поток для каждой из подгрупп муравьёв
             val jobs = List (antCount / antsByCoroutine) {
                 CoroutineScope(Dispatchers.Default).launch {
                     // для каждого муравья
-                    for (antIndex in 1..antsByCoroutine) {
-                        val ant = Ant("Ant-${antIndex}")
+                    for (i in 1..antsByCoroutine) {
+                        val ant = Ant("Ant-${i}")
                         // получаем путь, по которому прошёл муравей
-                        val path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta)
+                        var path: MutableList<PheromoneEdge<Double>>? = null
+
+                        for (j in 1..MAX_TRY_COUNT) {
+                            val startNode = graph.nodes.random()
+                            path = ant.getPath(phGraph, startNode, proximityCoefficient, alpha, beta, bestLength)
+                            if (path != null) break
+                        }
+
+                        if (path == null) break
+
                         // вычисляем его длину
                         val length = phGraph.calculateTotalLengthOf(path)
                         // сравниваем с лучшим путём и при необходимости обновляем его
-                        updateBestPath(path, length)
+                        updateBestPath(path, length, iteration)
                         // обновляем количество феромонов на пройденный ребёр (добавка)
                         updatePheromones(path, length)
                     }

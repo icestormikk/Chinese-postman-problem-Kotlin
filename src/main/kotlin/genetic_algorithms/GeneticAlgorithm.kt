@@ -17,7 +17,7 @@ class GeneticAlgorithm {
     // Логгер для отслеживания действий алгоритма в процессе работы программы
     private val logger = LoggingHelper().getLogger(GeneticAlgorithm::class.java.simpleName)
 
-    suspend fun <T, E: Edge<T>, G: Graph<T, E>> start(
+    suspend fun <T: Comparable<T>, E: Edge<T>, G: Graph<T, E>> start(
         // граф, на котором решается задача
         graph: G,
         // функция приспособленности
@@ -76,6 +76,7 @@ class GeneticAlgorithm {
                 val fitness = onFitness(currentPath)
 
                 if (bestChromosome == null || fitness > bestFitness) {
+                    logger.info { "The best solution has been updated!\tFitness: $fitness" }
                     bestChromosome = currentPath
                     bestFitness = fitness
                 }
@@ -94,7 +95,7 @@ class GeneticAlgorithm {
         }
 
         if (bestFitness == Double.MAX_VALUE * (-1)) {
-            throw IllegalStateException("Couldn't find a path suitable for the conditions")
+            throw IllegalStateException("Couldn't find a edges suitable for the conditions")
         }
 
         return bestChromosome!!.genes
