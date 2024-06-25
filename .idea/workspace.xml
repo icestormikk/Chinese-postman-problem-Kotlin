@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Небольшие доработки">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Финальные исправления, очистка кода" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -259,14 +257,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00118" summary="Удалил строу с вызовом логгера, которая использовалась для отладки">
-      <option name="closed" value="true" />
-      <created>1716189109807</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1716189109807</updated>
     </task>
     <task id="LOCAL-00119" summary="Обновил версию программы до 1.3.2-SNAPSHOT">
       <option name="closed" value="true" />
@@ -652,7 +642,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719251351904</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="Финальные исправления, очистка кода">
+      <option name="closed" value="true" />
+      <created>1719316163660</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1719316163661</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -677,7 +675,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Исправлена функция пригодности" />
     <MESSAGE value="Добавлен новый способ скрещивания - HUX" />
     <MESSAGE value="Исправлены функции пригодности и вычисления длины пути" />
     <MESSAGE value="Небольшое обновление" />
@@ -702,6 +699,7 @@
     <MESSAGE value="Обновил номер версии до 1.4.2-SNAPSHOT" />
     <MESSAGE value="Обновление до 1.4.3-SINGLE-SNAPSHOT, сделал Observable список генов, поправил методы мутации и скрещивания" />
     <MESSAGE value="Небольшие доработки" />
-    <option name="LAST_COMMIT_MESSAGE" value="Небольшие доработки" />
+    <MESSAGE value="Финальные исправления, очистка кода" />
+    <option name="LAST_COMMIT_MESSAGE" value="Финальные исправления, очистка кода" />
   </component>
 </project>
