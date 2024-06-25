@@ -76,7 +76,7 @@ suspend fun main(args: Array<String>) {
             }
             // Метод имитации муравьиной колонии
             AlgorithmType.ANT_COLONY -> {
-                launchAntColonyAlgorithm(configuration, graph, startNode)
+                launchAntColonyAlgorithm(configuration, graph)
             }
         }
         logger.info { "The response has been received, the correctness check begins" }
@@ -127,8 +127,7 @@ private fun <T, E: Edge<T>, G: Graph<T, E>> validateResponse(
 
 private suspend fun launchAntColonyAlgorithm(
     configuration: Configuration,
-    graph: DoubleGraph,
-    startNode: Node
+    graph: DoubleGraph
 ): Response {
     if (configuration.antColony == null) {
         throw Exception("The ant colony method was selected, but the configuration for it was not transmitted")

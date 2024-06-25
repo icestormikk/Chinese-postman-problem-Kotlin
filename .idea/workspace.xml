@@ -4,23 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Обновление до 1.4.3-SINGLE-SNAPSHOT, сделал Observable список генов, поправил методы мутации и скрещивания">
+    <list default="true" id="b4ba36f4-9959-43c6-9557-d82537352e29" name="Changes" comment="Небольшие доработки">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/Ant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/Ant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/AntColonyAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ant_colony/PheromoneGraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ant_colony/PheromoneGraph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/GeneticAlgorithm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/algorithm/GeneticAlgorithmHelpers.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/MutationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/NewPopulationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/genetic_algorithms/operators/RecombinationMethods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/graph/Graph.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Particle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/ParticleSwarm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/particles_swarm/Swarm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/utils/validators/ConfigurationValidator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,14 +259,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712421252985</updated>
-    </task>
-    <task id="LOCAL-00117" summary="Муравьиный алгоритм: исправил ошибку с бесконечным путешествием муравья">
-      <option name="closed" value="true" />
-      <created>1716188705777</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1716188705778</updated>
     </task>
     <task id="LOCAL-00118" summary="Удалил строу с вызовом логгера, которая использовалась для отладки">
       <option name="closed" value="true" />
@@ -667,7 +644,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717949817063</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="Небольшие доработки">
+      <option name="closed" value="true" />
+      <created>1719251351902</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1719251351904</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -692,7 +677,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Элитарный отбор заполняет оставшийся процент особей турнирным отбором" />
     <MESSAGE value="Исправлена функция пригодности" />
     <MESSAGE value="Добавлен новый способ скрещивания - HUX" />
     <MESSAGE value="Исправлены функции пригодности и вычисления длины пути" />
@@ -717,6 +701,7 @@
     <MESSAGE value="Добавил комментарии и исправил пару багов" />
     <MESSAGE value="Обновил номер версии до 1.4.2-SNAPSHOT" />
     <MESSAGE value="Обновление до 1.4.3-SINGLE-SNAPSHOT, сделал Observable список генов, поправил методы мутации и скрещивания" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление до 1.4.3-SINGLE-SNAPSHOT, сделал Observable список генов, поправил методы мутации и скрещивания" />
+    <MESSAGE value="Небольшие доработки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Небольшие доработки" />
   </component>
 </project>
